@@ -305,6 +305,7 @@
 
 <!-- HERO -->
 <section class="hero" aria-labelledby="hero-h">
+  <canvas id="hero-canvas" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
   <div class="hero-noise" aria-hidden="true"></div>
   <div class="hero-glow-top" aria-hidden="true"></div>
   <div class="hero-line" aria-hidden="true"></div>
@@ -699,6 +700,157 @@
 </footer>
 
 <script>
+/* ── HERO 3D PARTICLE CONSTELLATION ── */
+(function () {
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, mouse = { x: -9999, y: -9999 };
+
+  const GOLD = '201,168,76';
+  const N = 90;
+  const CONNECT_DIST = 140;
+  const MOUSE_DIST = 180;
+
+  /* 3D sphere distribution using Fibonacci lattice */
+  function makeParticles() {
+    const pts = [];
+    const golden = Math.PI * (3 - Math.sqrt(5));
+    for (let i = 0; i < N; i++) {
+      const y3 = 1 - (i / (N - 1)) * 2;
+      const r3 = Math.sqrt(1 - y3 * y3);
+      const theta = golden * i;
+      pts.push({
+        ox: Math.cos(theta) * r3,
+        oy: y3,
+        oz: Math.sin(theta) * r3,
+        vx: (Math.random() - 0.5) * 0.0002,
+        vy: (Math.random() - 0.5) * 0.0002,
+        vz: (Math.random() - 0.5) * 0.0002,
+        rx: Math.random() * Math.PI * 2,
+        ry: Math.random() * Math.PI * 2,
+        rz: Math.random() * Math.PI * 2,
+        sx: 0, sy: 0, sz: 0, // screen-space after projection
+      });
+    }
+    return pts;
+  }
+
+  let particles = makeParticles();
+  let angle = 0;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth  * devicePixelRatio;
+    H = canvas.height = canvas.offsetHeight * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+
+  function project(x, y, z) {
+    const fov = 2.2;
+    const scale = fov / (fov + z);
+    const cx = canvas.offsetWidth  / 2;
+    const cy = canvas.offsetHeight / 2;
+    const spread = Math.min(cx, cy) * 0.72;
+    return {
+      x: cx + x * spread * scale,
+      y: cy + y * spread * scale,
+      z,
+      scale,
+    };
+  }
+
+  function rotY(x, y, z, a) {
+    return { x: x * Math.cos(a) + z * Math.sin(a), y, z: -x * Math.sin(a) + z * Math.cos(a) };
+  }
+  function rotX(x, y, z, a) {
+    return { x, y: y * Math.cos(a) - z * Math.sin(a), z: y * Math.sin(a) + z * Math.cos(a) };
+  }
+
+  /* gentle mouse-influenced tilt */
+  let tiltX = 0, tiltY = 0;
+  window.addEventListener('mousemove', e => {
+    mouse.x = e.clientX; mouse.y = e.clientY;
+    tiltY = ((e.clientX / window.innerWidth)  - 0.5) * 0.35;
+    tiltX = ((e.clientY / window.innerHeight) - 0.5) * 0.20;
+  }, { passive: true });
+  window.addEventListener('mouseleave', () => { tiltX = 0; tiltY = 0; });
+
+  function draw(ts) {
+    const W2 = canvas.offsetWidth, H2 = canvas.offsetHeight;
+    ctx.clearRect(0, 0, W2, H2);
+
+    angle += 0.0015;
+
+    /* project all particles */
+    for (const p of particles) {
+      /* drift the original position slightly */
+      p.ox += p.vx; p.oy += p.vy; p.oz += p.vz;
+      const len = Math.sqrt(p.ox*p.ox + p.oy*p.oy + p.oz*p.oz);
+      p.ox /= len; p.oy /= len; p.oz /= len;
+
+      let { x, y, z } = rotY(p.ox, p.oy, p.oz, angle + tiltY);
+      ({ x, y, z } = rotX(x, y, z, tiltX));
+      const proj = project(x, y, z);
+      p.sx = proj.x; p.sy = proj.y; p.sz = proj.z; p.sc = proj.scale;
+    }
+
+    /* sort back-to-front */
+    particles.sort((a, b) => a.sz - b.sz);
+
+    /* draw connections */
+    for (let i = 0; i < particles.length; i++) {
+      const a = particles[i];
+      for (let j = i + 1; j < particles.length; j++) {
+        const b = particles[j];
+        const dx = a.sx - b.sx, dy = a.sy - b.sy;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist > CONNECT_DIST) continue;
+        const alpha = (1 - dist / CONNECT_DIST) * 0.18 * Math.min(a.sc, b.sc) * 1.4;
+        ctx.beginPath();
+        ctx.moveTo(a.sx, a.sy);
+        ctx.lineTo(b.sx, b.sy);
+        ctx.strokeStyle = `rgba(${GOLD},${alpha})`;
+        ctx.lineWidth = 0.6;
+        ctx.stroke();
+      }
+    }
+
+    /* draw nodes */
+    for (const p of particles) {
+      /* mouse proximity pulse */
+      const mdx = p.sx - mouse.x, mdy = p.sy - mouse.y;
+      const mDist = Math.sqrt(mdx*mdx + mdy*mdy);
+      const mouseBoost = mDist < MOUSE_DIST ? (1 - mDist / MOUSE_DIST) * 1.6 : 0;
+
+      const depth = (p.sz + 1) / 2; // 0 (back) → 1 (front)
+      const baseAlpha = 0.15 + depth * 0.55;
+      const r = (1.2 + depth * 1.8 + mouseBoost * 2) * p.sc;
+
+      /* glow for mouse-near or front particles */
+      if (mouseBoost > 0.2 || depth > 0.7) {
+        const glow = ctx.createRadialGradient(p.sx, p.sy, 0, p.sx, p.sy, r * 5);
+        glow.addColorStop(0, `rgba(${GOLD},${(mouseBoost * 0.3 + depth * 0.08).toFixed(3)})`);
+        glow.addColorStop(1, `rgba(${GOLD},0)`);
+        ctx.beginPath();
+        ctx.arc(p.sx, p.sy, r * 5, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+      }
+
+      /* core dot */
+      ctx.beginPath();
+      ctx.arc(p.sx, p.sy, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${GOLD},${Math.min(baseAlpha + mouseBoost * 0.5, 0.95)})`;
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); }, { passive: true });
+  resize();
+  requestAnimationFrame(draw);
+})();
+
 /* ── SCROLL PROGRESS ── */
 const prog = document.getElementById('progress');
 window.addEventListener('scroll', () => {
