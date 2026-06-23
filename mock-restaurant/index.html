@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Harbor Grille — Fresh Coastal Cuisine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green:  #1B4332;
+      --green2: #2D6A4F;
+      --gold:   #D4A853;
+      --bg:     #0C1A12;
+      --bg2:    #111F16;
+      --bg3:    #162B1E;
+      --text:   #F0EDE5;
+      --text2:  #7A8C7E;
+      --border: rgba(255,255,255,0.06);
+      --cream:  #E8DFC8;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    #progress { position:fixed;top:0;left:0;width:100%;height:3px;background:var(--gold);z-index:999;transform-origin:left;transform:scaleX(0); }
+
+    nav { position:fixed;top:0;left:0;right:0;z-index:200;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;transition:background .4s,border-color .4s;border-bottom:1px solid transparent; }
+    nav.scrolled { background:rgba(12,26,18,.96);backdrop-filter:blur(20px);border-color:var(--border); }
+    .nav-logo { font-family:'Instrument Serif',serif;font-size:20px;letter-spacing:.02em; }
+    .nav-logo em { font-style:italic;color:var(--gold); }
+    .nav-links { display:flex;gap:32px;list-style:none; }
+    .nav-links a { font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--text2);transition:color .2s; }
+    .nav-links a:hover { color:var(--text); }
+    .nav-reserve { padding:9px 22px;border:1px solid rgba(212,168,83,.35);color:var(--gold);border-radius:100px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;transition:all .2s; }
+    .nav-reserve:hover { background:rgba(212,168,83,.10); }
+    .hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px; }
+    .hamburger span { display:block;width:20px;height:1.5px;background:var(--text2); }
+    .mobile-menu { display:none;position:fixed;top:72px;left:0;right:0;background:rgba(12,26,18,.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 24px 24px;flex-direction:column;gap:2px;z-index:199; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-size:15px;font-weight:500;color:var(--text2);padding:13px 0;border-bottom:1px solid var(--border); }
+    .mobile-menu a:last-child { border:none;color:var(--gold);font-weight:600;margin-top:8px; }
+
+    .reveal { opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity:1;transform:translateY(0); }
+    .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+    @keyframes fade-up { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+
+    /* HERO */
+    .hero { min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:130px 48px 90px;position:relative;overflow:hidden; }
+    .hero-bg { position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(27,67,50,.6) 0%,transparent 70%); }
+    .hero-pattern { position:absolute;inset:0;opacity:.04;background-image:repeating-linear-gradient(0deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,var(--gold) 0,var(--gold) 1px,transparent 1px,transparent 60px); }
+    .hero-content { position:relative;z-index:1;max-width:720px; }
+    .hero-badge { display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(212,168,83,.25);background:rgba(212,168,83,.07);color:var(--gold);padding:6px 16px;border-radius:100px;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;margin-bottom:32px;animation:fade-up .8s ease .2s both; }
+    h1 { font-family:'Instrument Serif',serif;font-size:clamp(52px,7vw,88px);line-height:1.02;letter-spacing:-.01em;margin-bottom:24px;animation:fade-up .9s cubic-bezier(.22,1,.36,1) .4s both; }
+    h1 em { font-style:italic;color:var(--gold); }
+    .hero-sub { font-size:17px;color:var(--text2);line-height:1.8;font-weight:300;max-width:480px;margin:0 auto 40px;animation:fade-up .8s ease .6s both; }
+    .hero-actions { display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;animation:fade-up .8s ease .8s both; }
+    .btn-primary { padding:14px 32px;background:var(--gold);color:var(--bg);border-radius:100px;font-size:13px;font-weight:700;letter-spacing:.04em;transition:all .3s; }
+    .btn-primary:hover { background:#e8bc6b;transform:translateY(-2px);box-shadow:0 10px 28px rgba(212,168,83,.25); }
+    .btn-ghost { padding:14px 28px;border:1px solid rgba(255,255,255,.14);color:var(--text2);border-radius:100px;font-size:13px;font-weight:500;transition:all .3s; }
+    .btn-ghost:hover { border-color:rgba(255,255,255,.25);color:var(--text); }
+    .hero-line { position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:1px;height:56px;background:linear-gradient(to bottom,transparent,rgba(212,168,83,.4)); }
+
+    /* MARQUEE */
+    .marquee-wrap { border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:16px 0;overflow:hidden;background:var(--bg2); }
+    .marquee-track { display:flex;gap:48px;animation:marquee 28s linear infinite;width:max-content; }
+    .marquee-item { font-size:10px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:var(--text2);white-space:nowrap;display:flex;align-items:center;gap:24px; }
+    .marquee-item .sep { color:var(--gold); }
+    @keyframes marquee { from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+    section { padding:100px 48px; }
+    .inner { max-width:1100px;margin:0 auto; }
+    .label { font-size:10px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block; }
+    h2 { font-family:'Instrument Serif',serif;font-size:clamp(38px,4.5vw,60px);line-height:1.04;letter-spacing:-.01em;margin-bottom:16px; }
+    h2 em { font-style:italic;color:var(--gold); }
+    .section-sub { font-size:15px;color:var(--text2);max-width:420px;line-height:1.8;font-weight:300; }
+
+    /* MENU */
+    .menu-section { background:var(--bg2);border-top:1px solid var(--border); }
+    .menu-tabs { display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:40px; }
+    .menu-tab { padding:14px 28px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none;font-family:'Inter',sans-serif; }
+    .menu-tab.active { color:var(--gold);border-bottom-color:var(--gold); }
+    .menu-grid { display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border); }
+    .menu-item { background:var(--bg2);padding:24px 28px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;transition:background .3s; }
+    .menu-item:hover { background:var(--bg3); }
+    .menu-item-info h3 { font-family:'Instrument Serif',serif;font-size:18px;margin-bottom:6px; }
+    .menu-item-info p { font-size:12px;color:var(--text2);line-height:1.7;font-weight:300;max-width:280px; }
+    .menu-item-price { font-family:'Instrument Serif',serif;font-size:20px;color:var(--gold);white-space:nowrap;flex-shrink:0; }
+
+    /* ABOUT */
+    .about-grid { display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center; }
+    .about-img { aspect-ratio:4/5;background:var(--bg2);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--text2);font-size:12px;text-align:center;padding:32px;position:relative;overflow:hidden; }
+    .about-img::before { content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    .about-text h2 { margin-bottom:20px; }
+    .about-text p { font-size:15px;color:var(--text2);line-height:1.85;font-weight:300;margin-bottom:16px; }
+    .about-text p:last-of-type { margin-bottom:32px; }
+
+    /* TESTIMONIALS */
+    .testi-section { background:var(--bg2);border-top:1px solid var(--border); }
+    .testi-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px; }
+    .testi { background:var(--bg3);border:1px solid var(--border);padding:32px;border-radius:4px;transition:border-color .3s; }
+    .testi:hover { border-color:rgba(212,168,83,.3); }
+    .testi-stars { color:var(--gold);font-size:13px;letter-spacing:3px;margin-bottom:18px; }
+    .testi-quote { font-family:'Instrument Serif',serif;font-size:16px;line-height:1.7;color:var(--text);font-style:italic;margin-bottom:24px; }
+    .testi-footer { display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid var(--border); }
+    .testi-avatar { width:36px;height:36px;border-radius:50%;background:rgba(212,168,83,.12);border:1px solid rgba(212,168,83,.25);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--gold);flex-shrink:0; }
+    .testi-name { font-size:13px;font-weight:600; }
+    .testi-detail { font-size:11px;color:var(--text2);margin-top:2px; }
+
+    /* RESERVATION */
+    .res-section { background:var(--bg2);border-top:1px solid var(--border); }
+    .res-grid { display:grid;grid-template-columns:1fr 1.1fr;gap:72px;align-items:start; }
+    .res-left h2 { margin-bottom:16px; }
+    .res-left p { font-size:15px;color:var(--text2);line-height:1.8;font-weight:300;margin-bottom:32px; }
+    .info-rows { display:flex;flex-direction:column;gap:16px; }
+    .info-row { display:flex;gap:14px;align-items:flex-start; }
+    .info-icon { width:36px;height:36px;border-radius:50%;background:rgba(212,168,83,.10);border:1px solid rgba(212,168,83,.2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0; }
+    .info-text { font-size:13px;color:var(--text2);line-height:1.7; }
+    .info-text strong { display:block;font-size:10px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;color:var(--text2);margin-bottom:2px; }
+    .res-form { background:var(--bg3);border:1px solid var(--border);padding:36px;border-radius:4px;border-top:2px solid var(--gold); }
+    .form-title { font-family:'Instrument Serif',serif;font-size:26px;margin-bottom:24px; }
+    .fg { margin-bottom:16px; }
+    .fg label { display:block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text2);margin-bottom:7px; }
+    .fi,.fs { width:100%;padding:12px 14px;background:var(--bg2);border:1px solid rgba(255,255,255,.07);color:var(--text);font-size:13px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;appearance:none;color-scheme:dark;border-radius:4px; }
+    .fi:focus,.fs:focus { border-color:var(--gold); }
+    .form-row { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+    .form-btn { width:100%;padding:14px;margin-top:8px;background:var(--gold);color:var(--bg);border:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;cursor:pointer;transition:background .2s;border-radius:100px; }
+    .form-btn:hover { background:#e8bc6b; }
+
+    footer { border-top:1px solid var(--border);padding:56px 48px 28px; }
+    .footer-inner { max-width:1100px;margin:0 auto; }
+    .footer-top { display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:56px;margin-bottom:40px; }
+    .footer-logo { font-family:'Instrument Serif',serif;font-size:20px;margin-bottom:10px; }
+    .footer-logo em { font-style:italic;color:var(--gold); }
+    .footer-brand p { font-size:13px;color:var(--text2);line-height:1.75;font-weight:300;max-width:200px; }
+    .footer-col h4 { font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--text2);margin-bottom:16px; }
+    .footer-col ul { list-style:none;display:flex;flex-direction:column;gap:10px; }
+    .footer-col a { font-size:13px;color:var(--text2);transition:color .2s; }
+    .footer-col a:hover { color:var(--gold); }
+    .footer-bottom { display:flex;justify-content:space-between;padding-top:24px;border-top:1px solid var(--border);font-size:11px;color:var(--text2);flex-wrap:wrap;gap:8px; }
+    .footer-credit { font-size:10px;color:rgba(255,255,255,.2); }
+    .footer-credit a { color:rgba(212,168,83,.4); }
+
+    @media(max-width:900px){
+      nav{padding:0 20px;} .nav-links,.nav-reserve{display:none;} .hamburger{display:flex;}
+      section{padding:72px 20px;} .hero{padding:100px 20px 60px;}
+      .about-grid,.res-grid{grid-template-columns:1fr;} .menu-grid,.testi-grid{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr 1fr;} .form-row{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+<div id="progress"></div>
+<nav id="nav">
+  <div class="nav-logo">The Harbor <em>Grille</em></div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#reservations">Reservations</a></li>
+  </ul>
+  <a href="#reservations" class="nav-reserve">Reserve a Table</a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#menu" onclick="closeMenu()">Menu</a>
+  <a href="#about" onclick="closeMenu()">Our Story</a>
+  <a href="#reviews" onclick="closeMenu()">Reviews</a>
+  <a href="#reservations" onclick="closeMenu()">Reserve a Table →</a>
+</div>
+
+<main>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-badge">🌊 Fresh Coastal Cuisine · Est. 2019</div>
+    <h1>Where the Ocean<br />Meets the <em>Table.</em></h1>
+    <p class="hero-sub">Locally sourced seafood, wood-fired dishes, and an atmosphere that feels like home — right on the water.</p>
+    <div class="hero-actions">
+      <a href="#reservations" class="btn-primary">Reserve a Table</a>
+      <a href="#menu" class="btn-ghost">View Our Menu</a>
+    </div>
+  </div>
+  <div class="hero-line"></div>
+</section>
+
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Fresh Catch Daily <span class="sep">✦</span></span>
+    <span class="marquee-item">Wood-Fired Dishes <span class="sep">✦</span></span>
+    <span class="marquee-item">Local Ingredients <span class="sep">✦</span></span>
+    <span class="marquee-item">Waterfront Dining <span class="sep">✦</span></span>
+    <span class="marquee-item">Private Events <span class="sep">✦</span></span>
+    <span class="marquee-item">Full Bar <span class="sep">✦</span></span>
+    <span class="marquee-item">Fresh Catch Daily <span class="sep">✦</span></span>
+    <span class="marquee-item">Wood-Fired Dishes <span class="sep">✦</span></span>
+    <span class="marquee-item">Local Ingredients <span class="sep">✦</span></span>
+    <span class="marquee-item">Waterfront Dining <span class="sep">✦</span></span>
+    <span class="marquee-item">Private Events <span class="sep">✦</span></span>
+    <span class="marquee-item">Full Bar <span class="sep">✦</span></span>
+  </div>
+</div>
+
+<section class="menu-section" id="menu">
+  <div class="inner">
+    <div class="reveal">
+      <span class="label">What We Serve</span>
+      <h2>Our <em>Menu</em></h2>
+      <p class="section-sub">Everything prepared fresh daily using local farms and fishermen we know by name.</p>
+    </div>
+    <div class="menu-tabs" style="margin-top:40px;">
+      <button class="menu-tab active">Starters</button>
+      <button class="menu-tab">Mains</button>
+      <button class="menu-tab">Desserts</button>
+    </div>
+    <div class="menu-grid reveal">
+      <div class="menu-item"><div class="menu-item-info"><h3>Grilled Shrimp Skewers</h3><p>Gulf shrimp, garlic butter, lemon zest, served with house chimichurri</p></div><div class="menu-item-price">$16</div></div>
+      <div class="menu-item"><div class="menu-item-info"><h3>Clam Chowder</h3><p>New England style, fresh clams, smoked bacon, house-baked sourdough</p></div><div class="menu-item-price">$12</div></div>
+      <div class="menu-item"><div class="menu-item-info"><h3>Oysters on the Half Shell</h3><p>Local oysters, mignonette, cocktail sauce, lemon — half dozen or dozen</p></div><div class="menu-item-price">$18</div></div>
+      <div class="menu-item"><div class="menu-item-info"><h3>Crab Cakes</h3><p>Blue crab, old bay seasoning, remoulade, microgreens — two per order</p></div><div class="menu-item-price">$19</div></div>
+      <div class="menu-item"><div class="menu-item-info"><h3>Tuna Tartare</h3><p>Yellowfin tuna, avocado, sesame, wonton crisps, spicy aioli</p></div><div class="menu-item-price">$21</div></div>
+      <div class="menu-item"><div class="menu-item-info"><h3>Harbor Flatbread</h3><p>Shrimp, fresh mozzarella, roasted cherry tomatoes, basil oil</p></div><div class="menu-item-price">$17</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="inner">
+    <div class="about-grid">
+      <div class="about-img reveal">🌊<br /><br />Restaurant photo<br />goes here</div>
+      <div class="about-text reveal d1">
+        <span class="label">Our Story</span>
+        <h2>Cooking With <em>Purpose.</em></h2>
+        <p>The Harbor Grille was born out of a simple belief — that great food starts with great ingredients. We partner with local fishermen and farmers who share our obsession with quality.</p>
+        <p>Every dish is made from scratch, every day. No shortcuts, no frozen product. Just honest, delicious food served in a space that feels like a dinner party at a friend's house — if your friend happened to live on the water.</p>
+        <a href="#reservations" class="btn-primary">Make a Reservation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testi-section" id="reviews">
+  <div class="inner">
+    <div class="reveal"><span class="label">Guest Reviews</span><h2>What Our Guests <em>Say</em></h2></div>
+    <div class="testi-grid">
+      <div class="testi reveal"><div class="testi-stars">★★★★★</div><p class="testi-quote">"The freshest seafood I've had outside of a fishing boat. The crab cakes alone are worth the drive. Absolutely stunning."</p><div class="testi-footer"><div class="testi-avatar">AR</div><div><div class="testi-name">Amanda R.</div><div class="testi-detail">Regular guest</div></div></div></div>
+      <div class="testi reveal d1"><div class="testi-stars">★★★★★</div><p class="testi-quote">"We celebrated our anniversary here and the entire night was perfect. The waterfront view, the food, the service — truly special."</p><div class="testi-footer"><div class="testi-avatar">TM</div><div><div class="testi-name">Thomas M.</div><div class="testi-detail">Anniversary dinner</div></div></div></div>
+      <div class="testi reveal d2"><div class="testi-stars">★★★★★</div><p class="testi-quote">"I've eaten at high-end restaurants all over the country. The Harbor Grille holds its own with any of them — and the vibe is so much better."</p><div class="testi-footer"><div class="testi-avatar">LC</div><div><div class="testi-name">Lauren C.</div><div class="testi-detail">Food blogger</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="res-section" id="reservations">
+  <div class="inner">
+    <div class="res-grid">
+      <div class="res-left reveal">
+        <span class="label">Reservations</span>
+        <h2>Join Us for <em>Dinner.</em></h2>
+        <p>Reserve your table online or give us a call. We recommend booking ahead — especially on weekends.</p>
+        <div class="info-rows">
+          <div class="info-row"><div class="info-icon">📍</div><div class="info-text"><strong>Location</strong>12 Harbor View Rd, Coastal City</div></div>
+          <div class="info-row"><div class="info-icon">📞</div><div class="info-text"><strong>Phone</strong>(555) 000-0000</div></div>
+          <div class="info-row"><div class="info-icon">🕐</div><div class="info-text"><strong>Hours</strong>Tue–Sun: 4pm – 10pm · Closed Monday</div></div>
+        </div>
+      </div>
+      <div class="res-form reveal d1">
+        <div class="form-title">Reserve a Table</div>
+        <div class="form-row">
+          <div class="fg"><label>First Name</label><input class="fi" type="text" placeholder="Amanda" /></div>
+          <div class="fg"><label>Last Name</label><input class="fi" type="text" placeholder="Rivera" /></div>
+        </div>
+        <div class="fg"><label>Email</label><input class="fi" type="email" placeholder="amanda@email.com" /></div>
+        <div class="fg"><label>Phone</label><input class="fi" type="tel" placeholder="(555) 000-0000" /></div>
+        <div class="form-row">
+          <div class="fg"><label>Date</label><input class="fi" type="date" /></div>
+          <div class="fg"><label>Time</label><select class="fs"><option value="" disabled selected>Select time...</option><option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option><option>8:00 PM</option><option>9:00 PM</option></select></div>
+        </div>
+        <div class="fg"><label>Party Size</label><select class="fs"><option value="" disabled selected>How many guests?</option><option>1–2 guests</option><option>3–4 guests</option><option>5–6 guests</option><option>7+ guests (large party)</option></select></div>
+        <button class="form-btn">Request Reservation →</button>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="footer-logo">The Harbor <em>Grille</em></div><p>Fresh coastal cuisine, locally sourced, served with care. Open Tuesday through Sunday.</p></div>
+      <div class="footer-col"><h4>Explore</h4><ul><li><a href="#">Menu</a></li><li><a href="#">Our Story</a></li><li><a href="#">Private Events</a></li><li><a href="#">Gift Cards</a></li></ul></div>
+      <div class="footer-col"><h4>Visit</h4><ul><li><a href="#">12 Harbor View Rd</a></li><li><a href="#">(555) 000-0000</a></li><li><a href="#">Tue–Sun: 4pm–10pm</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><span>&copy; 2026 The Harbor Grille. All rights reserved.</span><span class="footer-credit">Built by <a href="#">Brand Verse Worldwide</a></span></div>
+  </div>
+</footer>
+<script>
+const prog=document.getElementById('progress');
+window.addEventListener('scroll',()=>{prog.style.transform=`scaleX(${window.scrollY/(document.body.scrollHeight-window.innerHeight)})`;},{passive:true});
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobile-menu');
+hamburger.addEventListener('click',()=>{mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';});
+function closeMenu(){mobileMenu.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('.menu-tab').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));tab.classList.add('active');});});
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target);}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

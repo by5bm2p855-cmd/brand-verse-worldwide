@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus — Your team's knowledge, finally alive.</title>
+  <meta name="description" content="Nexus turns scattered team knowledge into a living, searchable intelligence layer. Ask anything. Get answers in seconds." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --void:    #000000;
+      --bone:    #ffffff;
+      --ash:     #bdbdbd;
+      --smoke:   #9a9a9a;
+      --plum:    #8052ff;
+      --amber:   #ffb829;
+      --lichen:  #15846e;
+      --radius:  24px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      background: var(--void);
+      color: var(--bone);
+      overflow-x: hidden;
+      font-size: 15px;
+      line-height: 1.5;
+      letter-spacing: 0.025em;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 64px; display: flex; align-items: center;
+      justify-content: space-between; padding: 0 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(20px);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 18px; font-weight: 600; letter-spacing: 0.02em; color: var(--bone);
+    }
+    .nav-logo-icon {
+      width: 28px; height: 28px; position: relative;
+    }
+    .nav-logo-icon svg { width: 100%; height: 100%; }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 14px; font-weight: 400; letter-spacing: 0.021em;
+      color: var(--smoke); transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--bone); }
+    .nav-right { display: flex; align-items: center; gap: 18px; }
+    .nav-signin {
+      font-size: 14px; font-weight: 400; letter-spacing: 0.021em;
+      color: var(--smoke); transition: color 0.2s;
+    }
+    .nav-signin:hover { color: var(--bone); }
+    .btn-plum {
+      padding: 10px 18px; background: var(--plum); color: var(--bone);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; border-radius: var(--radius);
+      border: none; cursor: pointer; transition: opacity 0.2s;
+      font-family: inherit;
+    }
+    .btn-plum:hover { opacity: 0.85; }
+    .btn-amber {
+      padding: 10px 18px; background: transparent; color: var(--amber);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; border-radius: var(--radius);
+      border: 1px solid var(--amber); cursor: pointer; transition: opacity 0.2s;
+      font-family: inherit;
+    }
+    .btn-amber:hover { opacity: 0.75; }
+    .hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px; }
+    .hamburger span { display:block;width:20px;height:1px;background:var(--smoke); }
+    .mobile-menu { display:none;position:fixed;top:64px;left:0;right:0;background:rgba(0,0,0,0.98);border-bottom:1px solid rgba(255,255,255,.06);padding:16px 24px 24px;flex-direction:column;gap:2px;z-index:199; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-size:15px;color:var(--smoke);padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06); }
+    .mobile-menu a:last-child { border:none;color:var(--plum);margin-top:8px;font-weight:600; }
+
+    /* ── REVEAL ── */
+    .reveal { opacity:0; transform:translateY(20px); transition: opacity .9s cubic-bezier(.22,1,.36,1), transform .9s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .d1{transition-delay:.12s;} .d2{transition-delay:.24s;} .d3{transition-delay:.36s;}
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100svh; display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative; overflow: hidden;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 120px 64px 80px 64px; position: relative; z-index: 2;
+    }
+    .hero-right { position: relative; }
+    #constellation-canvas {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+    }
+    .hero-right-fade {
+      position: absolute; top: 0; left: 0; width: 200px; height: 100%;
+      background: linear-gradient(to right, #000 0%, transparent 100%);
+      z-index: 1; pointer-events: none;
+    }
+
+    .hero-kicker {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.10em;
+      text-transform: uppercase; color: var(--plum);
+      margin-bottom: 24px;
+      animation: fade-up 0.8s ease 0.2s both;
+    }
+    @keyframes fade-up { from{opacity:0;transform:translateY(16px);} to{opacity:1;transform:translateY(0);} }
+
+    .hero-headline {
+      font-size: clamp(56px, 6.5vw, 96px);
+      font-weight: 200; line-height: 0.9;
+      letter-spacing: -0.04em; color: var(--bone);
+      margin-bottom: 28px;
+      animation: fade-up 1s cubic-bezier(.22,1,.36,1) 0.35s both;
+    }
+    .hero-headline em { font-style: italic; color: var(--plum); font-weight: 200; }
+
+    .hero-body {
+      font-size: 16px; font-weight: 400; color: var(--ash);
+      line-height: 1.65; letter-spacing: 0.021em;
+      max-width: 400px; margin-bottom: 36px;
+      animation: fade-up 0.8s ease 0.55s both;
+    }
+    .hero-actions {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      animation: fade-up 0.8s ease 0.7s both;
+    }
+    .hero-note {
+      font-size: 12px; color: var(--smoke); letter-spacing: 0.05em; margin-top: 18px;
+      animation: fade-up 0.8s ease 0.85s both;
+    }
+
+    /* ── HAIRLINE DIVIDER ── */
+    .hairline { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 0; }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 64px; }
+    .inner { max-width: 1200px; margin: 0 auto; }
+
+    .section-kicker {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.10em;
+      text-transform: uppercase; color: var(--plum); margin-bottom: 16px;
+      display: block;
+    }
+    h2 {
+      font-size: clamp(42px, 4.5vw, 72px); font-weight: 200;
+      line-height: 0.95; letter-spacing: -0.04em; color: var(--bone);
+      margin-bottom: 18px;
+    }
+    h2 em { font-style: italic; color: var(--plum); }
+    .section-body {
+      font-size: 16px; color: var(--ash); font-weight: 400;
+      line-height: 1.65; letter-spacing: 0.021em; max-width: 520px;
+    }
+
+    /* ── CONSTELLATION ICON SECTION ── */
+    .icon-section { position: relative; min-height: 400px; }
+    #spore-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .icon-section-content {
+      position: relative; z-index: 2;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 400px; text-align: center; padding: 96px 64px;
+    }
+    .crystal-icon { margin-bottom: 32px; }
+    .icon-section h2 { max-width: 680px; text-align: center; margin: 0 auto 18px; }
+    .icon-section .section-body { text-align: center; margin: 0 auto; }
+
+    /* ── FEATURES GRID ── */
+    .features-section { border-top: 1px solid rgba(255,255,255,0.06); }
+    .features-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); overflow: hidden; margin-top: 64px; }
+    .feature { background: var(--void); padding: 36px 28px; position: relative; transition: background 0.3s; }
+    .feature:hover { background: rgba(128,82,255,0.04); }
+    .feature-num { font-size: 11px; font-weight: 600; letter-spacing: 0.10em; color: var(--smoke); text-transform: uppercase; margin-bottom: 24px; }
+    .feature h3 { font-size: 22px; font-weight: 300; letter-spacing: -0.02em; color: var(--bone); margin-bottom: 12px; line-height: 1.15; }
+    .feature p { font-size: 14px; color: var(--smoke); line-height: 1.7; letter-spacing: 0.025em; font-weight: 400; }
+    .feature-accent { width: 32px; height: 1px; background: var(--plum); margin-bottom: 20px; transition: width 0.4s; }
+    .feature:hover .feature-accent { width: 56px; }
+
+    /* ── METRICS STRIP ── */
+    .metrics-strip { border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+    .metric { padding: 48px 32px; text-align: center; border-right: 1px solid rgba(255,255,255,0.06); }
+    .metric:last-child { border-right: none; }
+    .metric-num { font-size: 60px; font-weight: 200; letter-spacing: -0.04em; color: var(--bone); line-height: 0.9; margin-bottom: 10px; display: block; }
+    .metric-num span { color: var(--plum); }
+    .metric-label { font-size: 12px; font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--smoke); }
+
+    /* ── TESTIMONIALS ── */
+    .testi-section { border-top: 1px solid rgba(255,255,255,0.06); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 64px; }
+    .testi {
+      border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius);
+      padding: 28px; transition: border-color 0.3s;
+    }
+    .testi:hover { border-color: rgba(128,82,255,0.35); }
+    .testi-quote {
+      font-size: 15px; font-weight: 300; color: var(--bone);
+      line-height: 1.65; letter-spacing: 0.021em; margin-bottom: 24px;
+    }
+    .testi-quote::before { content: '\201C'; color: var(--plum); font-size: 28px; font-weight: 200; line-height: 0; vertical-align: -10px; margin-right: 4px; }
+    .testi-footer { display: flex; align-items: center; gap: 12px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .testi-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(128,82,255,0.2); border: 1px solid rgba(128,82,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--plum); flex-shrink: 0; }
+    .testi-name { font-size: 13px; font-weight: 600; color: var(--bone); }
+    .testi-detail { font-size: 11px; color: var(--smoke); letter-spacing: 0.05em; margin-top: 2px; }
+
+    /* ── HOW IT WORKS ── */
+    .how-section { border-top: 1px solid rgba(255,255,255,0.06); }
+    .steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 40px; margin-top: 64px; }
+    .step-num { font-size: 72px; font-weight: 200; letter-spacing: -0.04em; color: rgba(255,255,255,0.08); line-height: 1; margin-bottom: 20px; }
+    .step h3 { font-size: 18px; font-weight: 400; color: var(--bone); margin-bottom: 10px; letter-spacing: 0.021em; }
+    .step p { font-size: 14px; color: var(--smoke); line-height: 1.7; letter-spacing: 0.025em; }
+    .step-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--plum); margin-bottom: 16px; }
+
+    /* ── PRICING ── */
+    .pricing-section { border-top: 1px solid rgba(255,255,255,0.06); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 64px; }
+    .plan {
+      border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius);
+      padding: 32px; transition: border-color 0.3s;
+    }
+    .plan.featured { border-color: rgba(128,82,255,0.5); }
+    .plan:hover { border-color: rgba(128,82,255,0.3); }
+    .plan-tier { font-size: 11px; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase; color: var(--smoke); margin-bottom: 12px; display: block; }
+    .plan-name { font-size: 28px; font-weight: 200; letter-spacing: -0.03em; color: var(--bone); margin-bottom: 6px; }
+    .plan-price { font-size: 48px; font-weight: 200; letter-spacing: -0.04em; color: var(--bone); line-height: 1; margin: 18px 0 4px; }
+    .plan-price sub { font-size: 14px; font-weight: 400; color: var(--smoke); vertical-align: middle; }
+    .plan-note { font-size: 12px; color: var(--smoke); letter-spacing: 0.05em; margin-bottom: 24px; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .plan-features li { font-size: 14px; color: var(--ash); display: flex; align-items: center; gap: 10px; letter-spacing: 0.021em; }
+    .plan-features li::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--plum); flex-shrink: 0; }
+    .plan-btn {
+      display: block; width: 100%; padding: 12px; text-align: center;
+      border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius);
+      font-size: 12px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--smoke); cursor: pointer; transition: all 0.25s; background: transparent; font-family: inherit;
+    }
+    .plan-btn:hover, .plan.featured .plan-btn { background: var(--plum); border-color: var(--plum); color: var(--bone); }
+
+    /* ── CTA BAND ── */
+    .cta-section { border-top: 1px solid rgba(255,255,255,0.06); position: relative; overflow: hidden; }
+    #cta-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .cta-inner { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; text-align: center; padding: 96px 64px; }
+    .cta-inner h2 { font-size: clamp(48px,5.5vw,80px); margin-bottom: 18px; }
+    .cta-inner p { font-size: 16px; color: var(--ash); line-height: 1.65; letter-spacing: 0.021em; margin-bottom: 36px; }
+    .cta-actions { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 56px 64px 32px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 13px; color: var(--smoke); margin-top: 14px; max-width: 200px; line-height: 1.65; letter-spacing: 0.025em; }
+    .footer-col h4 { font-size: 11px; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col a { font-size: 14px; color: var(--smoke); transition: color 0.2s; letter-spacing: 0.021em; }
+    .footer-col a:hover { color: var(--bone); }
+    .footer-bottom { display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 12px; color: rgba(255,255,255,0.2); flex-wrap: wrap; gap: 8px; }
+    .footer-credit a { color: rgba(128,82,255,0.5); }
+
+    @media(max-width:900px) {
+      nav{padding:0 20px;} .nav-links,.nav-right{display:none;} .hamburger{display:flex;}
+      .hero{grid-template-columns:1fr; min-height:auto;} .hero-left{padding:120px 24px 60px;}
+      .hero-right{height:280px;} section{padding:72px 24px;}
+      .features-grid,.testi-grid,.pricing-grid{grid-template-columns:1fr;}
+      .metrics-grid{grid-template-columns:1fr 1fr;} .steps-grid{grid-template-columns:1fr 1fr;}
+      .footer-top{grid-template-columns:1fr 1fr;} .cta-inner{padding:72px 24px;}
+    }
+    @media(max-width:540px) { .footer-top{grid-template-columns:1fr;} .steps-grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="14,2 26,8 26,20 14,26 2,20 2,8" fill="none" stroke="#8052ff" stroke-width="1.5"/>
+        <polygon points="14,7 21,11 21,18 14,22 7,18 7,11" fill="none" stroke="#8052ff" stroke-width="1"/>
+        <circle cx="14" cy="14" r="2" fill="#8052ff"/>
+      </svg>
+    </div>
+    Nexus
+  </div>
+  <ul class="nav-links">
+    <li><a href="#features">Product</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#">Blog</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Sign in</a>
+    <button class="btn-plum">Request Access</button>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#features" onclick="closeMenu()">Product</a>
+  <a href="#how" onclick="closeMenu()">How it works</a>
+  <a href="#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="#" onclick="closeMenu()">Request Access →</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-left">
+    <div class="hero-kicker">Stop losing what your team knows</div>
+    <h1 class="hero-headline">
+      Your team's<br />knowledge,<br /><em>finally alive.</em>
+    </h1>
+    <p class="hero-body">Nexus turns scattered docs, Slack threads, and tribal knowledge into a living intelligence layer your whole team can actually use — instantly.</p>
+    <div class="hero-actions">
+      <button class="btn-plum" style="padding:14px 24px;font-size:13px;">Request Early Access</button>
+      <button class="btn-amber" style="padding:14px 24px;font-size:13px;">See It In Action</button>
+    </div>
+    <p class="hero-note">No credit card required — 14-day free trial</p>
+  </div>
+  <div class="hero-right">
+    <canvas id="constellation-canvas"></canvas>
+    <div class="hero-right-fade"></div>
+  </div>
+</section>
+
+<hr class="hairline" />
+
+<!-- METRICS -->
+<section class="metrics-strip" style="padding:0;">
+  <div class="metrics-grid">
+    <div class="metric reveal"><span class="metric-num">12<span>x</span></span><div class="metric-label">Faster answers</div></div>
+    <div class="metric reveal d1"><span class="metric-num">94<span>%</span></span><div class="metric-label">Accuracy rate</div></div>
+    <div class="metric reveal d2"><span class="metric-num">3<span>K+</span></span><div class="metric-label">Teams onboarded</div></div>
+    <div class="metric reveal d3"><span class="metric-num">0<span>s</span></span><div class="metric-label">Search latency</div></div>
+  </div>
+</section>
+
+<!-- ICON / SPORE SECTION -->
+<section class="icon-section" style="padding:0;">
+  <canvas id="spore-canvas"></canvas>
+  <div class="icon-section-content">
+    <div class="crystal-icon reveal">
+      <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="48,6 90,30 90,66 48,90 6,66 6,30" fill="none" stroke="#15846e" stroke-width="1.5"/>
+        <polygon points="48,18 78,36 78,60 48,78 18,60 18,36" fill="none" stroke="#15846e" stroke-width="1"/>
+        <polygon points="48,30 66,42 66,54 48,66 30,54 30,42" fill="none" stroke="#8052ff" stroke-width="1.5"/>
+        <circle cx="48" cy="48" r="5" fill="#8052ff"/>
+        <line x1="48" y1="6" x2="48" y2="90" stroke="#15846e" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.4"/>
+        <line x1="6" y1="48" x2="90" y2="48" stroke="#15846e" stroke-width="0.5" stroke-dasharray="4 4" opacity="0.4"/>
+      </svg>
+    </div>
+    <span class="section-kicker reveal">Intelligence Layer</span>
+    <h2 class="reveal" style="text-align:center;max-width:680px;margin:0 auto 18px;">
+      Ask anything.<br /><em>Get answers instantly.</em>
+    </h2>
+    <p class="section-body reveal d1" style="text-align:center;margin:0 auto;">
+      Nexus reads your existing tools — Notion, Confluence, Slack, Drive, GitHub — and builds a unified knowledge graph your team can query in plain English. No tagging, no migration, no training.
+    </p>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="inner">
+    <div class="reveal">
+      <span class="section-kicker">What it does</span>
+      <h2>Built for how<br /><em>teams actually work.</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature reveal"><div class="feature-num">01</div><div class="feature-accent"></div><h3>Universal Connector</h3><p>One integration unlocks Notion, Confluence, Slack, Google Drive, GitHub, Jira, and Linear simultaneously. Your knowledge lives in those tools — Nexus just makes it findable.</p></div>
+      <div class="feature reveal d1"><div class="feature-num">02</div><div class="feature-accent"></div><h3>Semantic Search</h3><p>Forget keywords. Ask questions the way you'd ask a colleague. Nexus understands context, synonyms, and intent — returning the right answer, not a list of documents.</p></div>
+      <div class="feature reveal d2"><div class="feature-num">03</div><div class="feature-accent"></div><h3>Source Citations</h3><p>Every answer includes a verifiable source link. Nexus never hallucinates — it only surfaces knowledge that already exists in your connected tools.</p></div>
+      <div class="feature reveal"><div class="feature-num">04</div><div class="feature-accent"></div><h3>Permission Aware</h3><p>Users only see answers built from content they already have access to. Nexus respects your existing access controls — zero configuration required.</p></div>
+      <div class="feature reveal d1"><div class="feature-num">05</div><div class="feature-accent"></div><h3>Knowledge Graph</h3><p>Watch your team's knowledge form into a living constellation. See which documents are connected, which are outdated, and what's actually being used.</p></div>
+      <div class="feature reveal d2"><div class="feature-num">06</div><div class="feature-accent"></div><h3>Instant Onboarding</h3><p>New team members get up to speed in hours, not weeks. Ask Nexus how the codebase works, who owns what, or why a decision was made in 2021.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="inner">
+    <div class="reveal">
+      <span class="section-kicker">How it works</span>
+      <h2>Connected in<br /><em>minutes.</em></h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal"><div class="step-num">01</div><div class="step-dot"></div><h3>Connect your tools</h3><p>Link Notion, Slack, Drive, GitHub — whichever tools your team already uses. Setup takes under five minutes.</p></div>
+      <div class="step reveal d1"><div class="step-num">02</div><div class="step-dot"></div><h3>Nexus indexes</h3><p>Our pipeline reads, chunks, and embeds your content into a semantic knowledge graph. No manual tagging required.</p></div>
+      <div class="step reveal d2"><div class="step-num">03</div><div class="step-dot"></div><h3>Ask anything</h3><p>Your team starts asking questions in plain English. Nexus returns answers with exact source citations in under a second.</p></div>
+      <div class="step reveal d3"><div class="step-num">04</div><div class="step-dot"></div><h3>Knowledge evolves</h3><p>As your docs and conversations change, Nexus re-indexes automatically. Your knowledge base is always current.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section" style="border-top:1px solid rgba(255,255,255,0.06);">
+  <div class="inner">
+    <div class="reveal">
+      <span class="section-kicker">Early Access Teams</span>
+      <h2>What teams<br /><em>say about it.</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi reveal">
+        <p class="testi-quote">We stopped the 'who knows about X?' Slack message the same week we turned on Nexus. The answer is just… there.</p>
+        <div class="testi-footer"><div class="testi-avatar">AK</div><div><div class="testi-name">Amir K.</div><div class="testi-detail">CTO · Series B startup</div></div></div>
+      </div>
+      <div class="testi reveal d1">
+        <p class="testi-quote">Onboarding a new engineer used to take three weeks of shadow sessions. Now it takes three days and Nexus handles the other seventeen.</p>
+        <div class="testi-footer"><div class="testi-avatar">LN</div><div><div class="testi-name">Layla N.</div><div class="testi-detail">Engineering Lead · Fintech</div></div></div>
+      </div>
+      <div class="testi reveal d2">
+        <p class="testi-quote">The citation feature is what sold our security team. Every answer has a traceable source. No hallucinations. That's non-negotiable for us.</p>
+        <div class="testi-footer"><div class="testi-avatar">RM</div><div><div class="testi-name">Ross M.</div><div class="testi-detail">VP Product · Enterprise SaaS</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="inner">
+    <div class="reveal">
+      <span class="section-kicker">Pricing</span>
+      <h2>Simple plans,<br /><em>no surprises.</em></h2>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan reveal">
+        <span class="plan-tier">Starter</span>
+        <div class="plan-name">Team</div>
+        <div class="plan-price">$49<sub>/mo</sub></div>
+        <div class="plan-note">Up to 10 seats</div>
+        <ul class="plan-features">
+          <li>3 tool integrations</li>
+          <li>Semantic search</li>
+          <li>Source citations</li>
+          <li>Slack integration</li>
+          <li>5,000 queries / mo</li>
+        </ul>
+        <button class="plan-btn">Get Started</button>
+      </div>
+      <div class="plan featured reveal d1">
+        <span class="plan-tier" style="color:var(--plum);">Most Popular</span>
+        <div class="plan-name">Growth</div>
+        <div class="plan-price">$149<sub>/mo</sub></div>
+        <div class="plan-note">Unlimited seats</div>
+        <ul class="plan-features">
+          <li>All tool integrations</li>
+          <li>Knowledge graph view</li>
+          <li>Permission-aware answers</li>
+          <li>Analytics dashboard</li>
+          <li>Unlimited queries</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="plan-btn">Get Started</button>
+      </div>
+      <div class="plan reveal d2">
+        <span class="plan-tier">Enterprise</span>
+        <div class="plan-name">Scale</div>
+        <div class="plan-price">Custom</div>
+        <div class="plan-note">Tailored to your org</div>
+        <ul class="plan-features">
+          <li>Everything in Growth</li>
+          <li>SSO / SAML</li>
+          <li>Dedicated deployment</li>
+          <li>Custom integrations</li>
+          <li>SLA & compliance docs</li>
+          <li>Dedicated CSM</li>
+        </ul>
+        <button class="plan-btn">Talk to Sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <canvas id="cta-canvas"></canvas>
+  <div class="cta-inner">
+    <span class="section-kicker reveal">Ready?</span>
+    <h2 class="reveal">Stop managing<br /><em>knowledge.</em><br />Start using it.</h2>
+    <p class="reveal d1">Join 3,000+ teams who ended the 'who knows what?' Slack spiral. First 14 days free — no card required.</p>
+    <div class="cta-actions reveal d2">
+      <button class="btn-plum" style="padding:14px 28px;font-size:13px;">Request Early Access</button>
+      <button class="btn-amber" style="padding:14px 28px;font-size:13px;">Watch Demo</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo" style="font-size:16px;">
+          <div class="nav-logo-icon" style="width:22px;height:22px;">
+            <svg viewBox="0 0 28 28" fill="none"><polygon points="14,2 26,8 26,20 14,26 2,20 2,8" fill="none" stroke="#8052ff" stroke-width="1.5"/><circle cx="14" cy="14" r="2" fill="#8052ff"/></svg>
+          </div>
+          Nexus
+        </div>
+        <p>Your team's collective knowledge, made searchable, citable, and alive.</p>
+      </div>
+      <div class="footer-col"><h4>Product</h4><ul><li><a href="#">Features</a></li><li><a href="#">Integrations</a></li><li><a href="#">Security</a></li><li><a href="#">Changelog</a></li></ul></div>
+      <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">DPA</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Nexus Inc. All rights reserved.</span>
+      <span class="footer-credit">Built by <a href="#">Brand Verse Worldwide</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── MOBILE MENU ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
+function closeMenu() { mobileMenu.classList.remove('open'); }
+
+/* ── REVEAL ── */
+const ro = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); ro.unobserve(x.target); } }), { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ══════════════════════════════════════════════════════
+   HERO CONSTELLATION — thousands of micro-shapes
+   clustering into an organic brain/sphere form
+══════════════════════════════════════════════════════ */
+(function () {
+  const canvas = document.getElementById('constellation-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, tick = 0;
+
+  const COLORS = ['#8052ff','#ffb829','#15846e','#ffffff','#8052ff','#8052ff'];
+  const SHAPES = ['circle','triangle','diamond','square'];
+  const N = 1800;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth  * devicePixelRatio;
+    H = canvas.height = canvas.offsetHeight * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    buildParticles();
+  }
+
+  let particles = [];
+
+  /* organic brain-like cluster: two lobes centered in the right half */
+  function brainPoint() {
+    const lobe = Math.random() < 0.52 ? -1 : 1;
+    const cx = 0.5 + lobe * 0.16;
+    const cy = 0.48;
+    const rx = 0.22; const ry = 0.30;
+    const angle = Math.random() * Math.PI * 2;
+    const r = Math.pow(Math.random(), 0.5);
+    return {
+      tx: cx + Math.cos(angle) * rx * r,
+      ty: cy + Math.sin(angle) * ry * r * 0.8,
+    };
+  }
+
+  function buildParticles() {
+    particles = Array.from({ length: N }, (_, i) => {
+      const t = brainPoint();
+      const drift = 0.06 + Math.random() * 0.10;
+      /* start scattered, drift toward target */
+      return {
+        x:  Math.random(),
+        y:  Math.random(),
+        tx: t.tx,
+        ty: t.ty,
+        size: 1 + Math.random() * 3.5,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        shape: SHAPES[Math.floor(Math.random() * SHAPES.length)],
+        alpha: 0.3 + Math.random() * 0.55,
+        speed: 0.012 + Math.random() * 0.018,
+        drift,
+        vx: (Math.random() - 0.5) * 0.0004,
+        vy: (Math.random() - 0.5) * 0.0004,
+        phasex: Math.random() * Math.PI * 2,
+        phasey: Math.random() * Math.PI * 2,
+        freq:   0.0004 + Math.random() * 0.0008,
+      };
+    });
+  }
+
+  function drawShape(ctx, shape, x, y, s, color, alpha) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.strokeStyle = color;
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    const px = x * w, py = y * h;
+
+    if (shape === 'circle') {
+      ctx.beginPath(); ctx.arc(px, py, s, 0, Math.PI * 2); ctx.fill();
+    } else if (shape === 'triangle') {
+      ctx.beginPath();
+      ctx.moveTo(px, py - s);
+      ctx.lineTo(px + s * 0.87, py + s * 0.5);
+      ctx.lineTo(px - s * 0.87, py + s * 0.5);
+      ctx.closePath(); ctx.fill();
+    } else if (shape === 'diamond') {
+      ctx.beginPath();
+      ctx.moveTo(px, py - s);
+      ctx.lineTo(px + s * 0.7, py);
+      ctx.lineTo(px, py + s);
+      ctx.lineTo(px - s * 0.7, py);
+      ctx.closePath(); ctx.fill();
+    } else {
+      ctx.fillRect(px - s * 0.7, py - s * 0.7, s * 1.4, s * 1.4);
+    }
+    ctx.restore();
+  }
+
+  function frame() {
+    tick++;
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    ctx.clearRect(0, 0, w, h);
+
+    particles.forEach(p => {
+      /* ease toward target */
+      p.x += (p.tx - p.x) * p.speed;
+      p.y += (p.ty - p.y) * p.speed;
+      /* gentle drift once close */
+      p.x += Math.sin(tick * p.freq + p.phasex) * p.drift * 0.001;
+      p.y += Math.cos(tick * p.freq + p.phasey) * p.drift * 0.001;
+      drawShape(ctx, p.shape, p.x, p.y, p.size, p.color, p.alpha);
+    });
+
+    requestAnimationFrame(frame);
+  }
+
+  new ResizeObserver(() => {
+    const dpr = devicePixelRatio;
+    W = canvas.width = canvas.offsetWidth * dpr;
+    H = canvas.height = canvas.offsetHeight * dpr;
+    ctx.scale(dpr, dpr);
+  }).observe(canvas.parentElement);
+
+  resize();
+  requestAnimationFrame(frame);
+})();
+
+/* ══════════════════════════════════════════════════════
+   SPORE CANVAS — sparse drift particles behind icon section
+══════════════════════════════════════════════════════ */
+(function () {
+  const canvas = document.getElementById('spore-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  const COLORS = ['#8052ff','#ffb829','#15846e','#ffffff'];
+  const N = 280;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth  * devicePixelRatio;
+    H = canvas.height = canvas.offsetHeight * devicePixelRatio;
+  }
+  resize();
+  new ResizeObserver(resize).observe(canvas.parentElement);
+
+  const pts = Array.from({ length: N }, () => ({
+    x: Math.random(),
+    y: Math.random(),
+    size: 0.8 + Math.random() * 2.5,
+    color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    alpha: 0.15 + Math.random() * 0.35,
+    vx: (Math.random() - 0.5) * 0.00012,
+    vy: (Math.random() - 0.5) * 0.00012,
+  }));
+
+  function frame() {
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    ctx.clearRect(0, 0, w, h);
+    pts.forEach(p => {
+      p.x = ((p.x + p.vx) + 1) % 1;
+      p.y = ((p.y + p.vy) + 1) % 1;
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x * w, p.y * h, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ══════════════════════════════════════════════════════
+   CTA CANVAS — sparse radial constellation
+══════════════════════════════════════════════════════ */
+(function () {
+  const canvas = document.getElementById('cta-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  const COLORS = ['#8052ff','#8052ff','#ffb829','#15846e','#ffffff'];
+  const N = 400;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth  * devicePixelRatio;
+    H = canvas.height = canvas.offsetHeight * devicePixelRatio;
+  }
+  resize();
+  new ResizeObserver(resize).observe(canvas.parentElement);
+
+  const pts = Array.from({ length: N }, () => {
+    const angle = Math.random() * Math.PI * 2;
+    const r = 0.05 + Math.pow(Math.random(), 0.6) * 0.45;
+    return {
+      x: 0.5 + Math.cos(angle) * r,
+      y: 0.5 + Math.sin(angle) * r * 0.7,
+      size: 0.8 + Math.random() * 2.8,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      alpha: 0.12 + Math.random() * 0.35,
+      vx: (Math.random() - 0.5) * 0.00015,
+      vy: (Math.random() - 0.5) * 0.00015,
+    };
+  });
+
+  function frame() {
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    ctx.clearRect(0, 0, w, h);
+    pts.forEach(p => {
+      p.x = ((p.x + p.vx) + 1) % 1;
+      p.y = ((p.y + p.vy) + 1) % 1;
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.fillStyle = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x * w, p.y * h, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    });
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APEX Fitness — Train Like You Mean It</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --orange:  #FF6B00;
+      --orange2: #FF8C00;
+      --dark:    #080808;
+      --card:    #111111;
+      --border:  rgba(255,107,0,0.15);
+      --text:    rgba(255,255,255,0.85);
+      --text2:   rgba(255,255,255,0.40);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--text); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    #progress { position:fixed;top:0;left:0;width:100%;height:3px;background:var(--orange);z-index:999;transform-origin:left;transform:scaleX(0);transition:transform .05s linear; }
+
+    nav { position:fixed;top:0;left:0;right:0;z-index:200;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;transition:background .4s; }
+    nav.scrolled { background:rgba(8,8,8,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border); }
+    .nav-logo { font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.08em;color:#fff; }
+    .nav-logo span { color:var(--orange); }
+    .nav-links { display:flex;gap:32px;list-style:none; }
+    .nav-links a { font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text2);transition:color .2s; }
+    .nav-links a:hover { color:var(--orange); }
+    .nav-cta { padding:10px 24px;background:var(--orange);color:#fff;border-radius:2px;font-size:11px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;transition:background .2s; }
+    .nav-cta:hover { background:var(--orange2); }
+    .hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px; }
+    .hamburger span { display:block;width:20px;height:1.5px;background:var(--text2); }
+    .mobile-menu { display:none;position:fixed;top:68px;left:0;right:0;background:rgba(8,8,8,0.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:16px 24px 24px;flex-direction:column;gap:2px;z-index:199; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-size:15px;font-weight:500;color:var(--text2);padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06); }
+    .mobile-menu a:last-child { border:none;color:var(--orange);font-weight:700;margin-top:8px; }
+
+    .reveal { opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity:1;transform:translateY(0); }
+    .d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
+    @keyframes fade-up { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
+
+    /* HERO */
+    .hero { position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:140px 72px 100px;overflow:hidden; }
+    #gym-canvas { position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0; }
+    .hero-overlay { position:absolute;inset:0;background:linear-gradient(to right,rgba(8,8,8,0.92) 42%,rgba(8,8,8,0.25) 100%);z-index:1; }
+    .hero-content { position:relative;z-index:2;max-width:640px; }
+    .hero-badge { display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border:1px solid var(--border);border-radius:40px;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:24px;animation:fade-up .7s ease .2s both; }
+    .badge-dot { width:6px;height:6px;border-radius:50%;background:var(--orange);animation:pulse 2s ease infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.5;transform:scale(1.5);} }
+    .hero h1 { font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,9vw,128px);line-height:.93;letter-spacing:.03em;color:#fff;margin-bottom:24px;animation:fade-up .9s cubic-bezier(.22,1,.36,1) .4s both; }
+    .hero h1 .o { color:var(--orange); }
+    .hero-sub { font-size:16px;font-weight:300;color:var(--text2);line-height:1.85;max-width:420px;margin-bottom:36px;animation:fade-up .8s ease .6s both; }
+    .hero-actions { display:flex;gap:14px;flex-wrap:wrap;animation:fade-up .8s ease .8s both; }
+    .btn-fire { padding:15px 36px;background:var(--orange);color:#fff;font-size:12px;font-weight:800;letter-spacing:.10em;text-transform:uppercase;border-radius:2px;transition:all .3s;position:relative;overflow:hidden; }
+    .btn-fire::before { content:'';position:absolute;inset:0;background:rgba(255,255,255,.15);transform:translateX(-100%);transition:transform .4s; }
+    .btn-fire:hover::before { transform:translateX(0); }
+    .btn-fire:hover { transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,107,0,.35); }
+    .btn-out { padding:15px 28px;border:1px solid rgba(255,255,255,.15);color:var(--text2);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border-radius:2px;transition:all .3s; }
+    .btn-out:hover { border-color:var(--orange);color:var(--orange); }
+
+    /* EKG */
+    .ekg-wrap { position:absolute;bottom:0;left:0;right:0;height:64px;z-index:2;overflow:hidden; }
+    #ekg-canvas { width:100%;height:100%;display:block; }
+
+    /* STATS STRIP */
+    .stats-strip { background:var(--orange);padding:22px 48px;display:flex;justify-content:center;gap:64px;flex-wrap:wrap; }
+    .stat { text-align:center; }
+    .stat-num { font-family:'Bebas Neue',sans-serif;font-size:40px;color:#fff;line-height:1;letter-spacing:.04em; }
+    .stat-label { font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-top:2px; }
+
+    section { padding:96px 48px; }
+    .inner { max-width:1100px;margin:0 auto; }
+    .label { font-size:10px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:var(--orange);margin-bottom:12px;display:block; }
+    h2 { font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,6vw,80px);line-height:.95;letter-spacing:.04em;color:#fff;margin-bottom:16px; }
+    h2 .o { color:var(--orange); }
+    .section-sub { font-size:15px;color:var(--text2);max-width:440px;line-height:1.85;font-weight:300; }
+
+    /* PROGRAMS */
+    .programs-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:56px; }
+    .program { background:var(--card);padding:36px 28px;transition:background .3s;position:relative;overflow:hidden; }
+    .program::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--orange);transform:scaleX(0);transition:transform .5s;transform-origin:left; }
+    .program:hover { background:#161616; }
+    .program:hover::before { transform:scaleX(1); }
+    .prog-icon { font-size:32px;margin-bottom:20px; }
+    .program h3 { font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.06em;color:#fff;margin-bottom:8px; }
+    .program p { font-size:13px;color:var(--text2);line-height:1.8;font-weight:300; }
+    .prog-tag { display:inline-block;margin-top:16px;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);border:1px solid var(--border);padding:5px 12px;border-radius:20px; }
+
+    /* TRAINERS */
+    .trainers-section { border-top:1px solid rgba(255,255,255,.06); }
+    .trainers-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px; }
+    .trainer { border:1px solid rgba(255,255,255,.06);transition:border-color .3s; }
+    .trainer:hover { border-color:var(--border); }
+    .trainer-img { aspect-ratio:1;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden; }
+    .trainer-img::after { content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.9) 0%,transparent 60%); }
+    .trainer-body { padding:22px; }
+    .trainer-name { font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.06em;color:#fff;margin-bottom:2px; }
+    .trainer-spec { font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:10px; }
+    .trainer-bio { font-size:13px;color:var(--text2);line-height:1.75;font-weight:300; }
+
+    /* PRICING */
+    .pricing-section { background:var(--card);border-top:1px solid rgba(255,255,255,.06); }
+    .pricing-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,.08);margin-top:56px; }
+    .plan { padding:40px 32px;border-right:1px solid rgba(255,255,255,.08); }
+    .plan:last-child { border-right:none; }
+    .plan.featured { background:rgba(255,107,0,.06);border:1px solid var(--border); }
+    .plan-badge { font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:14px;display:block; }
+    .plan-name { font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.06em;color:#fff;margin-bottom:8px; }
+    .plan-price { font-size:48px;font-weight:800;color:var(--orange);line-height:1;margin-bottom:4px; }
+    .plan-price span { font-size:16px;color:var(--text2);font-weight:400; }
+    .plan-features { list-style:none;display:flex;flex-direction:column;gap:10px;margin:24px 0 28px; }
+    .plan-features li { font-size:13px;color:var(--text2);display:flex;align-items:center;gap:10px;font-weight:400; }
+    .plan-features li::before { content:'';width:6px;height:6px;background:var(--orange);border-radius:50%;flex-shrink:0; }
+    .plan-btn { width:100%;padding:13px;background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--text2);font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:.10em;text-transform:uppercase;cursor:pointer;transition:all .3s; }
+    .plan-btn:hover,.plan.featured .plan-btn { background:var(--orange);border-color:var(--orange);color:#fff; }
+
+    /* REVIEWS */
+    .testi-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(255,255,255,.08);margin-top:56px; }
+    .testi { padding:32px;border-right:1px solid rgba(255,255,255,.08);transition:background .3s; }
+    .testi:hover { background:var(--card); }
+    .testi:last-child { border-right:none; }
+    .testi-stars { color:var(--orange);font-size:12px;letter-spacing:2px;margin-bottom:16px; }
+    .testi-quote { font-size:14px;color:var(--text);line-height:1.8;font-style:italic;margin-bottom:20px;font-weight:300; }
+    .testi-footer { display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid rgba(255,255,255,.06); }
+    .testi-avatar { width:34px;height:34px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff;flex-shrink:0; }
+    .testi-name { font-size:13px;font-weight:600;color:#fff; }
+    .testi-detail { font-size:10px;color:var(--text2);margin-top:2px; }
+
+    /* CTA */
+    .cta-band { padding:80px 48px;text-align:center;position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.06); }
+    .cta-band::before { content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,rgba(255,107,0,.10) 0%,transparent 70%);pointer-events:none; }
+    .cta-band h2 { position:relative;z-index:1;margin-bottom:14px; }
+    .cta-band p { font-size:16px;color:var(--text2);margin-bottom:32px;font-weight:300;position:relative;z-index:1; }
+
+    footer { border-top:1px solid rgba(255,255,255,.06);padding:56px 48px 28px;background:#050505; }
+    .footer-inner { max-width:1100px;margin:0 auto; }
+    .footer-top { display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:56px;margin-bottom:40px; }
+    .footer-logo { font-family:'Bebas Neue',sans-serif;font-size:26px;color:#fff;letter-spacing:.08em;margin-bottom:10px; }
+    .footer-logo span { color:var(--orange); }
+    .footer-brand p { font-size:13px;color:var(--text2);line-height:1.75;font-weight:300;max-width:200px; }
+    .footer-col h4 { font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:16px; }
+    .footer-col ul { list-style:none;display:flex;flex-direction:column;gap:10px; }
+    .footer-col a { font-size:13px;color:var(--text2);transition:color .2s; }
+    .footer-col a:hover { color:var(--orange); }
+    .footer-bottom { display:flex;justify-content:space-between;padding-top:24px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:rgba(255,255,255,.2);flex-wrap:wrap;gap:8px; }
+    .footer-credit a { color:rgba(255,107,0,.45); }
+
+    @media(max-width:900px) {
+      nav{padding:0 20px;} .nav-links,.nav-cta{display:none;} .hamburger{display:flex;}
+      section{padding:72px 20px;} .hero{padding:120px 24px 100px;}
+      .programs-grid,.trainers-grid,.pricing-grid,.testi-grid{grid-template-columns:1fr;}
+      .stats-strip{gap:28px;padding:20px 24px;} .footer-top{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav id="nav">
+  <div class="nav-logo">APEX<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#trainers">Trainers</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+  <a href="#pricing" class="nav-cta">Start Today</a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#programs" onclick="closeMenu()">Programs</a>
+  <a href="#trainers" onclick="closeMenu()">Trainers</a>
+  <a href="#pricing" onclick="closeMenu()">Pricing</a>
+  <a href="#reviews" onclick="closeMenu()">Reviews</a>
+  <a href="#pricing" onclick="closeMenu()">Start Today →</a>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:140px 72px 100px;">
+  <canvas id="gym-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="badge-dot"></div>Now Enrolling — 3 Locations</div>
+    <h1>TRAIN<br /><span class="o">HARDER.</span><br />WIN BIGGER.</h1>
+    <p class="hero-sub">APEX isn't a gym you visit. It's a standard you hold yourself to. World-class equipment, elite coaching, zero excuses.</p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-fire">Start Free Trial</a>
+      <a href="#programs" class="btn-out">View Programs</a>
+    </div>
+  </div>
+  <div class="ekg-wrap"><canvas id="ekg-canvas"></canvas></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat"><div class="stat-num" data-target="5000">0</div><div class="stat-label">Active Members</div></div>
+  <div class="stat"><div class="stat-num" data-target="12">0</div><div class="stat-label">Elite Trainers</div></div>
+  <div class="stat"><div class="stat-num" data-target="3">0</div><div class="stat-label">Locations</div></div>
+  <div class="stat"><div class="stat-num" data-target="98">0</div><div class="stat-label">% Member Retention</div></div>
+</div>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="inner">
+    <div class="reveal">
+      <span class="label">Train With Purpose</span>
+      <h2>OUR <span class="o">PROGRAMS.</span></h2>
+      <p class="section-sub">Every program is built around results — not trends. Designed by coaches who've been in competition, not just certification classes.</p>
+    </div>
+    <div class="programs-grid">
+      <div class="program reveal"><div class="prog-icon">🏋️</div><h3>STRENGTH</h3><p>Heavy compound lifts, progressive overload, and periodization designed to build real, lasting muscle mass.</p><div class="prog-tag">All Levels</div></div>
+      <div class="program reveal d1"><div class="prog-icon">⚡</div><h3>HIIT POWER</h3><p>45-minute high-intensity circuits that torch calories and build cardiovascular endurance that actually transfers.</p><div class="prog-tag">Intermediate</div></div>
+      <div class="program reveal d2"><div class="prog-icon">🥊</div><h3>COMBAT FIT</h3><p>Boxing, kickboxing, and MMA conditioning. Full-body training with the intensity of a fighter's camp.</p><div class="prog-tag">All Levels</div></div>
+      <div class="program reveal"><div class="prog-icon">🔥</div><h3>APEX SHRED</h3><p>12-week transformation program combining strength training with calculated nutrition for maximum fat loss.</p><div class="prog-tag">Advanced</div></div>
+      <div class="program reveal d1"><div class="prog-icon">🧘</div><h3>RECOVERY</h3><p>Active recovery, mobility, and guided stretching to keep you training hard without breaking down.</p><div class="prog-tag">All Levels</div></div>
+      <div class="program reveal d2"><div class="prog-icon">🏃</div><h3>ENDURANCE</h3><p>Running, cycling, and rowing combined with strength work. Built for performance athletes.</p><div class="prog-tag">Advanced</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAINERS -->
+<section class="trainers-section" id="trainers">
+  <div class="inner">
+    <div class="reveal">
+      <span class="label">The Coaches</span>
+      <h2>ELITE <span class="o">TRAINERS.</span></h2>
+      <p class="section-sub">You don't need a trainer who looks good on Instagram. You need one who shows up, pushes you, and gets results.</p>
+    </div>
+    <div class="trainers-grid">
+      <div class="trainer reveal"><div class="trainer-img">🏋️</div><div class="trainer-body"><div class="trainer-name">MARCUS REID</div><div class="trainer-spec">Strength & Powerlifting</div><p class="trainer-bio">Former competitive powerlifter, NSCA certified. Specializes in compound movement mechanics and strength periodization.</p></div></div>
+      <div class="trainer reveal d1"><div class="trainer-img">⚡</div><div class="trainer-body"><div class="trainer-name">DIANA CROSS</div><div class="trainer-spec">HIIT & Conditioning</div><p class="trainer-bio">Division I track athlete turned performance coach. Expert in metabolic conditioning and body recomposition.</p></div></div>
+      <div class="trainer reveal d2"><div class="trainer-img">🥊</div><div class="trainer-body"><div class="trainer-name">RAY SANTOS</div><div class="trainer-spec">Combat Fitness & MMA</div><p class="trainer-bio">Amateur MMA fighter, certified S&C coach. His sessions are challenging, technical, and genuinely fun.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="pricing">
+  <div class="inner">
+    <div class="reveal">
+      <span class="label">Membership</span>
+      <h2>SIMPLE <span class="o">PRICING.</span></h2>
+      <p class="section-sub">No hidden fees, no long-term lock-ins. Cancel anytime. Results guaranteed or your money back.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan reveal">
+        <span class="plan-badge">Basic</span>
+        <div class="plan-name">STARTER</div>
+        <div class="plan-price">$39<span>/mo</span></div>
+        <ul class="plan-features"><li>Full gym access</li><li>Group classes (5/week)</li><li>Locker room & showers</li><li>App progress tracking</li></ul>
+        <button class="plan-btn">Get Started</button>
+      </div>
+      <div class="plan featured reveal d1">
+        <span class="plan-badge">Most Popular</span>
+        <div class="plan-name">APEX</div>
+        <div class="plan-price">$79<span>/mo</span></div>
+        <ul class="plan-features"><li>Everything in Starter</li><li>Unlimited group classes</li><li>2 PT sessions/month</li><li>Nutrition guidance</li><li>All 3 locations</li></ul>
+        <button class="plan-btn">Get Started</button>
+      </div>
+      <div class="plan reveal d2">
+        <span class="plan-badge">Elite</span>
+        <div class="plan-name">ELITE</div>
+        <div class="plan-price">$149<span>/mo</span></div>
+        <ul class="plan-features"><li>Everything in APEX</li><li>8 PT sessions/month</li><li>Custom programming</li><li>Monthly body scan</li><li>Priority class booking</li></ul>
+        <button class="plan-btn">Get Started</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" style="border-top:1px solid rgba(255,255,255,.06);">
+  <div class="inner">
+    <div class="reveal">
+      <span class="label">Results</span>
+      <h2>REAL <span class="o">RESULTS.</span></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi reveal"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Down 34 pounds in 4 months. My trainer never let me coast. Best decision I've ever made for my health."</p><div class="testi-footer"><div class="testi-avatar">JT</div><div><div class="testi-name">Jordan T.</div><div class="testi-detail">APEX Shred Program</div></div></div></div>
+      <div class="testi reveal d1"><div class="testi-stars">★★★★★</div><p class="testi-quote">"I've been to six gyms. APEX is where I actually stayed. The trainers care and the community keeps you accountable."</p><div class="testi-footer"><div class="testi-avatar">PR</div><div><div class="testi-name">Patricia R.</div><div class="testi-detail">Member since 2023</div></div></div></div>
+      <div class="testi reveal d2"><div class="testi-stars">★★★★★</div><p class="testi-quote">"Hit a 400lb deadlift PR after 6 months with Marcus. This is the only place I trust to get stronger."</p><div class="testi-footer"><div class="testi-avatar">DM</div><div><div class="testi-name">Devon M.</div><div class="testi-detail">Strength Program</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="inner">
+    <span class="label reveal">Your Move</span>
+    <h2 class="reveal">STOP WAITING.<br /><span class="o">START WINNING.</span></h2>
+    <p class="reveal d1">First week free. No commitment. Show up once and you'll know.</p>
+    <a href="#pricing" class="btn-fire reveal d2">Claim Free Week →</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand"><div class="footer-logo">APEX<span>.</span></div><p>Where serious people come to get serious results. No excuses. Just work.</p></div>
+      <div class="footer-col"><h4>Programs</h4><ul><li><a href="#">Strength</a></li><li><a href="#">HIIT Power</a></li><li><a href="#">Combat Fit</a></li><li><a href="#">APEX Shred</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="#">3 Locations</a></li><li><a href="#">(555) 000-0000</a></li><li><a href="#">Mon–Fri 5am–11pm</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 APEX Fitness. All rights reserved.</span>
+      <span class="footer-credit">Built by <a href="#">Brand Verse Worldwide</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── PROGRESS ── */
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => { prog.style.transform = `scaleX(${window.scrollY / (document.body.scrollHeight - window.innerHeight)})`; }, { passive: true });
+
+/* ── NAV ── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+/* ── MOBILE MENU ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : ''; });
+function closeMenu() { mobileMenu.classList.remove('open'); document.body.style.overflow = ''; }
+
+/* ── REVEAL ── */
+const ro = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); ro.unobserve(x.target); } }), { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* ── COUNTERS ── */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  let cur = 0;
+  const step = Math.max(1, Math.ceil(target / 60));
+  const id = setInterval(() => {
+    cur = Math.min(cur + step, target);
+    el.textContent = cur.toLocaleString();
+    if (cur >= target) clearInterval(id);
+  }, 20);
+}
+const co = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { animateCounter(x.target); co.unobserve(x.target); } }), { threshold: 0.5 });
+document.querySelectorAll('[data-target]').forEach(el => co.observe(el));
+
+/* ══════════════════════════════════════════════════════════
+   IMMERSIVE GYM CANVAS
+   - Perspective floor grid (scrolling depth lines)
+   - Floating barbell silhouettes
+   - Rising energy spark particles
+   - Radial glow orbs
+   - Sweep scan line
+══════════════════════════════════════════════════════════ */
+(function () {
+  const canvas = document.getElementById('gym-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, tick = 0;
+  let mx = 0.5, my = 0.5;
+
+  function resize() {
+    const wrap = canvas.parentElement;
+    W = canvas.width  = wrap.offsetWidth;
+    H = canvas.height = wrap.offsetHeight;
+  }
+  resize();
+  new ResizeObserver(resize).observe(canvas.parentElement);
+
+  canvas.parentElement.addEventListener('mousemove', e => {
+    const r = canvas.getBoundingClientRect();
+    mx = (e.clientX - r.left) / W;
+    my = (e.clientY - r.top)  / H;
+  }, { passive: true });
+
+  /* ─ perspective floor grid ─ */
+  function drawGrid() {
+    const horizon = H * 0.52;
+    const vx = W * 0.5 + (mx - 0.5) * 60;
+    const cols = 16;
+    const rowSpeed = (tick * 0.006) % 1;
+
+    /* vertical perspective lines */
+    for (let i = 0; i <= cols; i++) {
+      const frac = i / cols;
+      const bx = W * frac;
+      const a = 0.03 + 0.07 * Math.sin(frac * Math.PI);
+      ctx.beginPath();
+      ctx.moveTo(bx, H);
+      ctx.lineTo(vx, horizon);
+      ctx.strokeStyle = `rgba(255,107,0,${a})`;
+      ctx.lineWidth = 0.7;
+      ctx.stroke();
+    }
+
+    /* horizontal recession lines */
+    for (let j = 0; j < 14; j++) {
+      const raw = ((j / 14) + rowSpeed) % 1;
+      const f   = raw * raw;
+      const y   = horizon + f * (H - horizon);
+      const hw  = f * W * 0.55;
+      const a   = f * 0.13;
+      ctx.beginPath();
+      ctx.moveTo(vx - hw, y);
+      ctx.lineTo(vx + hw, y);
+      ctx.strokeStyle = `rgba(255,107,0,${a})`;
+      ctx.lineWidth = 0.6;
+      ctx.stroke();
+    }
+  }
+
+  /* ─ glow orbs ─ */
+  const orbs = Array.from({ length: 7 }, (_, i) => ({
+    x: 0.1 + Math.random() * 0.8,
+    y: 0.1 + Math.random() * 0.65,
+    r: 50 + Math.random() * 90,
+    spd: 0.00018 + Math.random() * 0.00045,
+    ph: (i / 7) * Math.PI * 2,
+    a: 0.04 + Math.random() * 0.055,
+  }));
+
+  function drawOrbs() {
+    orbs.forEach(o => {
+      const x = (o.x + Math.sin(tick * o.spd + o.ph) * 0.06) * W;
+      const y = (o.y + Math.cos(tick * o.spd * 0.7 + o.ph) * 0.04) * H;
+      const g = ctx.createRadialGradient(x, y, 0, x, y, o.r);
+      g.addColorStop(0, `rgba(255,107,0,${o.a})`);
+      g.addColorStop(1, 'rgba(255,107,0,0)');
+      ctx.beginPath();
+      ctx.arc(x, y, o.r, 0, Math.PI * 2);
+      ctx.fillStyle = g;
+      ctx.fill();
+    });
+  }
+
+  /* ─ barbell silhouettes ─ */
+  function drawBarbell(x, y, barW, alpha) {
+    if (alpha <= 0) return;
+    const bh = 3, ph = 28, pw = 13;
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = '#FF6B00';
+    /* bar */
+    ctx.fillRect(x - barW / 2, y - bh / 2, barW, bh);
+    /* plates */
+    [x - barW / 2 + pw / 2, x - barW / 2 + pw * 1.6].forEach(px => ctx.fillRect(px - pw / 2, y - ph / 2, pw, ph));
+    [x + barW / 2 - pw / 2, x + barW / 2 - pw * 1.6].forEach(px => ctx.fillRect(px - pw / 2, y - ph / 2, pw, ph));
+    ctx.restore();
+  }
+
+  const bbs = [
+    { x: 0.14, y: 0.22, w: 140, ph: 0.0 },
+    { x: 0.80, y: 0.33, w: 110, ph: 1.4 },
+    { x: 0.52, y: 0.70, w: 160, ph: 2.8 },
+    { x: 0.30, y: 0.55, w:  90, ph: 4.2 },
+  ];
+
+  function drawBarbells() {
+    bbs.forEach(b => {
+      const y = (b.y + Math.sin(tick * 0.0004 + b.ph) * 0.014) * H;
+      const a = 0.04 + 0.02 * Math.sin(tick * 0.0009 + b.ph);
+      drawBarbell(b.x * W, y, b.w, a);
+    });
+  }
+
+  /* ─ spark particles ─ */
+  function mkSpark() {
+    return {
+      x: Math.random(),
+      y: 0.55 + Math.random() * 0.45,
+      vx: (Math.random() - 0.5) * 0.00035,
+      vy: -(0.00015 + Math.random() * 0.0007),
+      life: 1,
+      sz: 0.8 + Math.random() * 2.2,
+    };
+  }
+  const sparks = Array.from({ length: 70 }, mkSpark);
+
+  function drawSparks() {
+    sparks.forEach((s, i) => {
+      s.x  += s.vx;
+      s.y  += s.vy;
+      s.life -= 0.005;
+      if (s.life <= 0 || s.y < 0) { sparks[i] = mkSpark(); return; }
+      const a = s.life * 0.55;
+      ctx.beginPath();
+      ctx.arc(s.x * W, s.y * H, s.sz, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,${130 + Math.floor(s.life * 50)},0,${a})`;
+      ctx.fill();
+    });
+  }
+
+  /* ─ scan line ─ */
+  let scanY = 0;
+  function drawScan() {
+    scanY = (scanY + 1) % H;
+    const g = ctx.createLinearGradient(0, scanY - 28, 0, scanY + 4);
+    g.addColorStop(0, 'rgba(255,107,0,0)');
+    g.addColorStop(1, 'rgba(255,107,0,0.045)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, scanY - 28, W, 32);
+  }
+
+  function frame() {
+    tick++;
+    ctx.clearRect(0, 0, W, H);
+    drawGrid();
+    drawOrbs();
+    drawBarbells();
+    drawSparks();
+    drawScan();
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ══════════════════════════════════════════════════════════
+   HEARTBEAT / EKG LINE at bottom of hero
+══════════════════════════════════════════════════════════ */
+(function () {
+  const canvas = document.getElementById('ekg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, offset = 0;
+
+  function resize() {
+    W = canvas.width  = canvas.parentElement.offsetWidth;
+    H = canvas.height = canvas.parentElement.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  function ekgY(phase) {
+    const p = phase % 1;
+    if (p < 0.28) return H * 0.5;
+    if (p < 0.33) return H * 0.5 - ((p - 0.28) / 0.05) * H * 0.72;
+    if (p < 0.37) return H * 0.5 - H * 0.72 + ((p - 0.33) / 0.04) * H * 0.90;
+    if (p < 0.42) return H * 0.5 + H * 0.18 - ((p - 0.37) / 0.05) * H * 0.18;
+    return H * 0.5;
+  }
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    offset += 1.8;
+
+    const period = W * 0.38;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x++) {
+      const y = ekgY((x + offset) / period);
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+
+    const g = ctx.createLinearGradient(0, 0, W, 0);
+    g.addColorStop(0,   'rgba(255,107,0,0)');
+    g.addColorStop(0.25,'rgba(255,107,0,0.55)');
+    g.addColorStop(0.75,'rgba(255,107,0,0.55)');
+    g.addColorStop(1,   'rgba(255,107,0,0)');
+
+    ctx.strokeStyle = g;
+    ctx.lineWidth = 2;
+    ctx.shadowColor = 'rgba(255,107,0,0.7)';
+    ctx.shadowBlur = 10;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

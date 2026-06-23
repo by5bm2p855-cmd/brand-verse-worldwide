@@ -283,7 +283,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
-    <li><a href="#work">Work</a></li>
+    <li><a href="work.html">Work</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#about">About</a></li>
   </ul>
@@ -295,7 +295,7 @@
 
 <div class="mobile-menu" id="mobile-menu">
   <a href="#services" onclick="closeMenu()">Services</a>
-  <a href="#work" onclick="closeMenu()">Work</a>
+  <a href="work.html" onclick="closeMenu()">Work</a>
   <a href="#pricing" onclick="closeMenu()">Pricing</a>
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="#contact" onclick="closeMenu()">Start a Project →</a>
@@ -461,11 +461,20 @@
       <h2 id="work-h">Built With <em>Purpose</em></h2>
       <p class="section-sub">Every site we build is made to perform — fast, beautiful, and built to convert.</p>
     </div>
-    <div class="reveal" style="margin-top:64px; background:var(--bg2); border:1px solid var(--border); border-radius:var(--r-2xl); padding:80px 40px; text-align:center;">
-      <div style="font-size:32px; margin-bottom:16px;">🚧</div>
-      <p style="font-family:'Instrument Serif',serif; font-size:22px; color:var(--text); margin-bottom:10px;">Portfolio Coming Soon</p>
-      <p style="font-size:14px; color:var(--text2); font-weight:300; max-width:380px; margin:0 auto 32px; line-height:1.8;">We're currently building our showcase. In the meantime, reach out and we'll walk you through our work directly.</p>
-      <a href="#contact" class="btn-primary" style="display:inline-flex;">Start a Conversation →</a>
+    <!-- PREVIEW THUMBNAILS -->
+    <div class="reveal" style="margin-top:64px;">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px;">
+        <div style="aspect-ratio:4/3;border-radius:var(--r-lg);background:linear-gradient(135deg,#FAFAF8,#e8dfc8,#B91C1C);display:flex;align-items:center;justify-content:center;font-size:28px;border:1px solid var(--border);">✂️</div>
+        <div style="aspect-ratio:4/3;border-radius:var(--r-lg);background:linear-gradient(135deg,#0C1A12,#152b1c,#D4A853);display:flex;align-items:center;justify-content:center;font-size:28px;border:1px solid var(--border);">🦞</div>
+        <div style="aspect-ratio:4/3;border-radius:var(--r-lg);background:linear-gradient(135deg,#080808,#111,#FF6B00);display:flex;align-items:center;justify-content:center;font-size:28px;border:1px solid var(--border);">🏋️</div>
+        <div style="aspect-ratio:4/3;border-radius:var(--r-lg);background:linear-gradient(135deg,#FAF7F2,#f0ece4,#C4956A);display:flex;align-items:center;justify-content:center;font-size:28px;border:1px solid var(--border);">🌸</div>
+        <div style="aspect-ratio:4/3;border-radius:var(--r-lg);background:linear-gradient(135deg,#000,#0d0d0d,#8052ff);display:flex;align-items:center;justify-content:center;font-size:28px;border:1px solid var(--border);">🔮</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--gold-bd);border-radius:var(--r-2xl);padding:32px 36px;text-align:center;">
+        <p style="font-size:15px;font-weight:500;color:var(--text);margin-bottom:8px;">5 live project demos — each built from scratch.</p>
+        <p style="font-size:14px;color:var(--text2);font-weight:300;margin-bottom:24px;">Barbershop, restaurant, fitness, beauty salon, and a SaaS tech site — every one a different style, color, and animation.</p>
+        <a href="work.html" class="btn-primary" style="display:inline-flex;font-size:14px;padding:15px 36px;">View All Projects →</a>
+      </div>
     </div>
   </div>
 </section>
