@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing — Brand Verse Worldwide</title>
+  <meta name="description" content="Transparent, no-surprise pricing for custom websites. Plans starting at $149. Built from scratch, delivered fast." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold:    #C9A84C;
+      --gold-lt: rgba(201,168,76,0.12);
+      --gold-bd: rgba(201,168,76,0.22);
+      --bg:      #080808;
+      --bg2:     #0f0f0f;
+      --bg3:     #161616;
+      --text:    #F2EFE9;
+      --text2:   #8a8476;
+      --text3:   #3d3a34;
+      --border:  rgba(255,255,255,0.06);
+      --border2: rgba(255,255,255,0.10);
+      --r-md: 10px; --r-lg: 16px; --r-2xl: 28px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    #progress { position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--gold),#e8c97a);z-index:999;transform-origin:left;transform:scaleX(0); }
+
+    /* NAV */
+    nav { position:fixed;top:0;left:0;right:0;z-index:200;padding:0 48px;height:72px;display:flex;align-items:center;justify-content:space-between;transition:background .5s,border-color .5s;border-bottom:1px solid transparent; }
+    nav.scrolled { background:rgba(8,8,8,0.94);backdrop-filter:blur(24px);border-color:var(--border); }
+    .nav-wordmark { display:flex;flex-direction:column;line-height:1; }
+    .nav-wordmark span:first-child { font-family:'Instrument Serif',serif;font-size:17px;letter-spacing:.02em;color:var(--text); }
+    .nav-wordmark span:last-child { font-size:9px;font-weight:600;letter-spacing:.20em;text-transform:uppercase;color:var(--gold);margin-top:1px; }
+    .nav-links { display:flex;align-items:center;gap:36px;list-style:none; }
+    .nav-links a { font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--text2);transition:color .2s; }
+    .nav-links a:hover, .nav-links a.active { color:var(--text); }
+    .nav-cta { display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid var(--gold-bd);border-radius:100px;font-size:12px;font-weight:600;color:var(--gold);transition:all .3s;background:var(--gold-lt); }
+    .nav-cta:hover { background:rgba(201,168,76,.20); }
+    .hamburger { display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none; }
+    .hamburger span { display:block;width:20px;height:1.5px;background:var(--text2);border-radius:2px;transition:all .3s; }
+    .hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity:0; }
+    .hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+    .mobile-menu { display:none;position:fixed;top:72px;left:0;right:0;background:rgba(8,8,8,0.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:16px 24px 24px;z-index:199;flex-direction:column;gap:2px; }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a { font-size:15px;font-weight:500;color:var(--text2);padding:13px 0;border-bottom:1px solid var(--border);transition:color .2s; }
+    .mobile-menu a:last-child { border:none;color:var(--gold);margin-top:8px;font-weight:600; }
+
+    .reveal { opacity:0;transform:translateY(20px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity:1;transform:translateY(0); }
+    .d1{transition-delay:.10s;} .d2{transition-delay:.20s;} .d3{transition-delay:.30s;}
+
+    /* PAGE HEADER */
+    .page-header { padding:130px 48px 72px;position:relative;overflow:hidden;border-bottom:1px solid var(--border); }
+    .page-header::before { content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 65%);pointer-events:none; }
+    .page-header-inner { max-width:1100px;margin:0 auto;position:relative;z-index:1;text-align:center; }
+    .back-link { display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--text3);transition:color .2s;margin-bottom:32px; }
+    .back-link:hover { color:var(--gold); }
+    .label { display:inline-block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px; }
+    h1 { font-family:'Instrument Serif',serif;font-size:clamp(40px,5.5vw,72px);line-height:1.04;letter-spacing:-.01em;margin-bottom:18px; }
+    h1 em { font-style:italic;color:var(--gold); }
+    .page-sub { font-size:17px;color:var(--text2);font-weight:300;line-height:1.8;max-width:520px;margin:0 auto; }
+
+    /* PLANS */
+    section { padding:72px 48px; }
+    .inner { max-width:1100px;margin:0 auto; }
+
+    .pricing-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:64px; }
+    .plan { background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-2xl);padding:36px 28px;position:relative;transition:border-color .4s,transform .5s cubic-bezier(.22,1,.36,1); }
+    .plan:hover { border-color:var(--gold-bd);transform:translateY(-4px); }
+    .plan.featured { border-color:var(--gold-bd);background:linear-gradient(160deg,var(--bg3),var(--bg2)); }
+    .plan-badge { display:inline-block;background:var(--gold);color:#0a0a0a;padding:3px 10px;border-radius:100px;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:20px; }
+    .plan h3 { font-family:'Instrument Serif',serif;font-size:22px;margin-bottom:6px; }
+    .plan-price { font-size:40px;font-weight:700;color:var(--gold);line-height:1;margin:16px 0 4px; }
+    .plan-price sub { font-size:14px;font-weight:400;color:var(--text2);vertical-align:middle; }
+    .plan-note { font-size:12px;color:var(--text3);margin-bottom:28px; }
+    .plan-features { list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px; }
+    .plan-features li { font-size:13px;color:var(--text2);display:flex;align-items:flex-start;gap:10px;line-height:1.5; }
+    .plan-features li::before { content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:1px; }
+    .plan-cta { display:block;text-align:center;padding:12px;border:1px solid var(--gold-bd);border-radius:100px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--gold);transition:all .3s; }
+    .plan-cta:hover { background:var(--gold-lt); }
+    .plan.featured .plan-cta { background:var(--gold);color:#0a0a0a;border-color:transparent; }
+    .plan.featured .plan-cta:hover { background:#d4b05a; }
+
+    /* ADD-ONS */
+    .addons-section { border-top:1px solid var(--border);background:var(--bg2); }
+    .addons-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px; }
+    .addon { border:1px solid var(--border);border-radius:var(--r-2xl);padding:28px;transition:border-color .3s; }
+    .addon:hover { border-color:var(--gold-bd); }
+    .addon h4 { font-family:'Instrument Serif',serif;font-size:18px;margin-bottom:6px; }
+    .addon p { font-size:13px;color:var(--text2);line-height:1.75;font-weight:300;margin-bottom:14px; }
+    .addon-price { font-size:13px;font-weight:700;color:var(--gold); }
+
+    /* FAQ */
+    .faq-section { border-top:1px solid var(--border); }
+    .faq-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px; }
+    .faq-item { border:1px solid var(--border);border-radius:var(--r-2xl);padding:28px;transition:border-color .3s; }
+    .faq-item:hover { border-color:var(--gold-bd); }
+    .faq-item h4 { font-size:15px;font-weight:600;color:var(--text);margin-bottom:10px; }
+    .faq-item p { font-size:14px;color:var(--text2);line-height:1.8;font-weight:300; }
+
+    /* CTA BAND */
+    .cta-band { border-top:1px solid var(--border);padding:80px 48px;text-align:center;background:var(--bg2); }
+    .cta-inner { max-width:560px;margin:0 auto; }
+    .cta-inner h2 { font-family:'Instrument Serif',serif;font-size:clamp(32px,4vw,52px);line-height:1.06;margin-bottom:14px; }
+    .cta-inner h2 em { font-style:italic;color:var(--gold); }
+    .cta-inner p { font-size:16px;color:var(--text2);font-weight:300;line-height:1.8;margin-bottom:32px; }
+    .btn-primary { display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:100px;font-size:13px;font-weight:600;background:var(--gold);color:#0a0a0a;transition:all .3s cubic-bezier(.22,1,.36,1); }
+    .btn-primary:hover { background:#d4b05a;transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,168,76,.28); }
+    h2 { font-family:'Instrument Serif',serif;font-size:clamp(36px,4.5vw,52px);line-height:1.05;letter-spacing:-.01em;margin-bottom:16px; }
+    h2 em { font-style:italic;color:var(--gold); }
+    .section-sub { font-size:16px;color:var(--text2);max-width:440px;line-height:1.8;font-weight:300; }
+
+    /* FOOTER */
+    footer { border-top:1px solid var(--border);padding:56px 48px 32px; }
+    .footer-inner { max-width:1100px;margin:0 auto; }
+    .footer-top { display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:60px;margin-bottom:48px; }
+    .footer-brand p { font-size:14px;color:var(--text3);margin-top:14px;max-width:220px;line-height:1.75;font-weight:300; }
+    .footer-col h4 { font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-bottom:18px; }
+    .footer-col ul { list-style:none;display:flex;flex-direction:column;gap:12px; }
+    .footer-col a { font-size:14px;color:var(--text2);transition:color .2s; }
+    .footer-col a:hover { color:var(--gold); }
+    .footer-bottom { display:flex;align-items:center;justify-content:space-between;padding-top:28px;border-top:1px solid var(--border);flex-wrap:wrap;gap:12px; }
+    .footer-copy { font-size:12px;color:var(--text3); }
+    .footer-copy a { color:var(--gold); }
+
+    @media(max-width:1040px) { .pricing-grid{grid-template-columns:1fr 1fr;} .addons-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:900px) {
+      nav{padding:0 20px;} .nav-links,.nav-cta{display:none;} .hamburger{display:flex;}
+      .page-header{padding:110px 20px 56px;} section{padding:56px 20px;}
+      .pricing-grid,.faq-grid{grid-template-columns:1fr;} .footer-top{grid-template-columns:1fr 1fr;}
+      .cta-band{padding:60px 20px;}
+    }
+    @media(max-width:580px) { .addons-grid{grid-template-columns:1fr;} .footer-top{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-wordmark">
+    <span>Brand Verse Worldwide</span>
+    <span>Web Design Studio</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="pricing.html" class="active">Pricing</a></li>
+    <li><a href="index.html#about">About</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Start a Project →</a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#services" onclick="closeMenu()">Services</a>
+  <a href="work.html" onclick="closeMenu()">Work</a>
+  <a href="pricing.html" onclick="closeMenu()">Pricing</a>
+  <a href="index.html#about" onclick="closeMenu()">About</a>
+  <a href="index.html#contact" onclick="closeMenu()">Start a Project →</a>
+</div>
+
+<main>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div><a href="index.html" class="back-link">← Back to Home</a></div>
+    <span class="label">Investment</span>
+    <h1>Transparent Pricing,<br /><em>No Hidden Fees.</em></h1>
+    <p class="page-sub">50% deposit to start. Balance due on launch day. Every plan includes 3 revision rounds and mobile-first design.</p>
+  </div>
+</div>
+
+<!-- PLANS -->
+<section>
+  <div class="inner">
+    <div class="reveal" style="text-align:center;">
+      <span class="label">Choose Your Plan</span>
+      <h2>The Right Plan<br /><em>For Every Budget.</em></h2>
+      <p class="section-sub" style="margin:0 auto;">Whether you're just getting online for the first time or ready for a full premium build — there's a plan that fits.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="plan reveal">
+        <h3>Micro</h3>
+        <div class="plan-price">$149</div>
+        <div class="plan-note">Quick 1-page site</div>
+        <ul class="plan-features">
+          <li>1-page custom design</li>
+          <li>Hero + contact section</li>
+          <li>Mobile responsive</li>
+          <li>Contact form wired up</li>
+          <li>2 revision rounds</li>
+          <li>Delivered in ~3 days</li>
+        </ul>
+        <a href="index.html#contact" class="plan-cta">Get Started →</a>
+      </div>
+      <div class="plan reveal d1">
+        <h3>Starter</h3>
+        <div class="plan-price">$299</div>
+        <div class="plan-note">Full landing page</div>
+        <ul class="plan-features">
+          <li>1-page, 4–5 sections</li>
+          <li>Scroll animations</li>
+          <li>Mobile hamburger nav</li>
+          <li>Contact form</li>
+          <li>3 revision rounds</li>
+          <li>Delivered in ~5 days</li>
+        </ul>
+        <a href="index.html#contact" class="plan-cta">Get Started →</a>
+      </div>
+      <div class="plan featured reveal d2">
+        <div class="plan-badge">Most Popular</div>
+        <h3>Business</h3>
+        <div class="plan-price">$600</div>
+        <div class="plan-note">Multi-section site</div>
+        <ul class="plan-features">
+          <li>5–8 sections</li>
+          <li>Smooth scroll animations</li>
+          <li>Booking or contact system</li>
+          <li>Testimonials section</li>
+          <li>Mobile hamburger nav</li>
+          <li>3 revision rounds</li>
+          <li>Delivered in ~7 days</li>
+        </ul>
+        <a href="index.html#contact" class="plan-cta">Get Started →</a>
+      </div>
+      <div class="plan reveal d3">
+        <h3>Premium</h3>
+        <div class="plan-price">$1,200</div>
+        <div class="plan-note">Advanced custom build</div>
+        <ul class="plan-features">
+          <li>Everything in Business</li>
+          <li>3D / canvas animations</li>
+          <li>Advanced interactions</li>
+          <li>Custom booking logic</li>
+          <li>3 revision rounds</li>
+          <li>Delivered in ~10 days</li>
+        </ul>
+        <a href="index.html#contact" class="plan-cta">Get Started →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<section class="addons-section">
+  <div class="inner">
+    <div class="reveal">
+      <span class="label">Extras</span>
+      <h2>Add-Ons &<br /><em>Extras.</em></h2>
+      <p class="section-sub">Stack these onto any plan to get exactly what you need.</p>
+    </div>
+    <div class="addons-grid">
+      <div class="addon reveal">
+        <h4>Logo Design</h4>
+        <p>A clean, professional logo mark and wordmark delivered with your site or as a standalone order.</p>
+        <div class="addon-price">From $150</div>
+      </div>
+      <div class="addon reveal d1">
+        <h4>Extra Pages</h4>
+        <p>Need a Blog, Team, Gallery, or Services detail page added to your site after launch?</p>
+        <div class="addon-price">$75 per page</div>
+      </div>
+      <div class="addon reveal d2">
+        <h4>SEO Setup</h4>
+        <p>Meta tags, page titles, sitemap, Google Search Console setup, and basic keyword targeting.</p>
+        <div class="addon-price">$100</div>
+      </div>
+      <div class="addon reveal">
+        <h4>Monthly Maintenance</h4>
+        <p>Content updates, performance monitoring, minor changes, and priority support — ongoing.</p>
+        <div class="addon-price">From $75 / mo</div>
+      </div>
+      <div class="addon reveal d1">
+        <h4>Domain Setup</h4>
+        <p>Help purchasing your domain, connecting it to your host, and setting up a professional email.</p>
+        <div class="addon-price">$50</div>
+      </div>
+      <div class="addon reveal d2">
+        <h4>Google Analytics</h4>
+        <p>Track visitors, traffic sources, and top pages so you know how your site is actually performing.</p>
+        <div class="addon-price">$50</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="inner">
+    <div class="reveal">
+      <span class="label">Questions</span>
+      <h2>Common<br /><em>Questions.</em></h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <h4>How does payment work?</h4>
+        <p>50% deposit upfront to lock in your spot and start the build. The remaining 50% is due the day your site goes live. No surprises.</p>
+      </div>
+      <div class="faq-item reveal d1">
+        <h4>What if I need changes after launch?</h4>
+        <p>Every plan includes revision rounds during the build. After launch, minor tweaks are often free — larger updates are covered by the Monthly Maintenance add-on.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>Do I need to provide content?</h4>
+        <p>Ideally yes — your business name, services, and a short about blurb helps a lot. If you're stuck, I can write placeholder copy and we'll refine it together.</p>
+      </div>
+      <div class="faq-item reveal d1">
+        <h4>How do I get my site live?</h4>
+        <p>I handle everything — domain connection, hosting setup, and going live. You just need a domain (about $12/year) and I'll walk you through buying one if needed.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>Can I upgrade my plan later?</h4>
+        <p>Absolutely. Start with Micro or Starter and upgrade to Business or Premium whenever you're ready. Your existing site is the foundation — we build on top of it.</p>
+      </div>
+      <div class="faq-item reveal d1">
+        <h4>What do you need from me to start?</h4>
+        <p>Business name, what you do, and any colors or sites you like. The chatbot on the homepage walks you through all of it in about 2 minutes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div class="cta-inner">
+    <span class="label reveal">Ready?</span>
+    <h2 class="reveal">Let's Build<br /><em>Something Great.</em></h2>
+    <p class="reveal">Start with the plan that fits your budget — you can always grow from there.</p>
+    <a href="index.html#contact" class="btn-primary reveal">Start Your Project →</a>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-wordmark"><span>Brand Verse Worldwide</span><span>Web Design Studio</span></a>
+        <p>Custom websites for businesses that want to look their best and grow online.</p>
+      </div>
+      <div class="footer-col"><h4>Pages</h4><ul><li><a href="work.html">Our Work</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="index.html#about">About</a></li><li><a href="index.html#contact">Contact</a></li></ul></div>
+      <div class="footer-col"><h4>Connect</h4><ul><li><a href="mailto:tscales22@brand-verses.com">tscales22@brand-verses.com</a></li><li><a href="tel:+13362106654">(336) 210-6654</a></li><li><a href="index.html#contact">Start a Project</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Brand Verse Worldwide. All rights reserved.</span>
+      <span class="footer-copy">Designed & built by <a href="#">Ty Scales</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const prog = document.getElementById('progress');
+window.addEventListener('scroll', () => { prog.style.transform = `scaleX(${window.scrollY / (document.body.scrollHeight - window.innerHeight)})`; }, { passive: true });
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => { const o = mobileMenu.classList.toggle('open'); hamburger.classList.toggle('open', o); document.body.style.overflow = o ? 'hidden' : ''; });
+function closeMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); document.body.style.overflow = ''; }
+const ro = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); ro.unobserve(x.target); } }), { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+<script src="chatbot.js"></script>
+</body>
+</html>
