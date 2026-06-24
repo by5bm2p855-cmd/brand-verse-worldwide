@@ -182,7 +182,7 @@
   const STEPS = [
     /* 0 */ { type: 'choice', key: null,
       ask: "Hey there! 👋 I'm Verse, your guide at Brand Verse Worldwide.\n\nReady to get your new website started?",
-      choices: ['Yes, let's do it! 🚀', 'I have a question first'] },
+      choices: ["Yes, let's do it! 🚀", 'I have a question first'] },
 
     /* 1 */ { type: 'text', key: 'businessName',
       ask: "Love it! First — what's the name of your business?" },
