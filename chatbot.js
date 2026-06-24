@@ -252,6 +252,29 @@
     if (!val) return;
     input.value = '';
     userMsg(val);
+
+    /* question sub-flow */
+    if (step === 'q_question') {
+      data.q_question = val;
+      step = 'q_email';
+      inputRow.classList.add('hidden');
+      setTimeout(() => {
+        botMsg("Got it! What's your email address so Ty can reply to you?", () => {
+          inputRow.classList.remove('hidden');
+          input.placeholder = 'your@email.com';
+          setTimeout(() => input.focus(), 100);
+        });
+      }, 600);
+      return;
+    }
+
+    if (step === 'q_email') {
+      data.q_email = val;
+      inputRow.classList.add('hidden');
+      submitQuestion();
+      return;
+    }
+
     const s = STEPS[step];
     if (s && s.key) data[s.key] = val;
     setTimeout(() => showStep(step + 1), 600);
@@ -266,18 +289,49 @@
     if (step === 0) {
       if (val.includes('question')) {
         setTimeout(() => {
-          botMsg("Of course! Feel free to email Ty directly at tscales22@brand-verses.com or call (336) 210-6654. Or if you're ready now, click below to kick things off 👇", () => {
-            showChoices(["I'm ready — let's start!"]);
-            inputRow.classList.add('hidden');
+          botMsg("Of course! Go ahead and type your question below and I'll make sure Ty sees it. He'll reply to you directly by email.", () => {
+            inputRow.classList.remove('hidden');
+            setTimeout(() => input.focus(), 100);
+            input.placeholder = 'Type your question…';
+            /* intercept next input as question flow */
+            step = 'q_question';
           });
         }, 600);
         return;
       }
     }
 
+
     const s = STEPS[step];
     if (s && s.key) data[s.key] = val;
     setTimeout(() => showStep(step + 1), 600);
+  }
+
+  async function submitQuestion() {
+    botMsg("Sending your question to Ty… one sec ✨");
+    try {
+      const res = await fetch(FORMSPREE, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `Question via Verse chatbot`,
+          _replyto: data.q_email,
+          email: data.q_email,
+          message: `QUESTION FROM CHATBOT\n\n${data.q_question}\n\nReply to: ${data.q_email}`,
+        })
+      });
+      if (res.ok) {
+        setTimeout(() => {
+          botMsg("Done! Ty will reply to your email within 24 hours. 📬\n\nIn the meantime if it's urgent you can reach him at tscales22@brand-verses.com or (336) 210-6654.");
+          clearChoices();
+          inputRow.classList.add('hidden');
+        }, 1200);
+      } else {
+        throw new Error('failed');
+      }
+    } catch {
+      botMsg("Hmm, something went wrong. Please email Ty directly at tscales22@brand-verses.com — sorry about that!");
+    }
   }
 
   async function submitForm() {
