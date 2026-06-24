@@ -523,21 +523,35 @@
       <h2 id="price-h">Transparent Pricing,<br /><em>No Hidden Fees</em></h2>
       <p class="section-sub">50% deposit to start. Balance due on launch day. 3 revision rounds included in every project.</p>
     </div>
-    <div class="pricing-grid">
+    <div class="pricing-grid" style="grid-template-columns:repeat(4,1fr);">
       <div class="plan reveal">
-        <h3>Starter</h3>
-        <div class="plan-price">$300<sub></sub></div>
-        <div class="plan-note">Single landing page</div>
+        <h3>Micro</h3>
+        <div class="plan-price">$149<sub></sub></div>
+        <div class="plan-note">Quick 1-page site</div>
         <ul class="plan-features">
           <li>1-page custom design</li>
+          <li>Hero + contact section</li>
           <li>Mobile responsive</li>
-          <li>Contact form (Formspree)</li>
+          <li>Contact form wired up</li>
+          <li>Delivered in ~3 days</li>
+        </ul>
+        <a href="#contact" class="plan-cta">Get Started →</a>
+      </div>
+      <div class="plan reveal d1">
+        <h3>Starter</h3>
+        <div class="plan-price">$299<sub></sub></div>
+        <div class="plan-note">Full landing page</div>
+        <ul class="plan-features">
+          <li>1-page, 4–5 sections</li>
+          <li>Scroll animations</li>
+          <li>Mobile responsive</li>
+          <li>Contact form</li>
           <li>3 revision rounds</li>
           <li>Delivered in ~5 days</li>
         </ul>
         <a href="#contact" class="plan-cta">Get Started →</a>
       </div>
-      <div class="plan featured reveal d1">
+      <div class="plan featured reveal d2">
         <div class="plan-badge">Most Popular</div>
         <h3>Business</h3>
         <div class="plan-price">$600</div>
@@ -552,7 +566,7 @@
         </ul>
         <a href="#contact" class="plan-cta">Get Started →</a>
       </div>
-      <div class="plan reveal d2">
+      <div class="plan reveal d3">
         <h3>Premium</h3>
         <div class="plan-price">$1,200</div>
         <div class="plan-note">Advanced custom build</div>
@@ -562,19 +576,6 @@
           <li>Advanced interactions</li>
           <li>Custom booking logic</li>
           <li>Delivered in ~10 days</li>
-        </ul>
-        <a href="#contact" class="plan-cta">Get Started →</a>
-      </div>
-      <div class="plan reveal d3">
-        <h3>E-Commerce</h3>
-        <div class="plan-price">$1,800<sub>+</sub></div>
-        <div class="plan-note">Online store</div>
-        <ul class="plan-features">
-          <li>Product listings</li>
-          <li>Shopping cart</li>
-          <li>Payment integration</li>
-          <li>Order management</li>
-          <li>Custom timeline</li>
         </ul>
         <a href="#contact" class="plan-cta">Get Started →</a>
       </div>
@@ -949,5 +950,6 @@ async function submitForm() {
   }
 }
 </script>
+<script src="chatbot.js"></script>
 </body>
 </html>
