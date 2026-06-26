@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Exterior Services — Complete Outdoor Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #1B3A6B;
+      --navy2:   #142d54;
+      --navy3:   #0e2040;
+      --gold:    #F5B800;
+      --gold2:   #e0a800;
+      --sky:     #4A90D9;
+      --sky-lt:  rgba(74,144,217,0.10);
+      --white:   #ffffff;
+      --off:     #f7f9fc;
+      --text:    #1a1a2e;
+      --text2:   #5a6a80;
+      --border:  rgba(27,58,107,0.10);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Open Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 76px; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; transition: background .4s, box-shadow .4s; }
+    nav.scrolled { background: var(--white); box-shadow: 0 2px 24px rgba(27,58,107,0.10); }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo-icon { width: 42px; height: 42px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 900; color: var(--gold); letter-spacing: .04em; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text span:first-child { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; color: var(--navy); letter-spacing: .04em; text-transform: uppercase; }
+    .nav-logo-text span:last-child { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--sky); }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 600; color: var(--text2); letter-spacing: .04em; transition: color .2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-cta { padding: 10px 24px; background: var(--gold); color: var(--navy); font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; border-radius: 6px; transition: all .2s; }
+    .nav-cta:hover { background: var(--gold2); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu { display: none; position: fixed; top: 76px; left: 0; right: 0; background: var(--white); border-bottom: 2px solid var(--gold); padding: 16px 24px 24px; z-index: 199; flex-direction: column; gap: 4px; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-size: 15px; font-weight: 600; color: var(--text2); padding: 12px 0; border-bottom: 1px solid var(--border); }
+    .mobile-menu a:last-child { border: none; background: var(--gold); color: var(--navy); text-align: center; border-radius: 6px; padding: 14px; margin-top: 8px; font-family: 'Montserrat', sans-serif; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+
+    /* ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .10s; } .d2 { transition-delay: .20s; } .d3 { transition-delay: .30s; } .d4 { transition-delay: .40s; }
+
+    /* HERO */
+    .hero { min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; position: relative; overflow: hidden; background: var(--navy3); }
+    #hero-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,32,64,0.3) 0%, rgba(14,32,64,0.6) 100%); }
+    .hero-content { position: relative; z-index: 2; max-width: 800px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,184,0,0.15); border: 1px solid rgba(245,184,0,0.4); color: var(--gold); padding: 6px 18px; border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 28px; }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+    .hero h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(40px, 6.5vw, 80px); font-weight: 900; line-height: 1.02; color: var(--white); margin-bottom: 24px; letter-spacing: -.01em; text-transform: uppercase; }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub { font-size: 18px; color: rgba(255,255,255,.72); max-width: 520px; margin: 0 auto 44px; line-height: 1.75; font-weight: 300; }
+    .hero-actions { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 15px 34px; background: var(--gold); color: var(--navy); font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; border-radius: 6px; transition: all .3s; }
+    .btn-primary:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(245,184,0,.35); }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px; border: 2px solid rgba(255,255,255,.3); color: var(--white); font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border-radius: 6px; transition: all .3s; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,.7); background: rgba(255,255,255,.08); }
+    .hero-stats { display: flex; align-items: center; justify-content: center; gap: 48px; margin-top: 56px; padding-top: 48px; border-top: 1px solid rgba(255,255,255,.12); flex-wrap: wrap; }
+    .hero-stat-num { font-family: 'Montserrat', sans-serif; font-size: 32px; font-weight: 900; color: var(--gold); line-height: 1; }
+    .hero-stat-label { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 4px; letter-spacing: .08em; text-transform: uppercase; }
+
+    /* TRUST BAR */
+    .trust-bar { background: var(--gold); padding: 18px 48px; }
+    .trust-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 10px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 800; color: var(--navy); letter-spacing: .06em; text-transform: uppercase; }
+    .trust-icon { font-size: 18px; }
+
+    /* SECTIONS */
+    section { padding: 88px 48px; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--sky); margin-bottom: 14px; }
+    h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(30px, 4vw, 46px); font-weight: 900; color: var(--navy); line-height: 1.06; letter-spacing: -.01em; text-transform: uppercase; margin-bottom: 16px; }
+    h2 span { color: var(--gold); }
+    .section-sub { font-size: 16px; color: var(--text2); line-height: 1.8; max-width: 480px; font-weight: 300; }
+
+    /* SERVICES */
+    .services-section { background: var(--off); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    .service-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 36px 28px; transition: all .3s; position: relative; overflow: hidden; }
+    .service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(27,58,107,.10); border-color: rgba(27,58,107,.2); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-icon { width: 52px; height: 52px; border-radius: 10px; background: var(--sky-lt); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 20px; }
+    .service-card h3 { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 800; color: var(--navy); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .02em; }
+    .service-card p { font-size: 14px; color: var(--text2); line-height: 1.75; font-weight: 300; margin-bottom: 20px; }
+    .service-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .service-list li { font-size: 13px; color: var(--text2); display: flex; align-items: center; gap: 8px; }
+    .service-list li::before { content: '✓'; color: var(--gold); font-weight: 700; font-size: 12px; flex-shrink: 0; }
+
+    /* BEFORE/AFTER */
+    .ba-section { background: var(--navy); }
+    .ba-section h2 { color: var(--white); }
+    .ba-section .section-label { color: var(--gold); }
+    .ba-section .section-sub { color: rgba(255,255,255,.6); }
+    .ba-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
+    .ba-card { border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); }
+    .ba-card-inner { display: grid; grid-template-columns: 1fr 1fr; }
+    .ba-panel { aspect-ratio: 1; display: flex; align-items: flex-end; padding: 12px; position: relative; }
+    .ba-before { background: linear-gradient(135deg, #2a3a2a 0%, #3d4a3d 50%, #2d3d2d 100%); }
+    .ba-after { background: linear-gradient(135deg, #e8f0ff 0%, #cce0ff 50%, #d4eaff 100%); }
+    .ba-label { font-family: 'Montserrat', sans-serif; font-size: 9px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; }
+    .ba-before .ba-label { background: rgba(0,0,0,.5); color: rgba(255,255,255,.7); }
+    .ba-after .ba-label { background: var(--gold); color: var(--navy); }
+    .ba-divider { width: 4px; background: var(--gold); position: relative; display: flex; align-items: center; justify-content: center; }
+    .ba-divider::after { content: '↔'; font-size: 10px; color: var(--navy); background: var(--gold); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: absolute; }
+    .ba-caption { background: var(--navy2); padding: 14px 16px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: .06em; }
+
+    /* WHY US */
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .why-image { aspect-ratio: 4/5; border-radius: 16px; background: var(--navy); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .why-image-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .why-image-text { position: relative; z-index: 1; text-align: center; }
+    .why-image-num { font-family: 'Montserrat', sans-serif; font-size: 80px; font-weight: 900; color: var(--gold); line-height: 1; }
+    .why-image-label { font-size: 13px; color: rgba(255,255,255,.6); letter-spacing: .10em; text-transform: uppercase; margin-top: 4px; }
+    .why-points { display: flex; flex-direction: column; gap: 24px; margin-top: 40px; }
+    .why-point { display: flex; gap: 18px; align-items: flex-start; }
+    .why-num { width: 36px; height: 36px; border-radius: 8px; background: var(--gold); color: var(--navy); font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+    .why-point h4 { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 800; color: var(--navy); margin-bottom: 5px; text-transform: uppercase; letter-spacing: .02em; }
+    .why-point p { font-size: 14px; color: var(--text2); line-height: 1.7; font-weight: 300; }
+
+    /* TESTIMONIALS */
+    .testi-section { background: var(--off); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    .testi-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 32px 28px; }
+    .testi-stars { color: var(--gold); font-size: 14px; margin-bottom: 16px; letter-spacing: 2px; }
+    .testi-text { font-size: 14px; color: var(--text2); line-height: 1.8; font-style: italic; margin-bottom: 24px; font-weight: 300; }
+    .testi-footer { display: flex; align-items: center; gap: 12px; padding-top: 20px; border-top: 1px solid var(--border); }
+    .testi-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--navy); color: var(--gold); font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .testi-name { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--navy); }
+    .testi-detail { font-size: 11px; color: var(--text2); margin-top: 2px; }
+
+    /* CONTACT */
+    .contact-section { background: var(--navy); }
+    .contact-section h2 { color: var(--white); }
+    .contact-section .section-label { color: var(--gold); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+    .contact-left p { font-size: 16px; color: rgba(255,255,255,.6); line-height: 1.8; font-weight: 300; margin-bottom: 40px; }
+    .contact-details { display: flex; flex-direction: column; gap: 18px; }
+    .contact-row { display: flex; align-items: flex-start; gap: 14px; }
+    .contact-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(245,184,0,.15); border: 1px solid rgba(245,184,0,.3); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .contact-info strong { display: block; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 2px; }
+    .contact-info span { font-size: 14px; color: rgba(255,255,255,.7); }
+    .contact-form { background: var(--white); border-radius: 16px; padding: 40px; }
+    .form-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; color: var(--navy); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 28px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .10em; text-transform: uppercase; color: var(--text2); margin-bottom: 7px; }
+    .form-input, .form-select, .form-textarea { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Open Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--off); outline: none; transition: border-color .2s; }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--sky); background: var(--white); }
+    .form-textarea { min-height: 110px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-submit { width: 100%; padding: 14px; background: var(--gold); color: var(--navy); font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; border: none; border-radius: 8px; cursor: pointer; transition: all .2s; margin-top: 8px; }
+    .form-submit:hover { background: var(--gold2); transform: translateY(-1px); }
+
+    /* FOOTER */
+    footer { background: var(--navy3); padding: 56px 48px 28px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
+    .footer-brand p { font-size: 13px; color: rgba(255,255,255,.4); margin-top: 14px; line-height: 1.75; font-weight: 300; max-width: 220px; }
+    .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col a { font-size: 13px; color: rgba(255,255,255,.5); transition: color .2s; }
+    .footer-col a:hover { color: var(--white); }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.3); }
+
+    @media(max-width:1040px) { .services-grid{grid-template-columns:1fr 1fr;} .ba-grid{grid-template-columns:1fr 1fr;} .testi-grid{grid-template-columns:1fr 1fr;} }
+    @media(max-width:900px) {
+      nav{padding:0 20px;} .nav-links,.nav-cta{display:none;} .hamburger{display:flex;}
+      section{padding:64px 20px;} .trust-bar{padding:14px 20px;} .trust-inner{gap:24px;}
+      .why-grid{grid-template-columns:1fr;} .contact-grid{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:640px) {
+      .services-grid,.ba-grid,.testi-grid{grid-template-columns:1fr;}
+      .form-row{grid-template-columns:1fr;} .footer-top{grid-template-columns:1fr;}
+      .hero-stats{gap:28px;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">
+    <div class="nav-logo-icon">EES</div>
+    <div class="nav-logo-text">
+      <span>Elite Exterior</span>
+      <span>Complete Outdoor Solutions</span>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Free Quote</a>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#services" onclick="closeMenu()">Services</a>
+  <a href="#why" onclick="closeMenu()">Why Us</a>
+  <a href="#reviews" onclick="closeMenu()">Reviews</a>
+  <a href="#contact" onclick="closeMenu()">Get a Free Quote →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">North Carolina's #1 Exterior Cleaning</div>
+    <h1>Make It <span>Shine.</span><br />Keep It Clean.</h1>
+    <p class="hero-sub">Professional pressure washing, exterior cleaning, and property cleanup for homes, driveways, patios, and heavy equipment.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a Free Quote →</a>
+      <a href="#services" class="btn-ghost">Our Services</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-num">500+</div><div class="hero-stat-label">Jobs Completed</div></div>
+      <div><div class="hero-stat-num">5★</div><div class="hero-stat-label">Avg. Rating</div></div>
+      <div><div class="hero-stat-num">24hr</div><div class="hero-stat-label">Response Time</div></div>
+      <div><div class="hero-stat-num">100%</div><div class="hero-stat-label">Satisfaction</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item"><span class="trust-icon">✓</span>Licensed & Insured</div>
+    <div class="trust-item"><span class="trust-icon">✓</span>Free Estimates</div>
+    <div class="trust-item"><span class="trust-icon">✓</span>Satisfaction Guaranteed</div>
+    <div class="trust-item"><span class="trust-icon">✓</span>Eco-Friendly Solutions</div>
+    <div class="trust-item"><span class="trust-icon">✓</span>Serving All of NC</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="services-section">
+  <div class="inner">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto;">
+      <span class="section-label">What We Do</span>
+      <h2>Complete <span>Exterior</span> Solutions</h2>
+      <p class="section-sub">From driveways to decks, houses to heavy equipment — we clean it all.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">💧</div>
+        <h3>Pressure Washing</h3>
+        <p>High-powered cleaning that blasts away dirt, grime, mold, and mildew from any surface.</p>
+        <ul class="service-list">
+          <li>Driveways & sidewalks</li>
+          <li>Decks & patios</li>
+          <li>Retaining walls</li>
+          <li>Fences & gates</li>
+        </ul>
+      </div>
+      <div class="service-card reveal d1">
+        <div class="service-icon">🏠</div>
+        <h3>House Washing</h3>
+        <p>Soft wash systems safe for all siding types — vinyl, brick, stucco, and wood.</p>
+        <ul class="service-list">
+          <li>Full exterior house wash</li>
+          <li>Roof soft washing</li>
+          <li>Gutters & fascia</li>
+          <li>Window frames</li>
+        </ul>
+      </div>
+      <div class="service-card reveal d2">
+        <div class="service-icon">🚜</div>
+        <h3>Heavy Equipment</h3>
+        <p>Industrial-grade cleaning for construction equipment, fleet vehicles, and machinery.</p>
+        <ul class="service-list">
+          <li>Construction equipment</li>
+          <li>Fleet & commercial vehicles</li>
+          <li>Trailers & containers</li>
+          <li>On-site cleaning available</li>
+        </ul>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🌿</div>
+        <h3>Property Cleanup</h3>
+        <p>Full outdoor property restoration — we leave your space looking brand new.</p>
+        <ul class="service-list">
+          <li>Debris removal</li>
+          <li>Lot clearing</li>
+          <li>Post-construction cleanup</li>
+          <li>Storm damage cleanup</li>
+        </ul>
+      </div>
+      <div class="service-card reveal d1">
+        <div class="service-icon">🏢</div>
+        <h3>Commercial Services</h3>
+        <p>Regular maintenance contracts for businesses, HOAs, and property managers.</p>
+        <ul class="service-list">
+          <li>Storefront cleaning</li>
+          <li>Parking lots & garages</li>
+          <li>HOA common areas</li>
+          <li>Scheduled maintenance</li>
+        </ul>
+      </div>
+      <div class="service-card reveal d2">
+        <div class="service-icon">🌧️</div>
+        <h3>Gutter Cleaning</h3>
+        <p>Keep your gutters flowing free and protect your home from water damage.</p>
+        <ul class="service-list">
+          <li>Full gutter flush</li>
+          <li>Downspout clearing</li>
+          <li>Gutter brightening</li>
+          <li>Before/after photos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section class="ba-section">
+  <div class="inner">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto;">
+      <span class="section-label">The Difference</span>
+      <h2>See the <span>Results</span></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.6);">Every job we do speaks for itself. Here's what Elite Exterior Services delivers.</p>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-card reveal">
+        <div class="ba-card-inner">
+          <div class="ba-panel ba-before"><span class="ba-label">Before</span></div>
+          <div class="ba-panel ba-after"><span class="ba-label">After</span></div>
+        </div>
+        <div class="ba-caption">Driveway Pressure Wash</div>
+      </div>
+      <div class="ba-card reveal d1">
+        <div class="ba-card-inner">
+          <div class="ba-panel ba-before" style="background:linear-gradient(135deg,#3a3020 0%,#4a4030 50%,#3d3525 100%);"></div>
+          <div class="ba-panel ba-after" style="background:linear-gradient(135deg,#f5f0e8 0%,#ede8d8 50%,#f0ece0 100%);"></div>
+        </div>
+        <div class="ba-caption">House Soft Wash</div>
+      </div>
+      <div class="ba-card reveal d2">
+        <div class="ba-card-inner">
+          <div class="ba-panel ba-before" style="background:linear-gradient(135deg,#1a2a1a 0%,#253525 50%,#1e2e1e 100%);"></div>
+          <div class="ba-panel ba-after" style="background:linear-gradient(135deg,#d4e8d4 0%,#c4d8c4 50%,#cce0cc 100%);"></div>
+        </div>
+        <div class="ba-caption">Deck & Patio Cleaning</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="inner">
+    <div class="why-grid">
+      <div class="why-image reveal">
+        <canvas class="why-image-canvas" id="why-canvas"></canvas>
+        <div class="why-image-text">
+          <div class="why-image-num">10+</div>
+          <div class="why-image-label">Years of Experience</div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <span class="section-label">Why Choose Us</span>
+        <h2>Built on <span>Trust</span> & Results</h2>
+        <p class="section-sub">We don't just clean — we restore. Every job is done right the first time.</p>
+        <div class="why-points">
+          <div class="why-point">
+            <div class="why-num">01</div>
+            <div><h4>Fully Licensed & Insured</h4><p>Your property is protected. We carry full liability insurance so you never have to worry.</p></div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">02</div>
+            <div><h4>Eco-Friendly Products</h4><p>We use biodegradable, plant-safe cleaning solutions that protect your landscaping and the environment.</p></div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">03</div>
+            <div><h4>No Job Too Big or Small</h4><p>From a single driveway to a full commercial property — we handle it all with the same level of care.</p></div>
+          </div>
+          <div class="why-point">
+            <div class="why-num">04</div>
+            <div><h4>Free Detailed Estimates</h4><p>No surprises, no hidden fees. We walk you through exactly what we'll do and what it costs before we start.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="reviews" class="testi-section">
+  <div class="inner">
+    <div class="reveal" style="text-align:center;max-width:560px;margin:0 auto;">
+      <span class="section-label">Reviews</span>
+      <h2>What Our <span>Clients</span> Say</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"They transformed my driveway completely. It looks better than when we first moved in. Professional, fast, and reasonably priced. Will definitely use again."</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">MJ</div>
+          <div><div class="testi-name">Marcus J.</div><div class="testi-detail">Homeowner, Raleigh NC</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Used them for our construction equipment after a big job. Everything came out spotless. On time, professional, and the price was fair. Highly recommend."</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">DT</div>
+          <div><div class="testi-name">Derek T.</div><div class="testi-detail">General Contractor</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Had my entire house washed before listing it for sale. The difference was night and day. Got multiple compliments from potential buyers. Worth every penny."</p>
+        <div class="testi-footer">
+          <div class="testi-avatar">SR</div>
+          <div><div class="testi-name">Sandra R.</div><div class="testi-detail">Home Seller, Durham NC</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="inner">
+    <div class="contact-grid">
+      <div class="contact-left reveal">
+        <span class="section-label">Get In Touch</span>
+        <h2>Get Your <span>Free</span> Quote</h2>
+        <p>Tell us about your property and we'll get back to you within 24 hours with a detailed, no-obligation estimate.</p>
+        <div class="contact-details">
+          <div class="contact-row">
+            <div class="contact-icon">📞</div>
+            <div class="contact-info"><strong>Phone</strong><span>(336) 555-0100</span></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📧</div>
+            <div class="contact-info"><strong>Email</strong><span>info@eliteexteriorservices.com</span></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">📍</div>
+            <div class="contact-info"><strong>Service Area</strong><span>All of North Carolina</span></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon">⚡</div>
+            <div class="contact-info"><strong>Response Time</strong><span>Within 24 hours</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <div class="contact-form">
+          <div class="form-title">Request a Free Estimate</div>
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input class="form-input" type="text" placeholder="John" /></div>
+            <div class="form-group"><label>Last Name</label><input class="form-input" type="text" placeholder="Smith" /></div>
+          </div>
+          <div class="form-group"><label>Phone</label><input class="form-input" type="tel" placeholder="(555) 000-0000" /></div>
+          <div class="form-group"><label>Email</label><input class="form-input" type="email" placeholder="john@email.com" /></div>
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select class="form-select">
+              <option value="" disabled selected>Select a service...</option>
+              <option>Pressure Washing</option>
+              <option>House Washing</option>
+              <option>Heavy Equipment Cleaning</option>
+              <option>Property Cleanup</option>
+              <option>Commercial Services</option>
+              <option>Gutter Cleaning</option>
+              <option>Multiple / Not Sure</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Tell Us About Your Property</label><textarea class="form-textarea" placeholder="Address, size, what needs cleaning, any special notes..."></textarea></div>
+          <button class="form-submit">Send My Free Quote Request →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <div class="nav-logo-icon">EES</div>
+          <div class="nav-logo-text">
+            <span>Elite Exterior</span>
+            <span>Complete Outdoor Solutions</span>
+          </div>
+        </div>
+        <p>Professional exterior cleaning for homes, businesses, and heavy equipment across North Carolina.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Pressure Washing</a></li>
+          <li><a href="#services">House Washing</a></li>
+          <li><a href="#services">Heavy Equipment</a></li>
+          <li><a href="#services">Property Cleanup</a></li>
+          <li><a href="#services">Gutter Cleaning</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+13365550100">(336) 555-0100</a></li>
+          <li><a href="mailto:info@eliteexteriorservices.com">info@eliteexteriorservices.com</a></li>
+          <li><a href="#contact">Get a Free Quote</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Elite Exterior Services. All rights reserved.</span>
+      <span class="footer-copy">Website by <a href="https://brand-verses.com" style="color:var(--gold);">Brand Verse Worldwide</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* NAV */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => { const o = mobileMenu.classList.toggle('open'); hamburger.classList.toggle('open', o); });
+function closeMenu() { mobileMenu.classList.remove('open'); hamburger.classList.remove('open'); }
+
+/* REVEAL */
+const ro = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('visible'); ro.unobserve(x.target); } }), { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+/* HERO CANVAS — water droplet particles + pressure spray effect */
+(function () {
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  const drops = [];
+  const NDROP = 120;
+
+  function init() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    drops.length = 0;
+    for (let i = 0; i < NDROP; i++) {
+      drops.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        len: 8 + Math.random() * 18,
+        speed: 1.5 + Math.random() * 3,
+        opacity: 0.05 + Math.random() * 0.18,
+        width: 0.5 + Math.random() * 1.5,
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* grid lines */
+    ctx.strokeStyle = 'rgba(74,144,217,0.06)';
+    ctx.lineWidth = 1;
+    const cols = 12, rows = 8;
+    for (let i = 0; i <= cols; i++) {
+      ctx.beginPath(); ctx.moveTo(i * W / cols, 0); ctx.lineTo(i * W / cols, H); ctx.stroke();
+    }
+    for (let j = 0; j <= rows; j++) {
+      ctx.beginPath(); ctx.moveTo(0, j * H / rows); ctx.lineTo(W, j * H / rows); ctx.stroke();
+    }
+
+    /* rain drops */
+    drops.forEach(d => {
+      ctx.save();
+      ctx.globalAlpha = d.opacity;
+      ctx.strokeStyle = '#4A90D9';
+      ctx.lineWidth = d.width;
+      ctx.beginPath();
+      ctx.moveTo(d.x, d.y);
+      ctx.lineTo(d.x - d.len * 0.15, d.y + d.len);
+      ctx.stroke();
+      ctx.restore();
+      d.y += d.speed;
+      if (d.y > H + 30) { d.y = -30; d.x = Math.random() * W; }
+    });
+
+    /* glow orbs */
+    [[W * 0.2, H * 0.3, 200, 'rgba(74,144,217,0.04)'], [W * 0.8, H * 0.6, 280, 'rgba(245,184,0,0.03)']].forEach(([cx, cy, r, c]) => {
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+      g.addColorStop(0, c); g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+
+/* WHY CANVAS */
+(function () {
+  const canvas = document.getElementById('why-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, t = 0;
+
+  function init() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+
+  function draw() {
+    t += 0.008;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#0e2040';
+    ctx.fillRect(0, 0, W, H);
+
+    /* animated water waves */
+    for (let w = 0; w < 3; w++) {
+      ctx.beginPath();
+      ctx.moveTo(0, H);
+      for (let x = 0; x <= W; x += 4) {
+        const y = H * 0.55 + Math.sin(x * 0.012 + t + w * 1.2) * 28 + w * 30;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(W, H); ctx.closePath();
+      ctx.fillStyle = `rgba(74,144,217,${0.08 + w * 0.05})`;
+      ctx.fill();
+    }
+
+    /* sparkle dots */
+    for (let i = 0; i < 20; i++) {
+      const x = (Math.sin(i * 2.4 + t) * 0.5 + 0.5) * W;
+      const y = (Math.cos(i * 1.7 + t * 0.7) * 0.5 + 0.5) * H * 0.5;
+      const a = (Math.sin(i + t * 2) * 0.5 + 0.5) * 0.6;
+      ctx.save(); ctx.globalAlpha = a; ctx.fillStyle = '#F5B800';
+      ctx.beginPath(); ctx.arc(x, y, 1.5, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', init);
+  init(); draw();
+})();
+</script>
+</body>
+</html>
