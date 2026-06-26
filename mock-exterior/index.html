@@ -32,7 +32,8 @@
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; height: 76px; padding: 0 48px; display: flex; align-items: center; justify-content: space-between; transition: background .4s, box-shadow .4s; }
     nav.scrolled { background: var(--white); box-shadow: 0 2px 24px rgba(27,58,107,0.10); }
     .nav-logo { display: flex; align-items: center; gap: 12px; }
-    .nav-logo-icon { width: 42px; height: 42px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 900; color: var(--gold); letter-spacing: .04em; }
+    .nav-logo-icon { width: 48px; height: 48px; border-radius: 50%; overflow: hidden; background: var(--white); display: flex; align-items: center; justify-content: center; }
+    .nav-logo-icon img { width: 100%; height: 100%; object-fit: contain; }
     .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
     .nav-logo-text span:first-child { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 800; color: var(--navy); letter-spacing: .04em; text-transform: uppercase; }
     .nav-logo-text span:last-child { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--sky); }
@@ -198,7 +199,7 @@
 <!-- NAV -->
 <nav id="nav">
   <div class="nav-logo">
-    <div class="nav-logo-icon">EES</div>
+    <div class="nav-logo-icon"><img src="logo.png" alt="Elite Exterior Services" /></div>
     <div class="nav-logo-text">
       <span>Elite Exterior</span>
       <span>Complete Outdoor Solutions</span>
@@ -225,6 +226,7 @@
   <canvas id="hero-canvas"></canvas>
   <div class="hero-overlay"></div>
   <div class="hero-content">
+    <img src="logo.png" alt="Elite Exterior Services" style="width:140px;margin:0 auto 20px;filter:drop-shadow(0 4px 16px rgba(0,0,0,.4));" />
     <div class="hero-badge">North Carolina's #1 Exterior Cleaning</div>
     <h1>Make It <span>Shine.</span><br />Keep It Clean.</h1>
     <p class="hero-sub">Professional pressure washing, exterior cleaning, and property cleanup for homes, driveways, patios, and heavy equipment.</p>
@@ -502,7 +504,7 @@
     <div class="footer-top">
       <div class="footer-brand">
         <div class="nav-logo">
-          <div class="nav-logo-icon">EES</div>
+          <div class="nav-logo-icon"><img src="logo.png" alt="Elite Exterior Services" /></div>
           <div class="nav-logo-text">
             <span>Elite Exterior</span>
             <span>Complete Outdoor Solutions</span>
