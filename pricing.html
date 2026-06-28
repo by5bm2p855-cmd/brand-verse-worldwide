@@ -67,6 +67,30 @@
     h1 em { font-style:italic;color:var(--gold); }
     .page-sub { font-size:17px;color:var(--text2);font-weight:300;line-height:1.8;max-width:520px;margin:0 auto; }
 
+    /* SUBSCRIPTION SECTION */
+    .sub-section { border-bottom:1px solid var(--border); }
+    .sub-card { background:linear-gradient(135deg,#0f0f0f,#161616);border:1px solid var(--gold-bd);border-radius:var(--r-2xl);padding:52px 48px;margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center; }
+    .sub-badge { display:inline-block;background:var(--gold);color:#0a0a0a;padding:4px 12px;border-radius:100px;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px; }
+    .sub-card h3 { font-family:'Instrument Serif',serif;font-size:32px;margin-bottom:10px; }
+    .sub-card h3 em { font-style:italic;color:var(--gold); }
+    .sub-price { font-size:56px;font-weight:700;color:var(--gold);line-height:1;margin:16px 0 6px; }
+    .sub-price sub { font-size:16px;font-weight:400;color:var(--text2);vertical-align:middle; }
+    .sub-note { font-size:13px;color:var(--text3);margin-bottom:28px; }
+    .sub-features { list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px; }
+    .sub-features li { font-size:13px;color:var(--text2);display:flex;align-items:flex-start;gap:10px;line-height:1.5; }
+    .sub-features li::before { content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:1px; }
+    .sub-cta { display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:100px;font-size:13px;font-weight:600;background:var(--gold);color:#0a0a0a;transition:all .3s; }
+    .sub-cta:hover { background:#d4b05a;transform:translateY(-2px); }
+    .sub-disclaimer { font-size:12px;color:var(--text3);margin-top:16px;line-height:1.7; }
+    .sub-right { border-left:1px solid var(--border);padding-left:60px; }
+    .sub-right h4 { font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3);margin-bottom:20px; }
+    .compare-row { display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text2); }
+    .compare-row:last-child { border:none; }
+    .compare-row span:last-child { font-weight:600;color:var(--text); }
+    .divider-label { text-align:center;margin:48px 0 0;position:relative; }
+    .divider-label::before { content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border); }
+    .divider-label span { position:relative;background:var(--bg);padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text3); }
+
     /* PLANS */
     section { padding:72px 48px; }
     .inner { max-width:1100px;margin:0 auto; }
@@ -178,13 +202,53 @@
   </div>
 </div>
 
+<!-- SUBSCRIPTION -->
+<section class="sub-section">
+  <div class="inner">
+    <div class="reveal" style="text-align:center;">
+      <span class="label">New — Monthly Plan</span>
+      <h2>No Budget? <em>No Problem.</em></h2>
+      <p class="section-sub" style="margin:0 auto;">Get a professional custom website for just $50/month — no upfront cost, no long-term contract.</p>
+    </div>
+    <div class="sub-card reveal">
+      <div>
+        <div class="sub-badge">Most Accessible</div>
+        <h3>The <em>Monthly</em> Plan</h3>
+        <div class="sub-price">$50<sub>/mo</sub></div>
+        <div class="sub-note">No deposit. Cancel anytime.</div>
+        <ul class="sub-features">
+          <li>Custom designed website built for your business</li>
+          <li>Mobile-first, hand-coded from scratch</li>
+          <li>Hosting & maintenance included</li>
+          <li>Minor updates included every month</li>
+          <li>Contact form wired and ready</li>
+          <li>Cancel anytime — no long-term commitment</li>
+        </ul>
+        <a href="index.html#contact" class="sub-cta">Get Started →</a>
+        <p class="sub-disclaimer">Site is hosted and maintained by Brand Verse Worldwide. Want to own it outright? Buy out at any time starting at $299.</p>
+      </div>
+      <div class="sub-right">
+        <h4>Monthly vs. One-Time — At a Glance</h4>
+        <div class="compare-row"><span>Upfront cost</span><span>$0</span></div>
+        <div class="compare-row"><span>Monthly cost</span><span>$50 / mo</span></div>
+        <div class="compare-row"><span>Custom design</span><span>✓ Included</span></div>
+        <div class="compare-row"><span>Hosting</span><span>✓ Included</span></div>
+        <div class="compare-row"><span>Maintenance</span><span>✓ Included</span></div>
+        <div class="compare-row"><span>You own the site</span><span>Buy out anytime</span></div>
+        <div class="compare-row"><span>Cancel anytime</span><span>✓ Yes</span></div>
+      </div>
+    </div>
+    <div class="divider-label reveal"><span>Or pay once and own it</span></div>
+  </div>
+</section>
+
 <!-- PLANS -->
 <section>
   <div class="inner">
     <div class="reveal" style="text-align:center;">
-      <span class="label">Choose Your Plan</span>
+      <span class="label">Own It — One-Time Plans</span>
       <h2>The Right Plan<br /><em>For Every Budget.</em></h2>
-      <p class="section-sub" style="margin:0 auto;">Whether you're just getting online for the first time or ready for a full premium build — there's a plan that fits.</p>
+      <p class="section-sub" style="margin:0 auto;">Pay once, own it forever. Every plan includes 3 revision rounds and mobile-first design.</p>
     </div>
     <div class="pricing-grid">
       <div class="plan reveal">
@@ -275,8 +339,8 @@
       </div>
       <div class="addon reveal">
         <h4>Monthly Maintenance</h4>
-        <p>Content updates, performance monitoring, minor changes, and priority support — ongoing.</p>
-        <div class="addon-price">From $75 / mo</div>
+        <p>For one-time plan clients — content updates, minor changes, and priority support. Keep your site fresh without the hassle.</p>
+        <div class="addon-price">$20 / mo</div>
       </div>
       <div class="addon reveal d1">
         <h4>Domain Setup</h4>
@@ -319,6 +383,14 @@
       <div class="faq-item reveal">
         <h4>Can I upgrade my plan later?</h4>
         <p>Absolutely. Start with Micro or Starter and upgrade to Business or Premium whenever you're ready. Your existing site is the foundation — we build on top of it.</p>
+      </div>
+      <div class="faq-item reveal d1">
+        <h4>What happens if I cancel the monthly plan?</h4>
+        <p>Your site comes down at the end of your billing cycle. If you want to keep it, you can buy it out starting at $299 and own it outright — no monthly fee going forward.</p>
+      </div>
+      <div class="faq-item reveal">
+        <h4>Does the monthly plan include maintenance?</h4>
+        <p>Yes — hosting, minor updates, and support are all included in the $50/month. For one-time plan clients, maintenance is a $20/month add-on.</p>
       </div>
       <div class="faq-item reveal d1">
         <h4>What do you need from me to start?</h4>
