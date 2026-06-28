@@ -316,6 +316,35 @@
         </div>
       </div>
 
+      <!-- Ridgeline Buildings & Structures -->
+      <div class="project-card reveal d1" data-category="contractor">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#0D0806 0%,#1A0E0A 55%,#6B2210 100%);position:relative;overflow:hidden;">
+          <canvas id="ridgeline-thumb-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+          <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(13,8,6,0.75) 30%,transparent 100%);z-index:1;"></div>
+          <div style="position:relative;z-index:2;padding:32px 36px;display:flex;align-items:center;gap:36px;">
+            <div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:#D4471A;margin-bottom:8px;">Pine Hall, NC</div>
+              <div style="font-family:'Instrument Serif',serif;font-size:clamp(22px,3vw,32px);color:#fff;line-height:1.1;margin-bottom:6px;">Ridgeline</div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);">Buildings & Structures</div>
+            </div>
+          </div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Contractor · Metal Buildings & Custom Structures</div>
+          <h3>Ridgeline Buildings & Structures</h3>
+          <p>A bold, structural site for a family-owned metal building company serving the Southeast. Features a cinematic mountain sunset canvas animation, rigid no-nonsense layout, SVG product icons, and a full quote request form — built to match the toughness of what they build.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Canvas Animation</span>
+              <span class="project-tag">Metal Buildings</span>
+              <span class="project-tag">Quote Form</span>
+            </div>
+            <a href="mock-ridgeline/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
       <!-- Elite Exterior Services -->
       <div class="project-card reveal" data-category="contractor">
         <div class="project-thumb" style="background:linear-gradient(135deg,#0e2040 0%,#1B3A6B 60%,#142d54 100%);position:relative;overflow:hidden;">
@@ -412,6 +441,40 @@ filterBtns.forEach(btn => {
     });
   });
 });
+
+/* RIDGELINE CARD MINI MOUNTAIN CANVAS */
+(function () {
+  const canvas = document.getElementById('ridgeline-thumb-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+  resize();
+  new ResizeObserver(resize).observe(canvas);
+  let t = 0;
+  function draw() {
+    t += 0.0008;
+    const w = canvas.offsetWidth, h = canvas.offsetHeight;
+    ctx.clearRect(0, 0, w, h);
+    const sky = ctx.createLinearGradient(0, 0, 0, h);
+    sky.addColorStop(0, '#0A0518'); sky.addColorStop(0.4, '#3A0C00');
+    sky.addColorStop(0.7, '#8B2000'); sky.addColorStop(1, '#D4471A');
+    ctx.fillStyle = sky; ctx.fillRect(0, 0, w, h);
+    const glow = ctx.createRadialGradient(w*0.65, h*0.85, 0, w*0.65, h*0.85, w*0.4);
+    glow.addColorStop(0,'rgba(255,120,20,0.3)'); glow.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle = glow; ctx.fillRect(0,0,w,h);
+    function range(pts, color) {
+      ctx.beginPath(); ctx.moveTo(0,h);
+      pts.forEach(([x,y]) => ctx.lineTo(x*w, y*h));
+      ctx.lineTo(w,h); ctx.closePath(); ctx.fillStyle = color; ctx.fill();
+    }
+    range([[0,.55],[.12,.40],[.25,.48],[.40,.32],[.55,.44],[.68,.28],[.80,.40],[1,.52]],'#180C1A');
+    range([[0,.68],[.10,.55],[.22,.63],[.35,.50],[.50,.60],[.63,.46],[.76,.56],[.90,.50],[1,.62]],'#100808');
+    range([[0,.82],[.08,.72],[.20,.78],[.34,.68],[.48,.75],[.62,.68],[.76,.74],[.90,.70],[1,.78]],'#080505');
+    ctx.fillStyle='#060404'; ctx.fillRect(0,h*0.80,w,h*0.20);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 
 /* NEXUS CARD MINI CONSTELLATION */
 (function () {
