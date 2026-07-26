@@ -1,0 +1,25 @@
+# This repo is PUBLIC — keep private notes and local files out of it
+
+# OS / editor / tooling
+.DS_Store
+**/.DS_Store
+.obsidian/
+.claude/
+
+# Personal notes and scratch files that landed in this folder
+Untitled.md
+Untitled.base
+Untitled.canvas
+2026-*.md
+*Playbook.md
+CLAUDE.md
+
+# Photos not used by the site
+IMG_*.JPG
+IMG_*.jpeg
+IMG_*.png
+
+# Secrets
+.env
+.env.*
+*recovery-codes*
