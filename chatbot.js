@@ -322,7 +322,7 @@
       });
       if (res.ok) {
         setTimeout(() => {
-          botMsg("Done! Ty will reply to your email within 24 hours. 📬\n\nIn the meantime if it's urgent you can reach him at tscales22@brand-verses.com or (336) 210-6654.");
+          botMsg("Done! Ty will reply to your email within 24 hours. 📬\n\nIn the meantime if it's urgent you can text him at (336) 210-6654.");
           clearChoices();
           inputRow.classList.add('hidden');
         }, 1200);
@@ -330,7 +330,7 @@
         throw new Error('failed');
       }
     } catch {
-      botMsg("Hmm, something went wrong. Please email Ty directly at tscales22@brand-verses.com — sorry about that!");
+      botMsg("Hmm, something went wrong. Please text Ty directly at (336) 210-6654 — sorry about that!");
     }
   }
 
@@ -371,7 +371,7 @@ ${data.notes || 'None provided'}
 
       if (res.ok) {
         setTimeout(() => {
-          botMsg(`You're all set, ${data.name ? data.name.split(' ')[0] : 'friend'}! 🎉\n\nTy has your brief and will reach out within 24 hours to discuss your project.\n\nIn the meantime you can email him directly at tscales22@brand-verses.com`);
+          botMsg(`You're all set, ${data.name ? data.name.split(' ')[0] : 'friend'}! 🎉\n\nTy has your brief and will reach out within 24 hours to discuss your project.\n\nIn the meantime you can text him directly at (336) 210-6654`);
           inputRow.classList.add('hidden');
           clearChoices();
           // update button
@@ -383,7 +383,7 @@ ${data.notes || 'None provided'}
         throw new Error('Send failed');
       }
     } catch {
-      botMsg("Hmm, something went wrong sending your info. Please email Ty directly at tscales22@brand-verses.com — sorry about that!");
+      botMsg("Hmm, something went wrong sending your info. Please text Ty directly at (336) 210-6654 — sorry about that!");
     }
   }
 
