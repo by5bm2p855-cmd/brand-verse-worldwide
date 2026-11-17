@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maison Rowe | Hair Studio in Greensboro, NC</title>
+  <meta name="description" content="Color, cuts and lived-in blondes in downtown Greensboro. Book online or call (336) 555-0188." />
+  <link rel="canonical" href="https://example.com/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%23000'/%3E%3Ctext x='16' y='21.5' font-family='Georgia' font-size='15' fill='%23FDFCFC' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#FDFCFC" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Maison Rowe | Hair Studio in Greensboro, NC" />
+  <meta property="og:description" content="Hair that grows out beautifully. Book online in under a minute." />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:image" content="https://example.com/images/og.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HairSalon",
+    "name": "Maison Rowe",
+    "telephone": "+1-336-555-0188",
+    "url": "https://example.com/",
+    "address": { "@type": "PostalAddress", "streetAddress": "214 S Elm St", "addressLocality": "Greensboro", "addressRegion": "NC", "postalCode": "27401" },
+    "openingHours": ["Tu-Fr 10:00-19:00", "Sa 09:00-16:00"],
+    "priceRange": "$$"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --canvas: #FDFCFC;
+      --surface: #F5F3F1;
+      --stone: #EBE8E4;
+      --ink: #000000;
+      --graphite: #44403B;
+      --smoke: #6F6A63;
+      --ash: #A59F97;
+
+      --font-display: 'Inter Tight', system-ui, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+
+      --r-input: 6px;
+      --r-card: 20px;
+      --r-lg: 24px;
+      --r-pill: 9999px;
+
+      --max: 1280px;
+      --gutter: clamp(16px, 4vw, 40px);
+      --section: clamp(72px, 10vw, 128px);
+      --ease: cubic-bezier(.2, .7, .2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font-body); font-size: 16px; line-height: 1.6; letter-spacing: .01em; color: var(--ink); background: var(--canvas); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
+    :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 300; letter-spacing: -.02em; }
+    h1 { font-size: clamp(2.6rem, 6.8vw, 5.4rem); line-height: 1.04; }
+    h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); line-height: 1.08; }
+    h3 { font-size: 1.5rem; line-height: 1.2; }
+
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: var(--section) 0; }
+    .band { background: var(--surface); }
+    .label { display: block; font-size: 13px; font-weight: 500; color: var(--graphite); margin-bottom: 20px; }
+    .lede { font-size: clamp(17px, 1.6vw, 20px); color: var(--smoke); line-height: 1.5; max-width: 520px; }
+    .head { display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; margin-bottom: clamp(40px, 6vw, 72px); }
+    .head h2 { max-width: 640px; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 12px 26px; border-radius: var(--r-pill); font-weight: 500; font-size: 15px; border: 1px solid var(--ink); cursor: pointer; transition: background .2s, color .2s, transform .2s var(--ease); }
+    .btn-ink { background: var(--ink); color: var(--canvas); }
+    .btn-ink:hover { background: var(--graphite); border-color: var(--graphite); }
+    .btn-line { background: var(--canvas); color: var(--ink); border-color: var(--stone); }
+    .btn-line:hover { border-color: var(--ink); }
+    .arrow { transition: transform .2s var(--ease); }
+    .btn:hover .arrow, .link:hover .arrow { transform: translateX(3px); }
+    .link { display: inline-flex; gap: 6px; font-weight: 500; border-bottom: 1px solid var(--stone); padding-bottom: 2px; }
+    .link:hover { border-color: var(--ink); }
+
+    .nav { position: sticky; top: 0; z-index: 50; background: rgba(253,252,252,.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+    .nav.scrolled { border-color: var(--stone); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { font-family: var(--font-display); font-size: 22px; font-weight: 400; letter-spacing: -.02em; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a:not(.btn) { font-size: 15px; color: var(--graphite); transition: color .2s; }
+    .nav-links a:not(.btn):hover { color: var(--ink); }
+    .nav-links .btn { min-height: 42px; padding: 8px 20px; }
+    .menu-btn { display: none; width: 44px; height: 44px; border: 0; background: none; cursor: pointer; }
+    .menu-btn svg { width: 24px; height: 24px; margin: auto; }
+
+    .hero { padding: clamp(40px, 6vw, 80px) 0 var(--section); }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: end; }
+    .hero h1 { margin-bottom: 28px; }
+    .hero .lede { margin-bottom: 36px; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-meta { display: flex; gap: 32px; margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--stone); font-size: 14px; color: var(--smoke); }
+    .hero-meta strong { display: block; font-family: var(--font-display); font-weight: 300; font-size: 28px; color: var(--ink); letter-spacing: -.02em; }
+
+    .photo { position: relative; border-radius: var(--r-lg); overflow: hidden; background: linear-gradient(160deg, #E9E1D8, #D8CCBF); }
+    .photo img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .photo.tall { aspect-ratio: 4 / 5; }
+    .photo.sq { aspect-ratio: 1; }
+    .photo.wide { aspect-ratio: 3 / 2; }
+    .photo:nth-child(3n+2) { background: linear-gradient(160deg, #DCD6CF, #C9BFB4); }
+    .photo:nth-child(3n+3) { background: linear-gradient(160deg, #EFE7DE, #E2D3C3); }
+
+    .menu { display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(32px, 6vw, 96px); }
+    .menu h3 { grid-column: 1 / -1; font-size: 1.25rem; margin: 40px 0 8px; }
+    .menu h3:first-child { margin-top: 0; }
+    .item { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--stone); }
+    .item p { font-size: 14px; color: var(--smoke); margin-top: 2px; }
+    .item strong { font-weight: 500; }
+    .price { font-family: var(--font-display); font-weight: 300; font-size: 20px; white-space: nowrap; }
+
+    .gallery { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 16px; align-items: start; }
+    .gallery .photo:nth-child(2) { margin-top: 64px; }
+
+    .team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .stylist .photo { margin-bottom: 20px; }
+    .stylist p { color: var(--smoke); font-size: 15px; }
+
+    .quote { max-width: 980px; margin: 0 auto; text-align: center; }
+    .quote blockquote { font-family: var(--font-display); font-weight: 300; font-size: clamp(1.6rem, 3.4vw, 2.6rem); line-height: 1.25; letter-spacing: -.02em; }
+    .quote figcaption { margin-top: 28px; color: var(--smoke); font-size: 15px; }
+    .dots { display: flex; justify-content: center; gap: 8px; margin-top: 32px; }
+    .dots button { width: 44px; height: 44px; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+    .dots button::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--stone); transition: background .2s, transform .2s; }
+    .dots button[aria-current="true"]::before { background: var(--ink); transform: scale(1.2); }
+
+    .visit { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 96px); }
+    .card { background: var(--canvas); border: 1px solid var(--stone); border-radius: var(--r-card); padding: 32px; }
+    .hours { list-style: none; }
+    .hours li { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--stone); font-size: 15px; }
+    .hours li:last-child { border: 0; }
+    .hours span:last-child { color: var(--smoke); }
+    .visit-lines { display: grid; gap: 8px; margin: 24px 0 32px; color: var(--graphite); }
+    .visit-lines a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+
+    form { display: grid; gap: 14px; }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    label { display: grid; gap: 6px; font-size: 13px; font-weight: 500; color: var(--graphite); }
+    input, select, textarea { width: 100%; font-size: 16px; padding: 12px 14px; border: 1px solid var(--stone); border-radius: var(--r-input); background: var(--canvas); transition: border-color .2s; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--ink); }
+    textarea { min-height: 96px; resize: vertical; }
+    .hp { position: absolute; left: -9999px; }
+    form .btn { width: 100%; margin-top: 6px; }
+    .form-msg { font-size: 14px; text-align: center; min-height: 1.4em; color: var(--smoke); }
+    .form-msg.ok { color: var(--ink); font-weight: 500; }
+    .form-msg.err { color: #9B2C1F; }
+
+    footer { border-top: 1px solid var(--stone); padding: 48px 0 calc(40px + env(safe-area-inset-bottom)); font-size: 14px; color: var(--smoke); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center; }
+    footer .logo { color: var(--ink); }
+    footer nav { display: flex; gap: 24px; }
+    footer a:hover { color: var(--ink); }
+
+    .callbar { display: none; }
+
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: var(--d, 0ms); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 960px) {
+      .hero-grid, .visit { grid-template-columns: 1fr; }
+      .hero-grid .photo { aspect-ratio: 3 / 2; }
+      .team { grid-template-columns: 1fr 1fr; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .gallery .photo:first-child { grid-column: 1 / -1; aspect-ratio: 3 / 2; }
+      .gallery .photo:nth-child(2) { margin-top: 0; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links { position: fixed; inset: 72px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 24px; background: var(--canvas); border-bottom: 1px solid var(--stone); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .2s, transform .2s, visibility .2s; }
+      .nav-links.open { opacity: 1; visibility: visible; transform: none; }
+      .nav-links a:not(.btn) { display: block; padding: 14px 0; font-size: 17px; border-bottom: 1px solid var(--stone); }
+      .nav-links .btn { width: 100%; margin-top: 16px; min-height: 48px; }
+      .menu-btn { display: grid; }
+      .hero-ctas .btn { flex: 1 1 100%; }
+      .hero-meta { gap: 20px; justify-content: space-between; }
+      .menu, .row-2 { grid-template-columns: 1fr; }
+      .team { grid-template-columns: 1fr; }
+      .stylist .photo { aspect-ratio: 4 / 3; }
+      .card { padding: 24px; }
+      .callbar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; inset: auto 0 0 0; z-index: 40; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom)); background: rgba(253,252,252,.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--stone); }
+      body { padding-bottom: 72px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo">Maison Rowe</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+    <nav aria-label="Main">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#team">Stylists</a></li>
+        <li><a href="#visit">Visit</a></li>
+        <li><a href="#book" class="btn btn-ink">Book now</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="label reveal">Hair studio · Downtown Greensboro</span>
+        <h1 id="hero-h" class="reveal" style="--d:60ms">Hair that grows out beautifully.</h1>
+        <p class="lede reveal" style="--d:120ms">Lived-in color, precision cuts and honest advice, so you leave loving it and still love it three months later.</p>
+        <div class="hero-ctas reveal" style="--d:180ms">
+          <a href="#book" class="btn btn-ink">Book an appointment <span class="arrow" aria-hidden="true">→</span></a>
+          <a href="#services" class="btn btn-line">See services &amp; prices</a>
+        </div>
+        <div class="hero-meta reveal" style="--d:240ms">
+          <div><strong>4.9</strong>Google rating</div>
+          <div><strong>11</strong>Years open</div>
+          <div><strong>3</strong>Senior stylists</div>
+        </div>
+      </div>
+      <div class="photo tall reveal" style="--d:120ms">
+        <img src="images/hero.webp" alt="Stylist finishing a soft blonde balayage at Maison Rowe" width="1200" height="1500" fetchpriority="high" onerror="this.remove()" />
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="band" aria-labelledby="services-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <span class="label">Services</span>
+          <h2 id="services-h">A short menu, done properly.</h2>
+        </div>
+        <p class="lede">Prices are starting points. Your stylist confirms the total at your consultation, before anything begins.</p>
+      </div>
+      <div class="menu reveal">
+        <h3>Cut &amp; style</h3>
+        <div class="item"><div><strong>Signature cut</strong><p>Consultation, wash, cut and finish</p></div><span class="price">$75</span></div>
+        <div class="item"><div><strong>Curly cut</strong><p>Dry-cut, shaped curl by curl</p></div><span class="price">$95</span></div>
+        <div class="item"><div><strong>Blowout</strong><p>Wash and a smooth, bouncy finish</p></div><span class="price">$50</span></div>
+        <div class="item"><div><strong>Fringe trim</strong><p>Between appointments, ten minutes</p></div><span class="price">$15</span></div>
+        <h3>Color</h3>
+        <div class="item"><div><strong>Balayage</strong><p>Hand-painted, soft grow-out</p></div><span class="price">$220</span></div>
+        <div class="item"><div><strong>Full highlights</strong><p>Foiled brightness, toner included</p></div><span class="price">$190</span></div>
+        <div class="item"><div><strong>Root touch-up</strong><p>Single process, every 4–6 weeks</p></div><span class="price">$85</span></div>
+        <div class="item"><div><strong>Gloss</strong><p>Shine and tone refresh</p></div><span class="price">$55</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <span class="label">Recent work</span>
+          <h2 id="work-h">Soft, dimensional, wearable.</h2>
+        </div>
+        <a href="https://instagram.com/" class="link">More on Instagram <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="gallery">
+        <div class="photo tall reveal"><img src="images/work-1.webp" alt="Honey balayage on long wavy hair" width="1200" height="1500" loading="lazy" onerror="this.remove()" /></div>
+        <div class="photo sq reveal" style="--d:80ms"><img src="images/work-2.webp" alt="Blunt bob with a glossy brunette finish" width="1000" height="1000" loading="lazy" onerror="this.remove()" /></div>
+        <div class="photo tall reveal" style="--d:160ms"><img src="images/work-3.webp" alt="Defined curls after a curly cut" width="1200" height="1500" loading="lazy" onerror="this.remove()" /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-label="Client review">
+    <div class="wrap">
+      <figure class="quote reveal" id="quotes">
+        <blockquote id="qText">"First salon that listened when I said low maintenance. Four months later my color still looks intentional."</blockquote>
+        <figcaption id="qName">Alyssa T. · Google review</figcaption>
+      </figure>
+      <div class="dots" role="group" aria-label="Choose review">
+        <button aria-label="Review 1" aria-current="true"></button>
+        <button aria-label="Review 2"></button>
+        <button aria-label="Review 3"></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" aria-labelledby="team-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <div>
+          <span class="label">Stylists</span>
+          <h2 id="team-h">Small team. Every chair senior.</h2>
+        </div>
+      </div>
+      <div class="team">
+        <article class="stylist reveal">
+          <div class="photo sq"><img src="images/team-1.webp" alt="Portrait of Claire Rowe, owner and color specialist" width="900" height="900" loading="lazy" onerror="this.remove()" /></div>
+          <h3>Claire Rowe</h3>
+          <p>Owner · Color &amp; balayage</p>
+        </article>
+        <article class="stylist reveal" style="--d:80ms">
+          <div class="photo sq"><img src="images/team-2.webp" alt="Portrait of Jordan Ellis, curl specialist" width="900" height="900" loading="lazy" onerror="this.remove()" /></div>
+          <h3>Jordan Ellis</h3>
+          <p>Curly &amp; textured hair</p>
+        </article>
+        <article class="stylist reveal" style="--d:160ms">
+          <div class="photo sq"><img src="images/team-3.webp" alt="Portrait of Nina Park, precision cutting" width="900" height="900" loading="lazy" onerror="this.remove()" /></div>
+          <h3>Nina Park</h3>
+          <p>Precision cuts &amp; bobs</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit" class="band" aria-labelledby="visit-h">
+    <div class="wrap visit">
+      <div class="reveal">
+        <span class="label">Visit</span>
+        <h2 id="visit-h">Come say hello.</h2>
+        <div class="visit-lines">
+          <a href="https://maps.google.com/?q=214+S+Elm+St+Greensboro+NC">214 S Elm St, Greensboro, NC 27401</a>
+          <a href="tel:+13365550188">(336) 555-0188</a>
+          <a href="sms:+13365550188">Text us anytime</a>
+        </div>
+        <ul class="hours">
+          <li><span>Tuesday – Friday</span><span>10am – 7pm</span></li>
+          <li><span>Saturday</span><span>9am – 4pm</span></li>
+          <li><span>Sunday – Monday</span><span>Closed</span></li>
+        </ul>
+      </div>
+      <div class="card reveal" id="book" style="--d:80ms">
+        <h3 style="margin-bottom:6px;">Request an appointment</h3>
+        <p style="color:var(--smoke); font-size:15px; margin-bottom:24px;">We'll text you within a few hours to confirm a time.</p>
+        <form id="bookForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="row-2">
+            <label>Name<input name="name" autocomplete="name" required /></label>
+            <label>Phone<input name="phone" type="tel" autocomplete="tel" required /></label>
+          </div>
+          <div class="row-2">
+            <label>Service
+              <select name="service">
+                <option>Signature cut</option><option>Curly cut</option><option>Balayage</option><option>Highlights</option><option>Root touch-up</option><option>Not sure, need advice</option>
+              </select>
+            </label>
+            <label>Stylist
+              <select name="stylist">
+                <option>First available</option><option>Claire</option><option>Jordan</option><option>Nina</option>
+              </select>
+            </label>
+          </div>
+          <label>Preferred days or times<textarea name="message" placeholder="e.g. Thursday after 3, or any Saturday"></textarea></label>
+          <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit" class="btn btn-ink">Request appointment</button>
+          <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="logo">Maison Rowe</a>
+    <nav aria-label="Footer"><a href="https://instagram.com/">Instagram</a><a href="tel:+13365550188">(336) 555-0188</a></nav>
+    <span>© <span id="year"></span> Maison Rowe · Concept demo by <a href="../index.html" style="text-decoration:underline;text-underline-offset:3px;">Brand Verse</a> · fictional business</span>
+  </div>
+</footer>
+
+<div class="callbar" aria-label="Quick contact">
+  <a href="tel:+13365550188" class="btn btn-line">Call</a>
+  <a href="#book" class="btn btn-ink">Book now</a>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const menuBtn = document.getElementById('menuBtn');
+  const links = document.getElementById('navLinks');
+  const setMenu = open => {
+    links.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  menuBtn.addEventListener('click', () => setMenu(!links.classList.contains('open')));
+  links.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+  const reviews = [
+    ['"First salon that listened when I said low maintenance. Four months later my color still looks intentional."', 'Alyssa T. · Google review'],
+    ['"Jordan is the first person who has ever cut my curls dry. I didn\'t know my hair could do this."', 'Monique B. · Google review'],
+    ['"Calm space, no upselling, and the best bob I\'ve had in ten years."', 'Rachel K. · Google review']
+  ];
+  const qText = document.getElementById('qText');
+  const qName = document.getElementById('qName');
+  const dots = document.querySelectorAll('.dots button');
+  dots.forEach((d, i) => d.addEventListener('click', () => {
+    qText.textContent = reviews[i][0];
+    qName.textContent = reviews[i][1];
+    dots.forEach(x => x.setAttribute('aria-current', x === d));
+  }));
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reveals = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    }), { rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => io.observe(el));
+  }
+
+  const form = document.getElementById('bookForm');
+  const msg = document.getElementById('formMsg');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    msg.className = 'form-msg';
+    msg.textContent = '';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error();
+      form.reset();
+      msg.className = 'form-msg ok';
+      msg.textContent = "Thank you. We'll text you shortly to confirm.";
+      btn.textContent = 'Request sent';
+    } catch {
+      msg.className = 'form-msg err';
+      msg.textContent = 'Something went wrong. Please call or text (336) 555-0188.';
+      btn.disabled = false;
+      btn.textContent = 'Request appointment';
+    }
+  });
+</script>
+</body>
+</html>

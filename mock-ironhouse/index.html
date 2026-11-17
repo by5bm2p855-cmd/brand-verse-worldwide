@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ironhouse Strength Club | Gym in Winston-Salem, NC</title>
+  <meta name="description" content="Barbell strength, conditioning and coached small-group training in Winston-Salem. Your first week is free. Call (336) 555-0163." />
+  <link rel="canonical" href="https://example.com/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000'/%3E%3Crect x='6' y='13' width='20' height='6' fill='%23D1FFCA'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#E5E5E5" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Ironhouse Strength Club | Winston-Salem" />
+  <meta property="og:description" content="Get strong. Stay strong. First week free." />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:image" content="https://example.com/images/og.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ExerciseGym",
+    "name": "Ironhouse Strength Club",
+    "telephone": "+1-336-555-0163",
+    "url": "https://example.com/",
+    "address": { "@type": "PostalAddress", "streetAddress": "880 Trade St NW", "addressLocality": "Winston-Salem", "addressRegion": "NC", "postalCode": "27101" },
+    "openingHours": ["Mo-Fr 05:00-21:00", "Sa-Su 07:00-14:00"],
+    "priceRange": "$$"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --canvas: #E5E5E5;
+      --mist: #F3F3F3;
+      --paper: #FFFFFF;
+      --carbon: #000000;
+      --graphite: #2F2F2F;
+      --slate: #444444;
+      --smoke: #6E6E6E;
+      --ash: #C6C6C6;
+      --mint: #D1FFCA;
+      --volt: #FFF100;
+
+      --font-display: 'Anton', 'Bebas Neue', Impact, sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+      --r-btn: 6px;
+      --r-card: 28px;
+      --r-lg: 48px;
+      --r-pill: 64px;
+
+      --max: 1280px;
+      --gutter: clamp(12px, 3vw, 32px);
+      --section: clamp(56px, 8vw, 96px);
+      --ease: cubic-bezier(.2, .7, .2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 96px; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font-body); font-size: 16px; line-height: 1.45; letter-spacing: -.01em; color: var(--carbon); background: var(--canvas); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
+    :focus-visible { outline: 3px solid var(--carbon); outline-offset: 3px; }
+
+    h1, h2, .display { font-family: var(--font-display); font-weight: 400; text-transform: uppercase; line-height: .9; letter-spacing: -.01em; }
+    h1 { font-size: clamp(4rem, 15vw, 12rem); }
+    h2 { font-size: clamp(3rem, 8vw, 6.5rem); }
+    h3 { font-size: 1.35rem; font-weight: 600; letter-spacing: -.02em; line-height: 1.2; }
+
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: var(--section) 0; }
+    .chip { display: inline-flex; align-self: flex-start; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; padding: 7px 14px; border-radius: var(--r-pill); background: var(--mint); color: var(--carbon); }
+    .chip.dark { background: var(--carbon); color: var(--mint); }
+    .chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--volt); box-shadow: 0 0 0 2px var(--carbon); }
+    .head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: clamp(28px, 4vw, 48px); }
+    .head p { max-width: 380px; color: var(--slate); font-weight: 500; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 14px 24px; border-radius: var(--r-btn); font-weight: 600; font-size: 15px; text-transform: uppercase; letter-spacing: .02em; border: 2px solid var(--carbon); cursor: pointer; transition: background .15s, color .15s, transform .15s var(--ease); }
+    .btn-black { background: var(--carbon); color: var(--paper); }
+    .btn-black:hover { background: var(--graphite); transform: translateY(-2px); }
+    .btn-white { background: var(--paper); color: var(--carbon); }
+    .btn-white:hover { background: var(--mint); transform: translateY(-2px); }
+    .btn-mint { background: var(--mint); color: var(--carbon); border-color: var(--mint); }
+    .btn-mint:hover { background: var(--paper); border-color: var(--paper); transform: translateY(-2px); }
+
+    .nav { position: sticky; top: 0; z-index: 50; padding: 12px 0; }
+    .nav-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; background: var(--paper); border-radius: var(--r-lg); padding: 8px 8px 8px 24px; transition: box-shadow .3s; }
+    .nav.scrolled .nav-bar { box-shadow: 0 0 0 1px var(--ash); }
+    .logo { font-family: var(--font-display); font-size: 26px; text-transform: uppercase; letter-spacing: .01em; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a:not(.btn) { padding: 10px 16px; border-radius: var(--r-pill); font-weight: 500; font-size: 15px; transition: background .15s; }
+    .nav-links a:not(.btn):hover { background: var(--mist); }
+    .nav-links .btn { min-height: 44px; padding: 10px 20px; border-radius: var(--r-pill); margin-left: 8px; font-size: 14px; }
+    .menu-btn { display: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: var(--carbon); color: var(--paper); cursor: pointer; }
+    .menu-btn svg { width: 22px; height: 22px; margin: auto; }
+
+    .hero { padding: clamp(24px, 4vw, 48px) 0 var(--section); }
+    .hero h1 { margin: 20px 0 clamp(24px, 4vw, 40px); }
+    .hero-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 12px; }
+    .block { border-radius: var(--r-card); padding: clamp(24px, 3vw, 36px); position: relative; overflow: hidden; }
+    .block.black { background: var(--carbon); color: var(--paper); }
+    .block.white { background: var(--paper); }
+    .hero-photo { min-height: 360px; display: flex; flex-direction: column; justify-content: flex-end; background: var(--graphite); color: var(--paper); }
+    .hero-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.75)); }
+    .hero-photo > *:not(img) { position: relative; z-index: 1; }
+    .hero-photo p { font-size: clamp(18px, 2vw, 22px); font-weight: 500; max-width: 440px; margin-top: 16px; }
+    .hero-side { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
+    .hero-side .big { font-family: var(--font-display); font-size: clamp(3.5rem, 7vw, 5.5rem); line-height: .9; }
+    .hero-side p { color: var(--smoke); font-weight: 500; }
+    .hero-side .btns { display: grid; gap: 8px; }
+
+    .programs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .program { background: var(--paper); border-radius: var(--r-card); padding: 28px; display: flex; flex-direction: column; gap: 14px; min-height: 280px; transition: transform .2s var(--ease); }
+    .program:hover { transform: translateY(-4px); }
+    .program .num { font-family: var(--font-display); font-size: 64px; line-height: .9; }
+    .program p { color: var(--slate); flex: 1; }
+    .program .chip { align-self: flex-start; }
+
+    .sched { background: var(--carbon); color: var(--paper); border-radius: var(--r-card); padding: clamp(20px, 3vw, 36px); }
+    .tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 20px; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tabs button { flex-shrink: 0; min-height: 44px; padding: 10px 18px; border-radius: var(--r-pill); border: 1px solid #3a3a3a; background: none; color: var(--ash); font-weight: 600; font-size: 14px; text-transform: uppercase; cursor: pointer; }
+    .tabs button[aria-selected="true"] { background: var(--mint); color: var(--carbon); border-color: var(--mint); }
+    .classes { list-style: none; }
+    .classes li { display: grid; grid-template-columns: 110px 1fr auto; gap: 16px; align-items: center; padding: 18px 0; border-top: 1px solid #2c2c2c; }
+    .classes time { font-family: var(--font-mono); font-size: 14px; color: var(--mint); }
+    .classes strong { font-weight: 600; font-size: 17px; }
+    .classes span { color: #9a9a9a; font-size: 14px; }
+
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .plan { background: var(--paper); border-radius: var(--r-card); padding: 32px; display: flex; flex-direction: column; }
+    .plan.black { background: var(--carbon); color: var(--paper); }
+    .plan .price { font-family: var(--font-display); font-size: 80px; line-height: .9; margin: 20px 0 4px; }
+    .plan .per { font-weight: 500; color: var(--smoke); }
+    .plan.black .per, .plan.black li { color: var(--ash); }
+    .plan ul { list-style: none; margin: 24px 0 32px; display: grid; gap: 10px; flex: 1; }
+    .plan li { padding-left: 22px; position: relative; color: var(--slate); font-weight: 500; }
+    .plan li::before { content: ""; position: absolute; left: 0; top: 7px; width: 10px; height: 10px; border-radius: 2px; background: var(--mint); box-shadow: inset 0 0 0 1px rgba(0,0,0,.15); }
+
+    .coaches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .coach { background: var(--paper); border-radius: var(--r-card); overflow: hidden; }
+    .coach .pic { position: relative; aspect-ratio: 1; background: linear-gradient(160deg, #cfcfcf, #b5b5b5); }
+    .coach .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1); }
+    .coach .info { padding: 20px 24px 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .coach .info span { color: var(--smoke); font-size: 14px; font-weight: 500; }
+
+    .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .review { background: var(--paper); border-radius: var(--r-card); padding: 28px; display: flex; flex-direction: column; gap: 20px; }
+    .review blockquote { font-size: 19px; font-weight: 500; line-height: 1.35; flex: 1; }
+    .review figcaption { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--smoke); }
+    .review mark { background: var(--volt); padding: 0 3px; }
+
+    .join { background: var(--carbon); color: var(--paper); border-radius: var(--r-lg); padding: clamp(28px, 5vw, 64px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: start; }
+    .join h2 { margin: 20px 0 20px; }
+    .join p { color: var(--ash); font-weight: 500; max-width: 420px; }
+    .join .lines { display: grid; gap: 6px; margin-top: 28px; font-weight: 500; }
+    .join .lines a:hover { color: var(--mint); }
+    form { display: grid; gap: 12px; }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    label { display: grid; gap: 6px; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; color: var(--ash); }
+    input, select { width: 100%; font-family: var(--font-body); font-size: 16px; text-transform: none; padding: 14px 16px; border: 2px solid #333; border-radius: var(--r-btn); background: var(--graphite); color: var(--paper); transition: border-color .15s; }
+    input:focus, select:focus { outline: none; border-color: var(--mint); }
+    .hp { position: absolute; left: -9999px; }
+    form .btn { width: 100%; margin-top: 6px; }
+    .form-msg { font-size: 14px; text-align: center; min-height: 1.4em; color: var(--ash); }
+    .form-msg.ok { color: var(--mint); font-weight: 600; }
+    .form-msg.err { color: #FF9C9C; }
+
+    footer { padding: 40px 0 calc(32px + env(safe-area-inset-bottom)); font-weight: 500; font-size: 14px; color: var(--slate); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center; }
+    footer .logo { color: var(--carbon); }
+    footer a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    .callbar { display: none; }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .5s var(--ease), transform .5s var(--ease); transition-delay: var(--d, 0ms); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 1000px) {
+      .programs { grid-template-columns: 1fr 1fr; }
+      .plans, .reviews, .coaches { grid-template-columns: 1fr; max-width: 560px; }
+      .join { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links { position: fixed; top: 80px; left: var(--gutter); right: var(--gutter); flex-direction: column; align-items: stretch; gap: 4px; padding: 12px; background: var(--paper); border-radius: var(--r-card); box-shadow: 0 0 0 1px var(--ash); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .2s, transform .2s, visibility .2s; }
+      .nav-links.open { opacity: 1; visibility: visible; transform: none; }
+      .nav-links a:not(.btn) { display: block; padding: 14px 16px; font-size: 17px; }
+      .nav-links .btn { margin: 8px 0 0; min-height: 52px; }
+      .menu-btn { display: grid; }
+      .hero-grid, .programs, .row-2 { grid-template-columns: 1fr; }
+      .hero-photo { min-height: 300px; }
+      .program { min-height: 0; }
+      .classes li { grid-template-columns: 1fr auto; gap: 4px 12px; }
+      .classes time { grid-column: 1 / -1; }
+      .plan .price { font-size: 64px; }
+      .callbar { display: grid; grid-template-columns: 1fr 1.4fr; gap: 8px; position: fixed; inset: auto 0 0 0; z-index: 40; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom)); background: var(--canvas); border-top: 2px solid var(--carbon); }
+      .callbar .btn { min-height: 48px; }
+      body { padding-bottom: 72px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <div class="nav-bar">
+      <a href="#top" class="logo">Ironhouse</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 9h14M5 15h14"/></svg>
+      </button>
+      <nav aria-label="Main">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#schedule">Schedule</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#coaches">Coaches</a></li>
+          <li><a href="#join" class="btn btn-black">Free week</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="wrap">
+      <span class="chip reveal"><span class="dot" aria-hidden="true"></span>Winston-Salem · Open 5am</span>
+      <h1 id="hero-h" class="reveal" style="--d:60ms">Get strong.<br />Stay strong.</h1>
+      <div class="hero-grid">
+        <div class="block hero-photo reveal" style="--d:120ms">
+          <img src="images/hero.webp" alt="Member deadlifting on the Ironhouse platform" width="1600" height="1000" fetchpriority="high" onerror="this.remove()" />
+          <span class="chip">Coached every session</span>
+          <p>Barbell strength and conditioning in small groups, with a coach who knows your name and your numbers.</p>
+        </div>
+        <div class="block white hero-side reveal" style="--d:180ms">
+          <div>
+            <div class="big">7 days<br />free</div>
+            <p style="margin-top:14px;">Try every class this week. No card, no contract, no sales pitch.</p>
+          </div>
+          <div class="btns">
+            <a href="#join" class="btn btn-black">Claim my free week</a>
+            <a href="#schedule" class="btn btn-white">See the schedule</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="programs" aria-labelledby="programs-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2 id="programs-h">Programs</h2>
+        <p>Four ways to train. Every one is coached and every one is scaled to you.</p>
+      </div>
+      <div class="programs">
+        <article class="program reveal"><span class="num">01</span><h3>Barbell Strength</h3><p>Squat, bench, deadlift and press, built on a 12-week progression.</p><span class="chip">60 min</span></article>
+        <article class="program reveal" style="--d:60ms"><span class="num">02</span><h3>Conditioning</h3><p>Sleds, rowers and kettlebells. Short, hard and smartly programmed.</p><span class="chip">45 min</span></article>
+        <article class="program reveal" style="--d:120ms"><span class="num">03</span><h3>Foundations</h3><p>New to lifting? Four weeks of form-first coaching before you join groups.</p><span class="chip">Beginners</span></article>
+        <article class="program reveal" style="--d:180ms"><span class="num">04</span><h3>Open Gym</h3><p>Your own program, our platforms. Members only, 5am to 9pm.</p><span class="chip">Self-led</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="schedule" aria-labelledby="schedule-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2 id="schedule-h">This week</h2>
+        <p>Drop into any class during your free week. Max 10 people per class.</p>
+      </div>
+      <div class="sched reveal">
+        <div class="tabs" role="tablist" aria-label="Day of week" id="dayTabs"></div>
+        <ul class="classes" id="classList" role="tabpanel"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" aria-labelledby="pricing-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2 id="pricing-h">Membership</h2>
+        <p>Month to month. Pause or cancel any time with one text.</p>
+      </div>
+      <div class="plans">
+        <article class="plan reveal">
+          <span class="chip">Open gym</span>
+          <div class="price">$59</div><span class="per">per month</span>
+          <ul><li>Open gym 5am–9pm</li><li>All equipment</li><li>Monthly check-in</li></ul>
+          <a href="#join" class="btn btn-white">Start free week</a>
+        </article>
+        <article class="plan black reveal" style="--d:60ms">
+          <span class="chip">Most popular</span>
+          <div class="price">$149</div><span class="per">per month</span>
+          <ul><li>Unlimited coached classes</li><li>Open gym included</li><li>Strength testing every 12 weeks</li><li>Nutrition kickoff session</li></ul>
+          <a href="#join" class="btn btn-mint">Start free week</a>
+        </article>
+        <article class="plan reveal" style="--d:120ms">
+          <span class="chip">1-on-1</span>
+          <div class="price">$299</div><span class="per">per month</span>
+          <ul><li>8 private sessions</li><li>Custom program in app</li><li>Unlimited classes</li></ul>
+          <a href="#join" class="btn btn-white">Start free week</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="coaches" aria-labelledby="coaches-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2 id="coaches-h">Coaches</h2>
+        <p>Certified, competitive and actually nice.</p>
+      </div>
+      <div class="coaches">
+        <article class="coach reveal"><div class="pic"><img src="images/coach-1.webp" alt="Coach Dre Mitchell" width="800" height="800" loading="lazy" onerror="this.remove()" /></div><div class="info"><h3>Dre Mitchell</h3><span>Head coach</span></div></article>
+        <article class="coach reveal" style="--d:60ms"><div class="pic"><img src="images/coach-2.webp" alt="Coach Sam Ortiz" width="800" height="800" loading="lazy" onerror="this.remove()" /></div><div class="info"><h3>Sam Ortiz</h3><span>Conditioning</span></div></article>
+        <article class="coach reveal" style="--d:120ms"><div class="pic"><img src="images/coach-3.webp" alt="Coach Tasha Greene" width="800" height="800" loading="lazy" onerror="this.remove()" /></div><div class="info"><h3>Tasha Greene</h3><span>Foundations</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="reviews-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <h2 id="reviews-h">Members</h2>
+        <p>4.9 stars from 210 Google reviews.</p>
+      </div>
+      <div class="reviews">
+        <figure class="review reveal"><blockquote>"Went from never touching a barbell to a <mark>275 deadlift</mark> in eight months. The coaching is the difference."</blockquote><figcaption>Kara L. · Member 2 yrs</figcaption></figure>
+        <figure class="review reveal" style="--d:60ms"><blockquote>"5am class with ten people who <mark>actually show up</mark>. Best habit I've ever built."</blockquote><figcaption>Jamal F. · Member 3 yrs</figcaption></figure>
+        <figure class="review reveal" style="--d:120ms"><blockquote>"No mirrors, no ego, no upsells. Just <mark>good training</mark> and good people."</blockquote><figcaption>Priya N. · Member 1 yr</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" aria-labelledby="join-h">
+    <div class="wrap">
+      <div class="join reveal">
+        <div>
+          <span class="chip"><span class="dot" aria-hidden="true"></span>7 days free</span>
+          <h2 id="join-h">Start this week</h2>
+          <p>Tell us when you want to come in. A coach will text you to set up your first session.</p>
+          <div class="lines">
+            <a href="tel:+13365550163">(336) 555-0163</a>
+            <a href="https://maps.google.com/?q=880+Trade+St+NW+Winston-Salem+NC">880 Trade St NW, Winston-Salem</a>
+            <span style="color:var(--ash);">Mon–Fri 5am–9pm · Sat–Sun 7am–2pm</span>
+          </div>
+        </div>
+        <form id="joinForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <div class="row-2">
+            <label>Name<input name="name" autocomplete="name" required /></label>
+            <label>Phone<input name="phone" type="tel" autocomplete="tel" required /></label>
+          </div>
+          <label>Email<input name="email" type="email" autocomplete="email" /></label>
+          <div class="row-2">
+            <label>Interested in
+              <select name="program"><option>Barbell Strength</option><option>Conditioning</option><option>Foundations</option><option>Open Gym</option><option>1-on-1</option></select>
+            </label>
+            <label>Best time
+              <select name="time"><option>Early morning</option><option>Lunch</option><option>Evening</option><option>Weekend</option></select>
+            </label>
+          </div>
+          <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit" class="btn btn-mint">Claim my free week</button>
+          <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="logo">Ironhouse</a>
+    <span><a href="tel:+13365550163">(336) 555-0163</a> · <a href="https://instagram.com/">Instagram</a></span>
+    <span>© <span id="year"></span> Ironhouse Strength Club · Concept demo by <a href="../index.html" style="text-decoration:underline;text-underline-offset:3px;">Brand Verse</a> · fictional business</span>
+  </div>
+</footer>
+
+<div class="callbar" aria-label="Quick contact">
+  <a href="tel:+13365550163" class="btn btn-white">Call</a>
+  <a href="#join" class="btn btn-black">Free week</a>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const menuBtn = document.getElementById('menuBtn');
+  const links = document.getElementById('navLinks');
+  const setMenu = open => {
+    links.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  menuBtn.addEventListener('click', () => setMenu(!links.classList.contains('open')));
+  links.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+  const weekday = [
+    ['5:00 AM', 'Barbell Strength', 'Dre'], ['6:15 AM', 'Conditioning', 'Sam'], ['12:00 PM', 'Conditioning', 'Sam'],
+    ['5:30 PM', 'Barbell Strength', 'Dre'], ['6:45 PM', 'Foundations', 'Tasha']
+  ];
+  const weekend = [['8:00 AM', 'Barbell Strength', 'Dre'], ['9:15 AM', 'Partner Conditioning', 'Sam'], ['10:30 AM', 'Foundations', 'Tasha']];
+  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  const tabs = document.getElementById('dayTabs');
+  const list = document.getElementById('classList');
+  const render = i => {
+    [...tabs.children].forEach((b, j) => b.setAttribute('aria-selected', i === j));
+    list.innerHTML = (i < 5 ? weekday : weekend).map(([t, n, c]) => `<li><time>${t}</time><strong>${n}</strong><span>Coach ${c}</span></li>`).join('');
+  };
+  days.forEach((d, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.textContent = d;
+    b.addEventListener('click', () => render(i));
+    tabs.appendChild(b);
+  });
+  render((new Date().getDay() + 6) % 7);
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reveals = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    }), { rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => io.observe(el));
+  }
+
+  const form = document.getElementById('joinForm');
+  const msg = document.getElementById('formMsg');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    msg.className = 'form-msg';
+    msg.textContent = '';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error();
+      form.reset();
+      msg.className = 'form-msg ok';
+      msg.textContent = "You're in. A coach will text you today.";
+      btn.textContent = 'Sent';
+    } catch {
+      msg.className = 'form-msg err';
+      msg.textContent = 'Something went wrong. Call or text (336) 555-0163.';
+      btn.disabled = false;
+      btn.textContent = 'Claim my free week';
+    }
+  });
+</script>
+</body>
+</html>

@@ -8,7 +8,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=Anton&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -171,6 +171,7 @@
       <button class="filter-btn" data-filter="salon">Beauty</button>
       <button class="filter-btn" data-filter="saas">SaaS / Tech</button>
       <button class="filter-btn" data-filter="contractor">Contractor</button>
+      <button class="filter-btn" data-filter="automotive">Automotive</button>
     </div>
   </div>
 </div>
@@ -369,6 +370,81 @@
               <span class="project-tag">Quote Form</span>
             </div>
             <a href="mock-ridgeline/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maison Rowe -->
+      <div class="project-card reveal" data-category="salon">
+        <div class="project-thumb" style="background:#FDFCFC;">
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:14px;width:100%;padding:0 36px;">
+            <div style="font-size:11px;font-weight:500;color:#44403B;">Hair studio · Greensboro</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(24px,3vw,34px);line-height:1.05;letter-spacing:-.02em;color:#000;">Hair that grows out<br />beautifully.</div>
+            <div style="display:inline-flex;padding:8px 16px;border-radius:999px;background:#000;color:#FDFCFC;font-size:11px;font-weight:500;">Book an appointment →</div>
+          </div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Beauty Salon · Warm Editorial</div>
+          <h3>Maison Rowe</h3>
+          <p>A calm, editorial hair studio on warm cream paper. Light-weight headlines, black pill buttons, and a strict no-colored-buttons rule, so the client's photos carry all the color. Includes a price menu, stylist profiles, rotating reviews, and an appointment request form.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Warm Editorial</span>
+              <span class="project-tag">Service Menu</span>
+              <span class="project-tag">Booking Form</span>
+            </div>
+            <a href="mock-maison-rowe/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Obsidian Auto Atelier -->
+      <div class="project-card reveal d1" data-category="automotive">
+        <div class="project-thumb" style="background:radial-gradient(90% 80% at 75% 20%,#2A2A3A 0%,#171721 70%);">
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:14px;width:100%;padding:0 36px;">
+            <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8D8D99;">Charlotte, NC · By appointment</div>
+            <div style="font-family:'Instrument Serif',serif;font-size:clamp(26px,3.2vw,38px);line-height:1;color:#EDEDF3;">Paint deeper than<br />the day it left <em style="color:#D4B47C;">the factory.</em></div>
+            <div style="display:inline-flex;padding:8px 16px;border-radius:40px;background:#D4B47C;color:#17130B;font-size:11px;font-weight:500;">Book a consultation</div>
+          </div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Automotive · Ceramic Coating &amp; Detailing</div>
+          <h3>Obsidian Auto Atelier</h3>
+          <p>A midnight-premium site for a high-end detailing studio. Serif headlines, monospace labels, and one champagne accent reserved for the booking button. Three package tiers, a four-step process, a studio gallery, and a consultation form built to sell $1,400+ jobs.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Midnight Premium</span>
+              <span class="project-tag">Package Tiers</span>
+              <span class="project-tag">Consultation Form</span>
+            </div>
+            <a href="mock-obsidian/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ironhouse Strength Club -->
+      <div class="project-card reveal" data-category="fitness">
+        <div class="project-thumb" style="background:#E5E5E5;">
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:12px;width:100%;padding:0 36px;">
+            <div style="display:inline-flex;padding:5px 12px;border-radius:64px;background:#D1FFCA;color:#000;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;text-transform:uppercase;">Winston-Salem · Open 5am</div>
+            <div style="font-family:'Anton','Bebas Neue',Impact,sans-serif;font-size:clamp(34px,4.6vw,56px);line-height:.9;text-transform:uppercase;color:#000;">Get strong.<br />Stay strong.</div>
+            <div style="display:inline-flex;padding:8px 16px;border-radius:6px;background:#000;color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;">Claim my free week</div>
+          </div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Fitness · Brutalist Bold</div>
+          <h3>Ironhouse Strength Club</h3>
+          <p>A loud, brutalist gym site with huge condensed headlines on warm gray, black and white blocks, and neon mint used only on small tags. Features a live day-by-day class schedule, membership pricing, coach cards, and a free-week signup.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Brutalist Bold</span>
+              <span class="project-tag">Class Schedule</span>
+              <span class="project-tag">Free Trial Form</span>
+            </div>
+            <a href="mock-ironhouse/index.html" class="project-link" target="_blank">View Demo →</a>
           </div>
         </div>
       </div>

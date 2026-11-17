@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obsidian Auto Atelier | Ceramic Coating &amp; Detailing in Charlotte, NC</title>
+  <meta name="description" content="Paint correction, ceramic coating and concours-level detailing in Charlotte, NC. By appointment. Call (704) 555-0117." />
+  <link rel="canonical" href="https://example.com/" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23171721'/%3E%3Cpath d='M16 6l8 10-8 10-8-10z' fill='none' stroke='%23D4B47C' stroke-width='2'/%3E%3C/svg%3E" />
+  <meta name="theme-color" content="#171721" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Obsidian Auto Atelier | Ceramic Coating in Charlotte" />
+  <meta property="og:description" content="Paint that looks deeper than the day it left the factory. By appointment only." />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:image" content="https://example.com/images/og.jpg" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoDetailing",
+    "name": "Obsidian Auto Atelier",
+    "telephone": "+1-704-555-0117",
+    "url": "https://example.com/",
+    "areaServed": "Charlotte, NC",
+    "openingHours": "Mo-Sa 08:00-18:00",
+    "priceRange": "$$$"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --canvas: #171721;
+      --card: #1E1E2A;
+      --raised: #272735;
+      --line: rgba(226, 227, 237, .12);
+      --line-strong: rgba(226, 227, 237, .28);
+      --text: #EDEDF3;
+      --muted: #C3C3CC;
+      --faint: #8D8D99;
+      --accent: #D4B47C;
+      --accent-2: #E3C893;
+      --on-accent: #17130B;
+
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+      --r-sm: 4px;
+      --r-card: 12px;
+      --r-pill: 40px;
+
+      --max: 1200px;
+      --gutter: clamp(16px, 4vw, 40px);
+      --section: clamp(72px, 10vw, 128px);
+      --ease: cubic-bezier(.2, .7, .2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; -webkit-text-size-adjust: 100%; }
+    body { font-family: var(--font-body); font-size: 16px; line-height: 1.6; color: var(--text); background: var(--canvas); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    h1, h2, h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: -.01em; }
+    h1 { font-size: clamp(3rem, 8vw, 6.4rem); line-height: .98; }
+    h2 { font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.04; }
+    h3 { font-size: 1.9rem; line-height: 1.1; }
+    h1 em, h2 em { font-style: italic; color: var(--accent); }
+
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+    section { padding: var(--section) 0; }
+    .tag { display: inline-block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); margin-bottom: 20px; }
+    .lede { font-size: clamp(17px, 1.6vw, 19px); color: var(--muted); max-width: 540px; }
+    .head { margin-bottom: clamp(40px, 6vw, 72px); max-width: 720px; }
+    .head .lede { margin-top: 20px; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; padding: 12px 28px; border-radius: var(--r-pill); font-weight: 500; font-size: 15px; border: 1px solid transparent; cursor: pointer; transition: background .2s, border-color .2s, transform .2s var(--ease); }
+    .btn-accent { background: var(--accent); color: var(--on-accent); }
+    .btn-accent:hover { background: var(--accent-2); transform: translateY(-1px); }
+    .btn-ghost { border-color: var(--line-strong); color: var(--text); }
+    .btn-ghost:hover { border-color: var(--text); }
+
+    .nav { position: fixed; inset: 0 0 auto 0; z-index: 50; transition: background .3s, border-color .3s; border-bottom: 1px solid transparent; }
+    .nav.scrolled { background: rgba(23,23,33,.86); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-color: var(--line); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .logo { display: flex; align-items: center; gap: 12px; font-family: var(--font-display); font-size: 24px; }
+    .logo svg { width: 22px; height: 22px; color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a:not(.btn) { padding: 8px 16px; border-radius: var(--r-pill); font-size: 14px; color: var(--muted); transition: background .2s, color .2s; }
+    .nav-links a:not(.btn):hover { background: var(--raised); color: var(--text); }
+    .nav-links .btn { min-height: 42px; padding: 8px 20px; margin-left: 8px; font-size: 14px; }
+    .menu-btn { display: none; width: 44px; height: 44px; border: 0; background: none; cursor: pointer; color: var(--text); }
+    .menu-btn svg { width: 24px; height: 24px; margin: auto; }
+
+    .hero { position: relative; min-height: min(100svh, 900px); display: flex; align-items: flex-end; padding: 140px 0 clamp(56px, 8vw, 96px); isolation: isolate; overflow: hidden; }
+    .hero-media { position: absolute; inset: 0; z-index: -1; background: radial-gradient(90% 70% at 70% 30%, #2A2A3A 0%, var(--canvas) 70%); }
+    .hero-media img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(23,23,33,.35) 0%, rgba(23,23,33,.55) 45%, var(--canvas) 100%); }
+    .hero h1 { max-width: 900px; margin-bottom: 28px; }
+    .hero-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+    .hero-stats { display: flex; gap: 40px; margin-top: 56px; padding-top: 28px; border-top: 1px solid var(--line); }
+    .hero-stats div { font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+    .hero-stats strong { display: block; font-family: var(--font-display); font-size: 36px; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--text); line-height: 1.1; }
+
+    .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .tier { background: var(--card); border-radius: var(--r-card); padding: 32px; display: flex; flex-direction: column; border: 1px solid transparent; }
+    .tier.featured { border-color: var(--line-strong); background: var(--raised); }
+    .tier .tag { margin-bottom: 16px; }
+    .tier.featured .tag { color: var(--accent); }
+    .tier .price { font-family: var(--font-display); font-size: 48px; line-height: 1; margin: 20px 0 6px; }
+    .tier .price small { font-family: var(--font-body); font-size: 14px; color: var(--faint); margin-left: 6px; }
+    .tier > p { color: var(--muted); font-size: 15px; }
+    .tier ul { list-style: none; margin: 24px 0 32px; display: grid; gap: 12px; flex: 1; }
+    .tier li { display: flex; gap: 12px; font-size: 15px; color: var(--muted); }
+    .tier li::before { content: ""; width: 6px; height: 6px; margin-top: 9px; flex-shrink: 0; transform: rotate(45deg); border: 1px solid var(--accent); }
+    .tier .btn { width: 100%; }
+
+    .process { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+    .process li { padding: 32px 24px 0 0; }
+    .process .tag { margin-bottom: 14px; color: var(--accent); }
+    .process h3 { font-size: 1.6rem; margin-bottom: 10px; }
+    .process p { color: var(--muted); font-size: 15px; }
+
+    .gallery { display: grid; grid-template-columns: 2fr 1fr; grid-template-rows: auto auto; gap: 16px; }
+    .shot { position: relative; border-radius: var(--r-card); overflow: hidden; background: linear-gradient(140deg, #23232F, #1A1A24); }
+    .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .shot.big { grid-row: span 2; aspect-ratio: 4 / 3.2; }
+    .shot.small { aspect-ratio: 4 / 3; }
+    .shot figcaption { position: absolute; left: 16px; bottom: 16px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; padding: 6px 12px; border-radius: var(--r-pill); background: rgba(23,23,33,.72); backdrop-filter: blur(6px); color: var(--muted); }
+
+    .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .review { background: var(--card); border-radius: var(--r-card); padding: 32px; display: flex; flex-direction: column; gap: 24px; }
+    .review blockquote { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.3; flex: 1; }
+    .review figcaption { font-size: 14px; color: var(--muted); }
+    .review figcaption span { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); margin-top: 4px; }
+
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+    .contact-lines { list-style: none; margin-top: 32px; border-top: 1px solid var(--line); }
+    .contact-lines li { display: flex; justify-content: space-between; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .contact-lines span { font-family: var(--font-mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+    .contact-lines a:hover { color: var(--accent); }
+    form { background: var(--card); border-radius: var(--r-card); padding: clamp(24px, 4vw, 40px); display: grid; gap: 16px; }
+    .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    label { display: grid; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--faint); }
+    input, select, textarea { width: 100%; font-family: var(--font-body); font-size: 16px; letter-spacing: 0; text-transform: none; padding: 13px 18px; border: 1px solid var(--line); border-radius: 24px; background: var(--canvas); color: var(--text); transition: border-color .2s; }
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C3C3CC' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 16px; padding-right: 44px; }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
+    textarea { min-height: 110px; resize: vertical; border-radius: 16px; }
+    .hp { position: absolute; left: -9999px; }
+    form .btn { width: 100%; margin-top: 4px; }
+    .form-msg { font-size: 14px; text-align: center; min-height: 1.4em; color: var(--muted); }
+    .form-msg.ok { color: var(--accent); }
+    .form-msg.err { color: #F2A3A3; }
+
+    footer { border-top: 1px solid var(--line); padding: 48px 0 calc(40px + env(safe-area-inset-bottom)); font-size: 14px; color: var(--faint); }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center; }
+    footer .logo { color: var(--text); font-size: 20px; }
+    footer a:hover { color: var(--text); }
+
+    .callbar { display: none; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0ms); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 960px) {
+      .tiers, .reviews { grid-template-columns: 1fr; max-width: 560px; }
+      .process { grid-template-columns: 1fr 1fr; row-gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links { position: fixed; inset: 76px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 24px; background: var(--canvas); border-bottom: 1px solid var(--line); opacity: 0; visibility: hidden; transform: translateY(-6px); transition: opacity .2s, transform .2s, visibility .2s; }
+      .nav-links.open { opacity: 1; visibility: visible; transform: none; }
+      .nav-links a:not(.btn) { display: block; padding: 16px 0; border-radius: 0; font-size: 17px; border-bottom: 1px solid var(--line); }
+      .nav-links a:not(.btn):hover { background: none; }
+      .nav-links .btn { margin: 16px 0 0; width: 100%; min-height: 50px; }
+      .nav.menu-open { background: var(--canvas); }
+      .menu-btn { display: grid; }
+      .hero { min-height: 92svh; }
+      .hero-ctas, .hero-ctas .btn { width: 100%; }
+      .hero-stats { gap: 24px; justify-content: space-between; }
+      .hero-stats strong { font-size: 30px; }
+      .process, .row-2 { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+      .shot.big { grid-row: auto; aspect-ratio: 4 / 3; }
+      .tier, .review { padding: 24px; }
+      .callbar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; position: fixed; inset: auto 0 0 0; z-index: 40; padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom)); background: rgba(23,23,33,.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line); }
+      .callbar .btn { min-height: 48px; }
+      body { padding-bottom: 72px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="logo" aria-label="Obsidian Auto Atelier home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 2l8 10-8 10-8-10z"/></svg>
+      Obsidian
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg>
+    </button>
+    <nav aria-label="Main">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#reviews">Clients</a></li>
+        <li><a href="#consult" class="btn btn-accent">Book a consultation</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="hero-media">
+      <img src="images/hero.webp" alt="" width="1920" height="1200" fetchpriority="high" onerror="this.remove()" />
+    </div>
+    <div class="wrap">
+      <span class="tag reveal">Charlotte, NC · By appointment</span>
+      <h1 id="hero-h" class="reveal" style="--d:60ms">Paint deeper than the day it left <em>the factory.</em></h1>
+      <div class="hero-row reveal" style="--d:120ms">
+        <p class="lede">Multi-stage paint correction and ceramic coating for owners who notice every swirl. One car at a time, in a climate-controlled studio.</p>
+        <div class="hero-ctas">
+          <a href="#consult" class="btn btn-accent">Book a consultation</a>
+          <a href="#packages" class="btn btn-ghost">View packages</a>
+        </div>
+      </div>
+      <div class="hero-stats reveal" style="--d:180ms">
+        <div><strong>640+</strong>Cars coated</div>
+        <div><strong>9 yr</strong>Coating warranty</div>
+        <div><strong>5.0</strong>Google rating</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="packages" aria-labelledby="packages-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="tag">Packages</span>
+        <h2 id="packages-h">Three levels of <em>finish.</em></h2>
+        <p class="lede">Every package starts with a paint-depth reading and an in-person inspection. Final pricing depends on vehicle size and condition.</p>
+      </div>
+      <div class="tiers">
+        <article class="tier reveal">
+          <span class="tag">Signature</span>
+          <h3>Restore</h3>
+          <p class="price">$450<small>from</small></p>
+          <p>A full reset for daily drivers that have lost their shine.</p>
+          <ul>
+            <li>Hand wash &amp; iron decontamination</li>
+            <li>Single-stage machine polish</li>
+            <li>12-month sealant</li>
+            <li>Interior deep clean</li>
+          </ul>
+          <a href="#consult" class="btn btn-ghost">Choose Restore</a>
+        </article>
+        <article class="tier featured reveal" style="--d:80ms">
+          <span class="tag">Most chosen</span>
+          <h3>Ceramic</h3>
+          <p class="price">$1,400<small>from</small></p>
+          <p>Correction plus a professional coating that keeps it glossy for years.</p>
+          <ul>
+            <li>Two-stage paint correction</li>
+            <li>5-year ceramic coating</li>
+            <li>Wheels, glass &amp; trim coated</li>
+            <li>Annual inspection included</li>
+          </ul>
+          <a href="#consult" class="btn btn-accent">Choose Ceramic</a>
+        </article>
+        <article class="tier reveal" style="--d:160ms">
+          <span class="tag">Concours</span>
+          <h3>Atelier</h3>
+          <p class="price">$2,800<small>from</small></p>
+          <p>Show-level perfection for collector and exotic vehicles.</p>
+          <ul>
+            <li>Multi-stage correction, wet sanding</li>
+            <li>9-year flagship coating</li>
+            <li>Leather &amp; engine bay treatment</li>
+            <li>Enclosed pickup &amp; delivery</li>
+          </ul>
+          <a href="#consult" class="btn btn-ghost">Choose Atelier</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" aria-labelledby="process-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="tag">Process</span>
+        <h2 id="process-h">Slow work, on purpose.</h2>
+      </div>
+      <ol class="process">
+        <li class="reveal"><span class="tag">01 · Inspect</span><h3>Measure</h3><p>Paint depth readings on every panel, so we never remove more than we should.</p></li>
+        <li class="reveal" style="--d:80ms"><span class="tag">02 · Prepare</span><h3>Decontaminate</h3><p>Foam, hand wash, iron and clay. The paint is truly bare before polishing.</p></li>
+        <li class="reveal" style="--d:160ms"><span class="tag">03 · Correct</span><h3>Refine</h3><p>Swirls, haze and scratches leveled under studio lighting, panel by panel.</p></li>
+        <li class="reveal" style="--d:240ms"><span class="tag">04 · Protect</span><h3>Coat</h3><p>Ceramic applied and infrared-cured, then a final inspection with you.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="tag">Recent work</span>
+        <h2 id="work-h">Under the studio lights.</h2>
+      </div>
+      <div class="gallery">
+        <figure class="shot big reveal"><img src="images/work-1.webp" alt="Black Porsche 911 after ceramic coating, reflecting studio lights" width="1600" height="1280" loading="lazy" onerror="this.remove()" /><figcaption>Porsche 911 · Atelier</figcaption></figure>
+        <figure class="shot small reveal" style="--d:80ms"><img src="images/work-2.webp" alt="Close-up of corrected paint showing a mirror finish" width="1000" height="750" loading="lazy" onerror="this.remove()" /><figcaption>Paint correction</figcaption></figure>
+        <figure class="shot small reveal" style="--d:160ms"><img src="images/work-3.webp" alt="Range Rover interior after leather treatment" width="1000" height="750" loading="lazy" onerror="this.remove()" /><figcaption>Range Rover · Ceramic</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" aria-labelledby="reviews-h">
+    <div class="wrap">
+      <div class="head reveal">
+        <span class="tag">Clients</span>
+        <h2 id="reviews-h">Owners who notice everything.</h2>
+      </div>
+      <div class="reviews">
+        <figure class="review reveal">
+          <blockquote>"I've had cars coated at three shops. This is the first time the paint looked better than delivery day."</blockquote>
+          <figcaption>Marcus D.<span>Porsche 911 GT3 · Google</span></figcaption>
+        </figure>
+        <figure class="review reveal" style="--d:80ms">
+          <blockquote>"They showed me the paint readings before touching anything. That's when I knew."</blockquote>
+          <figcaption>Elena S.<span>Tesla Model S · Google</span></figcaption>
+        </figure>
+        <figure class="review reveal" style="--d:160ms">
+          <blockquote>"Eighteen months on and water still beads like the first week. Worth every dollar."</blockquote>
+          <figcaption>Brandon W.<span>Ford Bronco · Google</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="consult" aria-labelledby="consult-h">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <span class="tag">Consultation</span>
+        <h2 id="consult-h">Tell us about <em>your car.</em></h2>
+        <p class="lede" style="margin-top:20px;">We reply within one business day with availability and an estimate.</p>
+        <ul class="contact-lines">
+          <li><span>Call</span><a href="tel:+17045550117">(704) 555-0117</a></li>
+          <li><span>Text</span><a href="sms:+17045550117">Send photos</a></li>
+          <li><span>Studio</span><span style="font-family:var(--font-body); letter-spacing:0; text-transform:none; font-size:16px; color:var(--text);">South End, Charlotte</span></li>
+          <li><span>Hours</span><span style="font-family:var(--font-body); letter-spacing:0; text-transform:none; font-size:16px; color:var(--text);">Mon–Sat, 8–6</span></li>
+        </ul>
+      </div>
+      <form id="consultForm" class="reveal" style="--d:80ms" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="row-2">
+          <label>Name<input name="name" autocomplete="name" required /></label>
+          <label>Phone<input name="phone" type="tel" autocomplete="tel" required /></label>
+        </div>
+        <div class="row-2">
+          <label>Vehicle<input name="vehicle" placeholder="Year, make, model" /></label>
+          <label>Package
+            <select name="package"><option>Ceramic</option><option>Restore</option><option>Atelier</option><option>Not sure yet</option></select>
+          </label>
+        </div>
+        <label>Anything we should know?<textarea name="message" placeholder="Condition, timing, previous coatings"></textarea></label>
+        <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <button type="submit" class="btn btn-accent">Request consultation</button>
+        <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="logo">Obsidian Auto Atelier</a>
+    <span>Charlotte, NC · <a href="tel:+17045550117">(704) 555-0117</a></span>
+    <span>© <span id="year"></span> Obsidian Auto Atelier · Concept demo by <a href="../index.html" style="text-decoration:underline;text-underline-offset:3px;">Brand Verse</a> · fictional business</span>
+  </div>
+</footer>
+
+<div class="callbar" aria-label="Quick contact">
+  <a href="tel:+17045550117" class="btn btn-ghost">Call</a>
+  <a href="#consult" class="btn btn-accent">Book</a>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const menuBtn = document.getElementById('menuBtn');
+  const links = document.getElementById('navLinks');
+  const setMenu = open => {
+    links.classList.toggle('open', open);
+    nav.classList.toggle('menu-open', open);
+    menuBtn.setAttribute('aria-expanded', open);
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  menuBtn.addEventListener('click', () => setMenu(!links.classList.contains('open')));
+  links.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reveals = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    reveals.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(entries => entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    }), { rootMargin: '0px 0px -8% 0px' });
+    reveals.forEach(el => io.observe(el));
+  }
+
+  const form = document.getElementById('consultForm');
+  const msg = document.getElementById('formMsg');
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    msg.className = 'form-msg';
+    msg.textContent = '';
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error();
+      form.reset();
+      msg.className = 'form-msg ok';
+      msg.textContent = "Received. We'll be in touch within one business day.";
+      btn.textContent = 'Request sent';
+    } catch {
+      msg.className = 'form-msg err';
+      msg.textContent = 'Something went wrong. Please call or text (704) 555-0117.';
+      btn.disabled = false;
+      btn.textContent = 'Request consultation';
+    }
+  });
+</script>
+</body>
+</html>
