@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Work — Brand Verse Worldwide</title>
+  <title>My Work — Brand Verse Worldwide</title>
   <meta name="description" content="See the websites built by Brand Verse Worldwide — custom, hand-coded sites for barbershops, restaurants, gyms, salons, and more." />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -58,26 +58,28 @@
     .d1{transition-delay:.10s;}.d2{transition-delay:.20s;}.d3{transition-delay:.30s;}
 
     /* PAGE HEADER */
-    .page-header { padding:130px 48px 72px;position:relative;overflow:hidden;border-bottom:1px solid var(--border); }
+    .page-header { padding:104px 48px 28px;position:relative;overflow:hidden;border-bottom:1px solid var(--border); }
     .page-header::before { content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 65%);pointer-events:none; }
-    .page-header-inner { max-width:1100px;margin:0 auto;position:relative;z-index:1; }
-    .back-link { display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--text3);transition:color .2s;margin-bottom:32px; }
+    .page-header-inner { max-width:1240px;margin:0 auto;position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;column-gap:48px;align-items:end; }
+    .page-header-inner > * { grid-column:1; }
+    .page-header .page-sub { grid-column:2;grid-row:2 / span 2;max-width:340px;font-size:15px;line-height:1.7;margin-bottom:18px; }
+    .back-link { display:none; }
     .back-link:hover { color:var(--gold); }
     .label { display:inline-block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px; }
-    h1 { font-family:'Instrument Serif',serif;font-size:clamp(40px,5.5vw,72px);line-height:1.04;letter-spacing:-.01em;margin-bottom:18px; }
+    h1 { font-family:'Instrument Serif',serif;font-size:clamp(36px,4.4vw,56px);line-height:1.04;letter-spacing:-.01em;margin-bottom:0; }
     h1 em { font-style:italic;color:var(--gold); }
     .page-sub { font-size:17px;color:var(--text2);font-weight:300;line-height:1.8;max-width:500px; }
 
     /* FILTER TABS */
-    .filter-bar { display:flex;gap:10px;flex-wrap:wrap;margin-top:40px; }
+    .filter-bar { grid-column:1 / -1;display:flex;gap:8px;flex-wrap:wrap;margin-top:24px; }
     .filter-btn { padding:8px 18px;border:1px solid var(--border2);border-radius:100px;font-size:12px;font-weight:600;letter-spacing:.06em;color:var(--text2);background:transparent;cursor:pointer;transition:all .25s;font-family:'Inter',sans-serif; }
     .filter-btn:hover { border-color:var(--gold-bd);color:var(--text); }
     .filter-btn.active { background:var(--gold-lt);border-color:var(--gold-bd);color:var(--gold); }
 
     /* PROJECTS GRID */
-    .projects-section { padding:64px 48px 120px; }
-    .projects-inner { max-width:1100px;margin:0 auto; }
-    .projects-grid { display:grid;grid-template-columns:1fr 1fr;gap:24px; }
+    .projects-section { padding:28px 48px 96px; }
+    .projects-inner { max-width:1240px;margin:0 auto; }
+    .projects-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px; }
 
     /* PROJECT CARDS */
     .project-card { background:var(--bg2);border:1px solid var(--border);border-radius:var(--r-2xl);overflow:hidden;transition:border-color .4s,transform .5s cubic-bezier(.22,1,.36,1);display:flex;flex-direction:column; }
@@ -85,12 +87,14 @@
     .project-thumb { aspect-ratio:16/9;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px; }
     .project-thumb-badge { position:absolute;top:16px;right:16px;background:var(--gold-lt);border:1px solid var(--gold-bd);color:var(--gold);padding:4px 10px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:.10em;text-transform:uppercase; }
     .project-thumb-overlay { position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,.6) 0%,transparent 60%); }
-    .project-body { padding:28px 32px;flex:1;display:flex;flex-direction:column; }
+    .project-thumb { aspect-ratio:16/10; }
+    .project-body { padding:20px 22px 18px;flex:1;display:flex;flex-direction:column; }
     .project-cat { font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-bottom:8px; }
     .project-card h3 { font-family:'Instrument Serif',serif;font-size:22px;margin-bottom:10px; }
-    .project-card p { font-size:14px;color:var(--text2);line-height:1.75;font-weight:300;flex:1; }
-    .project-footer { display:flex;align-items:center;justify-content:space-between;margin-top:22px;padding-top:20px;border-top:1px solid var(--border); }
-    .project-tags { display:flex;gap:6px;flex-wrap:wrap; }
+    .project-card p { font-size:13.5px;color:var(--text2);line-height:1.65;font-weight:300;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden; }
+    .project-card h3 { font-size:21px;margin-bottom:6px; }
+    .project-footer { display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:14px;border-top:1px solid var(--border); }
+    .project-tags { display:none; }
     .project-tag { padding:4px 10px;border:1px solid var(--border2);border-radius:100px;font-size:10px;font-weight:600;color:var(--text3); }
     .project-link { display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--gold);white-space:nowrap;transition:gap .2s; }
     .project-link:hover { gap:10px; }
@@ -119,11 +123,20 @@
 
     @media(max-width:900px) {
       nav{padding:0 20px;} .nav-links,.nav-cta{display:none;} .hamburger{display:flex;}
-      .page-header{padding:110px 20px 56px;} .projects-section{padding:48px 20px 80px;}
-      .projects-grid{grid-template-columns:1fr;}
+      .page-header{padding:96px 20px 20px;} .projects-section{padding:20px 20px 72px;}
+      .page-header-inner{grid-template-columns:1fr;} .page-header .page-sub{grid-column:1;grid-row:auto;margin:12px 0 0;}
+      .projects-grid{grid-template-columns:1fr 1fr;gap:14px;}
+      .filter-bar{flex-wrap:nowrap;overflow-x:auto;margin:20px -20px 0;padding:0 20px 4px;scrollbar-width:none;}
+      .filter-bar::-webkit-scrollbar{display:none;}
+      .filter-btn{flex-shrink:0;}
       .footer-top{grid-template-columns:1fr 1fr;} .cta-band{padding:60px 20px;}
     }
-    @media(max-width:580px) { .footer-top{grid-template-columns:1fr;} }
+    @media(max-width:620px) {
+      .footer-top{grid-template-columns:1fr;}
+      .projects-grid{grid-template-columns:1fr;}
+      .page-header .page-sub{display:none;}
+      .project-card p{-webkit-line-clamp:2;}
+    }
   </style>
 </head>
 <body>
@@ -137,7 +150,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="index.html#services">Services</a></li>
-    <li><a href="work.html" class="active">Work</a></li>
+    <li><a href="work.html" class="active">My Work</a></li>
     <li><a href="pricing.html">Pricing</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="https://www.instagram.com/20_brandverse_26/" target="_blank" rel="noopener">Instagram</a></li>
@@ -147,7 +160,7 @@
 </nav>
 <div class="mobile-menu" id="mobile-menu">
   <a href="index.html#services" onclick="closeMenu()">Services</a>
-  <a href="work.html" onclick="closeMenu()">Work</a>
+  <a href="work.html" onclick="closeMenu()">My Work</a>
   <a href="pricing.html" onclick="closeMenu()">Pricing</a>
   <a href="about.html" onclick="closeMenu()">About</a>
   <a href="https://www.instagram.com/20_brandverse_26/" target="_blank" rel="noopener" onclick="closeMenu()">Instagram</a>
@@ -160,7 +173,7 @@
 <div class="page-header">
   <div class="page-header-inner">
     <a href="index.html" class="back-link">← Back to Home</a>
-    <span class="label">Portfolio</span>
+    <span class="label">My Work</span>
     <h1>Built With <em>Purpose.</em></h1>
     <p class="page-sub">Every site here is hand-coded from scratch — no templates, no shortcuts. Built to perform, designed to convert.</p>
     <div class="filter-bar">
@@ -181,226 +194,8 @@
   <div class="projects-inner">
     <div class="projects-grid">
 
-      <!-- Elite Exterior Services -->
-      <div class="project-card reveal" data-category="contractor">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#0e2040 0%,#1B3A6B 60%,#142d54 100%);position:relative;overflow:hidden;">
-          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;">
-            <div style="width:64px;height:64px;border-radius:50%;background:#F5B800;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-size:16px;font-weight:900;color:#1B3A6B;letter-spacing:.04em;">EES</div>
-            <div style="font-family:Montserrat,sans-serif;font-size:22px;font-weight:900;color:#fff;letter-spacing:.06em;text-transform:uppercase;">Elite Exterior</div>
-            <div style="font-size:11px;color:#F5B800;letter-spacing:.14em;text-transform:uppercase;font-weight:700;">Complete Outdoor Solutions</div>
-          </div>
-          <div class="project-thumb-badge">Client Project</div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat">Exterior Services · Pressure Washing & Property Cleanup</div>
-          <h3>Elite Exterior Services</h3>
-          <p>A clean, bold site built in navy and gold to match their brand — pressure washing, house washing, heavy equipment cleaning, and property cleanup. Features an animated rain-drop hero canvas, before/after results section, trust badges, and a free quote form.</p>
-          <div class="project-footer">
-            <div class="project-tags">
-              <span class="project-tag">Navy & Gold</span>
-              <span class="project-tag">Pressure Washing</span>
-              <span class="project-tag">Canvas Animation</span>
-              <span class="project-tag">Free Quote Form</span>
-            </div>
-            <a href="https://by5bm2p855-cmd.github.io/elite-exterior-site/" class="project-link" target="_blank" rel="noopener">View Live Site →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- King's Cut Barbershop -->
-      <div class="project-card reveal" data-category="barbershop">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#FAFAF8 0%,#F4F1EC 55%,#B91C1C 100%);">
-          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
-            <div style="font-size:52px;">✂️</div>
-            <div style="font-family:'Instrument Serif',serif;font-size:26px;color:#1A1008;letter-spacing:.02em;">King's Cut</div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(26,16,8,.45);">Barbershop</div>
-          </div>
-          <div class="project-thumb-overlay"></div>
-          <div class="project-thumb-badge">Mock Build</div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat">Barbershop · Booking System</div>
-          <h3>King's Cut Barbershop</h3>
-          <p>A sharp, light-themed barbershop site with a custom scroll-linked scissors animation — the blades open and close as a pair of scissors cuts its way down the page. Includes full service menu, about, testimonials, and appointment booking.</p>
-          <div class="project-footer">
-            <div class="project-tags">
-              <span class="project-tag">Scroll Animation</span>
-              <span class="project-tag">Booking Form</span>
-              <span class="project-tag">Light Theme</span>
-            </div>
-            <a href="mock-barbershop/index.html" class="project-link" target="_blank">View Demo →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- The Harbor Grille -->
-      <div class="project-card reveal d1" data-category="restaurant">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#0C1A12 0%,#152b1c 55%,#D4A853 100%);">
-          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
-            <div style="font-size:52px;">🦞</div>
-            <div style="font-family:'Instrument Serif',serif;font-size:26px;color:#fff;letter-spacing:.02em;">The Harbor Grille</div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(255,255,255,.35);">Coastal Fine Dining</div>
-          </div>
-          <div class="project-thumb-overlay"></div>
-          <div class="project-thumb-badge">Mock Build</div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat">Restaurant · Reservations</div>
-          <h3>The Harbor Grille</h3>
-          <p>A coastal fine-dining experience in deep forest green and warm gold. Features a full tabbed menu section with JS-driven switching, scrolling atmosphere gallery strip, reservation form, and chef testimonials.</p>
-          <div class="project-footer">
-            <div class="project-tags">
-              <span class="project-tag">Tabbed Menu</span>
-              <span class="project-tag">Gallery Strip</span>
-              <span class="project-tag">Reservations</span>
-            </div>
-            <a href="mock-restaurant/index.html" class="project-link" target="_blank">View Demo →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- APEX Fitness -->
-      <div class="project-card reveal" data-category="fitness">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#080808 0%,#111 45%,#FF6B00 100%);">
-          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
-            <div style="font-size:52px;">🏋️</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:#fff;letter-spacing:.10em;">APEX FITNESS</div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(255,255,255,.35);">Gym & Training</div>
-          </div>
-          <div class="project-thumb-overlay"></div>
-          <div class="project-thumb-badge">Mock Build</div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat">Fitness · Canvas Animation</div>
-          <h3>APEX Fitness</h3>
-          <p>A fully immersive gym site with a live canvas animation in the hero — perspective floor grid, floating barbell silhouettes, rising spark particles, and a pulsing heartbeat EKG line. Includes programs, elite trainers, and membership pricing.</p>
-          <div class="project-footer">
-            <div class="project-tags">
-              <span class="project-tag">Canvas Animation</span>
-              <span class="project-tag">EKG Heartbeat</span>
-              <span class="project-tag">Pricing Plans</span>
-            </div>
-            <a href="mock-fitness/index.html" class="project-link" target="_blank">View Demo →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Lumière Studio -->
-      <div class="project-card reveal d1" data-category="salon">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#FAF7F2 0%,#f0ece4 50%,#C4956A 100%);">
-          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
-            <div style="font-size:52px;">🌸</div>
-            <div style="font-family:'Instrument Serif',serif;font-size:26px;color:#2c2415;letter-spacing:.02em;">Lumière Studio</div>
-            <div style="font-size:9px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(44,36,21,.4);">Beauty & Wellness</div>
-          </div>
-          <div class="project-thumb-overlay" style="background:linear-gradient(to top,rgba(250,247,242,.5) 0%,transparent 60%);"></div>
-          <div class="project-thumb-badge">Mock Build</div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat">Beauty Salon · Booking</div>
-          <h3>Lumière Studio</h3>
-          <p>A warm, elegant beauty salon with a light cream theme and rose gold accents — completely different from the dark sites. Features a scrolling gallery animation, split hero layout, corner bracket decorations, and a polished booking form.</p>
-          <div class="project-footer">
-            <div class="project-tags">
-              <span class="project-tag">Light Theme</span>
-              <span class="project-tag">Gallery Animation</span>
-              <span class="project-tag">Booking Form</span>
-            </div>
-            <a href="mock-salon/index.html" class="project-link" target="_blank">View Demo →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Nexus SaaS -->
-      <div class="project-card reveal" data-category="saas" style="grid-column:1/-1;">
-        <div class="project-thumb" style="background:#000000;aspect-ratio:21/9;position:relative;overflow:hidden;">
-          <!-- mini constellation -->
-          <canvas id="work-nexus-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
-          <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.85) 30%,transparent 100%);z-index:1;"></div>
-          <div style="position:relative;z-index:2;padding:40px 48px;display:flex;align-items:center;gap:48px;">
-            <div>
-              <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                <svg width="22" height="22" viewBox="0 0 28 28" fill="none"><polygon points="14,2 26,8 26,20 14,26 2,20 2,8" fill="none" stroke="#8052ff" stroke-width="1.5"/><circle cx="14" cy="14" r="2" fill="#8052ff"/></svg>
-                <span style="font-size:18px;font-weight:600;color:#fff;letter-spacing:.02em;">Nexus</span>
-              </div>
-              <div style="font-size:clamp(32px,3.5vw,52px);font-weight:200;line-height:.95;letter-spacing:-.04em;color:#fff;margin-bottom:12px;">Your team's knowledge,<br /><span style="color:#8052ff;font-style:italic;">finally alive.</span></div>
-              <div style="font-size:13px;color:#9a9a9a;letter-spacing:.05em;">Cosmic void · Particle constellation · SaaS</div>
-            </div>
-          </div>
-          <div class="project-thumb-badge">Mock Build</div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat">SaaS / Tech Product · Knowledge Management</div>
-          <h3>Nexus — AI Knowledge Platform</h3>
-          <p>A cosmic void SaaS site built to the Dala design system — pure black canvas, violet Plum Voltage accent, ultra-thin 200-weight display headlines, and thousands of micro-shape particles (triangles, diamonds, circles) clustering into an organic brain constellation. No shadows, no gradients — depth comes purely from the void and particle field.</p>
-          <div class="project-footer">
-            <div class="project-tags">
-              <span class="project-tag">Particle Constellation</span>
-              <span class="project-tag">Cosmic Void</span>
-              <span class="project-tag">SaaS / Tech</span>
-              <span class="project-tag">Pricing Plans</span>
-            </div>
-            <a href="mock-saas/index.html" class="project-link" target="_blank">View Demo →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Ridgeline Buildings & Structures -->
-      <div class="project-card reveal d1" data-category="contractor">
-        <div class="project-thumb" style="background:linear-gradient(135deg,#0D0806 0%,#1A0E0A 55%,#6B2210 100%);position:relative;overflow:hidden;">
-          <canvas id="ridgeline-thumb-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
-          <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(13,8,6,0.75) 30%,transparent 100%);z-index:1;"></div>
-          <div style="position:relative;z-index:2;padding:32px 36px;display:flex;align-items:center;gap:36px;">
-            <div>
-              <div style="font-size:11px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:#D4471A;margin-bottom:8px;">Pine Hall, NC</div>
-              <div style="font-family:'Instrument Serif',serif;font-size:clamp(22px,3vw,32px);color:#fff;line-height:1.1;margin-bottom:6px;">Ridgeline</div>
-              <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);">Buildings & Structures</div>
-            </div>
-          </div>
-          <div class="project-thumb-badge">Mock Build</div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat">Contractor · Metal Buildings & Custom Structures</div>
-          <h3>Ridgeline Buildings & Structures</h3>
-          <p>A bold, structural site for a family-owned metal building company serving the Southeast. Features a cinematic mountain sunset canvas animation, rigid no-nonsense layout, SVG product icons, and a full quote request form — built to match the toughness of what they build.</p>
-          <div class="project-footer">
-            <div class="project-tags">
-              <span class="project-tag">Canvas Animation</span>
-              <span class="project-tag">Metal Buildings</span>
-              <span class="project-tag">Quote Form</span>
-            </div>
-            <a href="mock-ridgeline/index.html" class="project-link" target="_blank">View Demo →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Maison Rowe -->
-      <div class="project-card reveal" data-category="salon">
-        <div class="project-thumb" style="background:#FDFCFC;">
-          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:14px;width:100%;padding:0 36px;">
-            <div style="font-size:11px;font-weight:500;color:#44403B;">Hair studio · Greensboro</div>
-            <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(24px,3vw,34px);line-height:1.05;letter-spacing:-.02em;color:#000;">Hair that grows out<br />beautifully.</div>
-            <div style="display:inline-flex;padding:8px 16px;border-radius:999px;background:#000;color:#FDFCFC;font-size:11px;font-weight:500;">Book an appointment →</div>
-          </div>
-          <div class="project-thumb-badge">Mock Build</div>
-        </div>
-        <div class="project-body">
-          <div class="project-cat">Beauty Salon · Warm Editorial</div>
-          <h3>Maison Rowe</h3>
-          <p>A calm, editorial hair studio on warm cream paper. Light-weight headlines, black pill buttons, and a strict no-colored-buttons rule, so the client's photos carry all the color. Includes a price menu, stylist profiles, rotating reviews, and an appointment request form.</p>
-          <div class="project-footer">
-            <div class="project-tags">
-              <span class="project-tag">Warm Editorial</span>
-              <span class="project-tag">Service Menu</span>
-              <span class="project-tag">Booking Form</span>
-            </div>
-            <a href="mock-maison-rowe/index.html" class="project-link" target="_blank">View Demo →</a>
-          </div>
-        </div>
-      </div>
-
       <!-- Obsidian Auto Atelier -->
-      <div class="project-card reveal d1" data-category="automotive">
+      <div class="project-card reveal" data-category="automotive">
         <div class="project-thumb" style="background:radial-gradient(90% 80% at 75% 20%,#2A2A3A 0%,#171721 70%);">
           <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:14px;width:100%;padding:0 36px;">
             <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8D8D99;">Charlotte, NC · By appointment</div>
@@ -445,6 +240,224 @@
               <span class="project-tag">Free Trial Form</span>
             </div>
             <a href="mock-ironhouse/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maison Rowe -->
+      <div class="project-card reveal" data-category="salon">
+        <div class="project-thumb" style="background:#FDFCFC;">
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;gap:14px;width:100%;padding:0 36px;">
+            <div style="font-size:11px;font-weight:500;color:#44403B;">Hair studio · Greensboro</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:clamp(24px,3vw,34px);line-height:1.05;letter-spacing:-.02em;color:#000;">Hair that grows out<br />beautifully.</div>
+            <div style="display:inline-flex;padding:8px 16px;border-radius:999px;background:#000;color:#FDFCFC;font-size:11px;font-weight:500;">Book an appointment →</div>
+          </div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Beauty Salon · Warm Editorial</div>
+          <h3>Maison Rowe</h3>
+          <p>A calm, editorial hair studio on warm cream paper. Light-weight headlines, black pill buttons, and a strict no-colored-buttons rule, so the client's photos carry all the color. Includes a price menu, stylist profiles, rotating reviews, and an appointment request form.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Warm Editorial</span>
+              <span class="project-tag">Service Menu</span>
+              <span class="project-tag">Booking Form</span>
+            </div>
+            <a href="mock-maison-rowe/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Elite Exterior Services -->
+      <div class="project-card reveal" data-category="contractor">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#0e2040 0%,#1B3A6B 60%,#142d54 100%);position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+            <div style="width:64px;height:64px;border-radius:50%;background:#F5B800;display:flex;align-items:center;justify-content:center;font-family:Montserrat,sans-serif;font-size:16px;font-weight:900;color:#1B3A6B;letter-spacing:.04em;">EES</div>
+            <div style="font-family:Montserrat,sans-serif;font-size:22px;font-weight:900;color:#fff;letter-spacing:.06em;text-transform:uppercase;">Elite Exterior</div>
+            <div style="font-size:11px;color:#F5B800;letter-spacing:.14em;text-transform:uppercase;font-weight:700;">Complete Outdoor Solutions</div>
+          </div>
+          <div class="project-thumb-badge">Client Project</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Exterior Services · Pressure Washing & Property Cleanup</div>
+          <h3>Elite Exterior Services</h3>
+          <p>A clean, bold site built in navy and gold to match their brand — pressure washing, house washing, heavy equipment cleaning, and property cleanup. Features an animated rain-drop hero canvas, before/after results section, trust badges, and a free quote form.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Navy & Gold</span>
+              <span class="project-tag">Pressure Washing</span>
+              <span class="project-tag">Canvas Animation</span>
+              <span class="project-tag">Free Quote Form</span>
+            </div>
+            <a href="https://by5bm2p855-cmd.github.io/elite-exterior-site/" class="project-link" target="_blank" rel="noopener">View Live Site →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ridgeline Buildings & Structures -->
+      <div class="project-card reveal" data-category="contractor">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#0D0806 0%,#1A0E0A 55%,#6B2210 100%);position:relative;overflow:hidden;">
+          <canvas id="ridgeline-thumb-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+          <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(13,8,6,0.75) 30%,transparent 100%);z-index:1;"></div>
+          <div style="position:relative;z-index:2;padding:32px 36px;display:flex;align-items:center;gap:36px;">
+            <div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:#D4471A;margin-bottom:8px;">Pine Hall, NC</div>
+              <div style="font-family:'Instrument Serif',serif;font-size:clamp(22px,3vw,32px);color:#fff;line-height:1.1;margin-bottom:6px;">Ridgeline</div>
+              <div style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,0.5);">Buildings & Structures</div>
+            </div>
+          </div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Contractor · Metal Buildings & Custom Structures</div>
+          <h3>Ridgeline Buildings & Structures</h3>
+          <p>A bold, structural site for a family-owned metal building company serving the Southeast. Features a cinematic mountain sunset canvas animation, rigid no-nonsense layout, SVG product icons, and a full quote request form — built to match the toughness of what they build.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Canvas Animation</span>
+              <span class="project-tag">Metal Buildings</span>
+              <span class="project-tag">Quote Form</span>
+            </div>
+            <a href="mock-ridgeline/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- King's Cut Barbershop -->
+      <div class="project-card reveal" data-category="barbershop">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#FAFAF8 0%,#F4F1EC 55%,#B91C1C 100%);">
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
+            <div style="font-size:52px;">✂️</div>
+            <div style="font-family:'Instrument Serif',serif;font-size:26px;color:#1A1008;letter-spacing:.02em;">King's Cut</div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(26,16,8,.45);">Barbershop</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Barbershop · Booking System</div>
+          <h3>King's Cut Barbershop</h3>
+          <p>A sharp, light-themed barbershop site with a custom scroll-linked scissors animation — the blades open and close as a pair of scissors cuts its way down the page. Includes full service menu, about, testimonials, and appointment booking.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Scroll Animation</span>
+              <span class="project-tag">Booking Form</span>
+              <span class="project-tag">Light Theme</span>
+            </div>
+            <a href="mock-barbershop/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- APEX Fitness -->
+      <div class="project-card reveal" data-category="fitness">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#080808 0%,#111 45%,#FF6B00 100%);">
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
+            <div style="font-size:52px;">🏋️</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:34px;color:#fff;letter-spacing:.10em;">APEX FITNESS</div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(255,255,255,.35);">Gym & Training</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Fitness · Canvas Animation</div>
+          <h3>APEX Fitness</h3>
+          <p>A fully immersive gym site with a live canvas animation in the hero — perspective floor grid, floating barbell silhouettes, rising spark particles, and a pulsing heartbeat EKG line. Includes programs, elite trainers, and membership pricing.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Canvas Animation</span>
+              <span class="project-tag">EKG Heartbeat</span>
+              <span class="project-tag">Pricing Plans</span>
+            </div>
+            <a href="mock-fitness/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lumière Studio -->
+      <div class="project-card reveal" data-category="salon">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#FAF7F2 0%,#f0ece4 50%,#C4956A 100%);">
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
+            <div style="font-size:52px;">🌸</div>
+            <div style="font-family:'Instrument Serif',serif;font-size:26px;color:#2c2415;letter-spacing:.02em;">Lumière Studio</div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(44,36,21,.4);">Beauty & Wellness</div>
+          </div>
+          <div class="project-thumb-overlay" style="background:linear-gradient(to top,rgba(250,247,242,.5) 0%,transparent 60%);"></div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Beauty Salon · Booking</div>
+          <h3>Lumière Studio</h3>
+          <p>A warm, elegant beauty salon with a light cream theme and rose gold accents — completely different from the dark sites. Features a scrolling gallery animation, split hero layout, corner bracket decorations, and a polished booking form.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Light Theme</span>
+              <span class="project-tag">Gallery Animation</span>
+              <span class="project-tag">Booking Form</span>
+            </div>
+            <a href="mock-salon/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Harbor Grille -->
+      <div class="project-card reveal" data-category="restaurant">
+        <div class="project-thumb" style="background:linear-gradient(135deg,#0C1A12 0%,#152b1c 55%,#D4A853 100%);">
+          <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;">
+            <div style="font-size:52px;">🦞</div>
+            <div style="font-family:'Instrument Serif',serif;font-size:26px;color:#fff;letter-spacing:.02em;">The Harbor Grille</div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.20em;text-transform:uppercase;color:rgba(255,255,255,.35);">Coastal Fine Dining</div>
+          </div>
+          <div class="project-thumb-overlay"></div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">Restaurant · Reservations</div>
+          <h3>The Harbor Grille</h3>
+          <p>A coastal fine-dining experience in deep forest green and warm gold. Features a full tabbed menu section with JS-driven switching, scrolling atmosphere gallery strip, reservation form, and chef testimonials.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Tabbed Menu</span>
+              <span class="project-tag">Gallery Strip</span>
+              <span class="project-tag">Reservations</span>
+            </div>
+            <a href="mock-restaurant/index.html" class="project-link" target="_blank">View Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nexus SaaS -->
+      <div class="project-card reveal" data-category="saas" style="grid-column:1/-1;">
+        <div class="project-thumb" style="background:#000000;aspect-ratio:21/9;position:relative;overflow:hidden;">
+          <!-- mini constellation -->
+          <canvas id="work-nexus-canvas" style="position:absolute;inset:0;width:100%;height:100%;"></canvas>
+          <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.85) 30%,transparent 100%);z-index:1;"></div>
+          <div style="position:relative;z-index:2;padding:40px 48px;display:flex;align-items:center;gap:48px;">
+            <div>
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                <svg width="22" height="22" viewBox="0 0 28 28" fill="none"><polygon points="14,2 26,8 26,20 14,26 2,20 2,8" fill="none" stroke="#8052ff" stroke-width="1.5"/><circle cx="14" cy="14" r="2" fill="#8052ff"/></svg>
+                <span style="font-size:18px;font-weight:600;color:#fff;letter-spacing:.02em;">Nexus</span>
+              </div>
+              <div style="font-size:clamp(32px,3.5vw,52px);font-weight:200;line-height:.95;letter-spacing:-.04em;color:#fff;margin-bottom:12px;">Your team's knowledge,<br /><span style="color:#8052ff;font-style:italic;">finally alive.</span></div>
+              <div style="font-size:13px;color:#9a9a9a;letter-spacing:.05em;">Cosmic void · Particle constellation · SaaS</div>
+            </div>
+          </div>
+          <div class="project-thumb-badge">Mock Build</div>
+        </div>
+        <div class="project-body">
+          <div class="project-cat">SaaS / Tech Product · Knowledge Management</div>
+          <h3>Nexus — AI Knowledge Platform</h3>
+          <p>A cosmic void SaaS site built to the Dala design system — pure black canvas, violet Plum Voltage accent, ultra-thin 200-weight display headlines, and thousands of micro-shape particles (triangles, diamonds, circles) clustering into an organic brain constellation. No shadows, no gradients — depth comes purely from the void and particle field.</p>
+          <div class="project-footer">
+            <div class="project-tags">
+              <span class="project-tag">Particle Constellation</span>
+              <span class="project-tag">Cosmic Void</span>
+              <span class="project-tag">SaaS / Tech</span>
+              <span class="project-tag">Pricing Plans</span>
+            </div>
+            <a href="mock-saas/index.html" class="project-link" target="_blank">View Demo →</a>
           </div>
         </div>
       </div>
